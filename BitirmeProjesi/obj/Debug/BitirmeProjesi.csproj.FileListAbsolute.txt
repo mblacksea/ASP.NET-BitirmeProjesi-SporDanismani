@@ -19,23 +19,3 @@ C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmePro
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.dll
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.pdb
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.dll.config
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.pdb
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\Recaptcha.Web.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Helpers.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Mvc.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Razor.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Deployment.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Razor.dll
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Helpers.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Mvc.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Razor.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Deployment.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Razor.xml
-C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.pdb
