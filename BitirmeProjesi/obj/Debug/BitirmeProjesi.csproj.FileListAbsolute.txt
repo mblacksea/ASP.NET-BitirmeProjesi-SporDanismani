@@ -19,3 +19,5 @@ C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmePro
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.dll
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.pdb
 C:\Users\MUSTAFA\documents\visual studio 2013\Projects\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
+C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
+C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.dll
