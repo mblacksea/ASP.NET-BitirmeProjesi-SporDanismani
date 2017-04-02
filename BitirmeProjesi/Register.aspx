@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
 <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/notifyit/notifIt.js"></script>
-       
- <link rel="stylesheet" href="stylesheet-pure-css.css">
+<link href="css/stylesheet-pure-css.css" rel="stylesheet" />
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
