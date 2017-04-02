@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="Register.aspx.cs" Inherits="BitirmeProjesi.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="BitirmeProjesi.Register" %>
 
 <!DOCTYPE html>
 
@@ -28,10 +28,10 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server" action="RegisterSecondPart.aspx" method="post" >
+    <form id="form1" runat="server">
  <div class='login'>
   <h2>Personel Trainer</h2>
-     <asp:TextBox ID="textboxName" runat="server" placeholder='Name' ></asp:TextBox>
+     <asp:TextBox ID="textboxName" runat="server" placeholder='Name'></asp:TextBox>
       <asp:RequiredFieldValidator id="nameReq"
               runat="server"
               ControlToValidate="textboxName"
