@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.IO;
 namespace BitirmeProjesi
 {
     public partial class Register : System.Web.UI.Page
@@ -47,6 +48,10 @@ namespace BitirmeProjesi
                 }
 
                  Session["userBirthday"] = txtDate.Text.ToString();
+
+                 StringWriter strWrtr = new StringWriter();
+                 HttpUtility.HtmlEncode(textboxBio.Text.ToString(), strWrtr);
+                 Session["userBio"] = strWrtr.ToString();
                
 
 
