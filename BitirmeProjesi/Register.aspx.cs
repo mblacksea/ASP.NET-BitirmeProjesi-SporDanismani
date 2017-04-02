@@ -33,20 +33,20 @@ namespace BitirmeProjesi
             }
             else
             {
-                Session["userName"] = textboxName.Text.ToString();
-                Session["userSurname"] = textboxSurname.Text.ToString();
-                Session["userEmail"] = textboxEmail.Text.ToString();
-                Session["userPassword"] = FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text,"MD5");
-                 if (radio1.Checked == true && radio2.Checked==false)
-                {
-                    Session["userSex"] = radio1.Value;
-                }
-                else
-                {
-                    Session["userSex"] = radio2.Value;
-                }
+                //Session["userName"] = textboxName.Text.ToString();
+                //Session["userSurname"] = textboxSurname.Text.ToString();
+                //Session["userEmail"] = textboxEmail.Text.ToString();
+                //Session["userPassword"] = FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text,"MD5");
+                // if (radio1.Checked == true && radio2.Checked==false)
+                //{
+                //    Session["userSex"] = radio1.Value;
+                //}
+                //else
+                //{
+                //    Session["userSex"] = radio2.Value;
+                //}
 
-                 Session["userBirthday"] = txtDate.Text.ToString();
+                // Session["userBirthday"] = txtDate.Text.ToString();
                
 
 

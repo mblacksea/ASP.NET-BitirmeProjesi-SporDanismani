@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-</head>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <link href="css/register.css" rel="stylesheet">
@@ -27,10 +26,14 @@
             });
         });
     </script>
+    </head>
+
 
 <body>
     <form id="form1" runat="server">
   <div class='login'> 
+
+      <div id="testberk" runat="server"></div>
 
 <h2>Add Certificate</h2>
      <asp:TextBox ID="textboxCertificateName" runat="server" placeholder='Certificate Name'></asp:TextBox>
@@ -67,5 +70,6 @@
     
 
     </form>
+    
 </body>
 </html>

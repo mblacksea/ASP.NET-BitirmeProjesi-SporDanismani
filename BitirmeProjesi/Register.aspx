@@ -28,10 +28,10 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" action="RegisterSecondPart.aspx" method="post" >
  <div class='login'>
   <h2>Personel Trainer</h2>
-     <asp:TextBox ID="textboxName" runat="server" placeholder='Name'></asp:TextBox>
+     <asp:TextBox ID="textboxName" runat="server" placeholder='Name' ></asp:TextBox>
       <asp:RequiredFieldValidator id="nameReq"
               runat="server"
               ControlToValidate="textboxName"
