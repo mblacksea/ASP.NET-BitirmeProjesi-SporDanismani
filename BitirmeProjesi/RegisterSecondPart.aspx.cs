@@ -30,22 +30,24 @@ namespace BitirmeProjesi
             if (!Page.IsPostBack)
             {
                 Page.Session["username"] = Request.Form["textboxName"];
-                HttpContext.Current.Session["usersurname"] = Request.Form["textboxSurname"];
-                HttpContext.Current.Session["useremail"] = Request.Form["textboxEmail"];
-                HttpContext.Current.Session["userpassword"] = Request.Form["textboxPassword"];
-                HttpContext.Current.Session["usersex"] = Request.Form["radio"];
-                HttpContext.Current.Session["userbirthday"] = Request.Form["txtDate"];
+                Page.Session["usersurname"] = Request.Form["textboxSurname"];
+                Page.Session["useremail"] = Request.Form["textboxEmail"];
+                Page.Session["userpassword"] = Request.Form["textboxPassword"];
+                Page.Session["usersex"] = Request.Form["radio"];
+                Page.Session["userbirthday"] = Request.Form["txtDate"];
                 userbio = Request.Form["textboxBio"];
+
+                StringWriter strWrt = new StringWriter();
+
+                HttpUtility.HtmlEncode(userbio, strWrt);
+                userbio = strWrt.ToString();
+                Page.Session["userbio"] = userbio;
+                testberk.InnerHtml = userbio;
             }
            
 
             
-            StringWriter strWrt = new StringWriter();
-
-            HttpUtility.HtmlEncode(userbio,strWrt);
-            userbio = strWrt.ToString();
-            HttpContext.Current.Session["userbio"] = userbio;
-            testberk.InnerHtml = userbio;
+            
 
 
 
@@ -78,12 +80,12 @@ namespace BitirmeProjesi
         {
 
             username = Page.Session["username"].ToString();
-            usersurname = (string)HttpContext.Current.Session["usersurname"];
-            useremail = (string)HttpContext.Current.Session["useremail"];
-            userpassword = (string)HttpContext.Current.Session["userpassword"];
-            usersex = (string)HttpContext.Current.Session["usersex"];
-            userbirthday = (string)HttpContext.Current.Session["userbirthday"];
-            userbio = (string) HttpContext.Current.Session["userbio"];
+            usersurname = Page.Session["usersurname"].ToString();
+            useremail = Page.Session["useremail"].ToString();
+            userpassword = Page.Session["userpassword"].ToString();
+            usersex = Page.Session["usersex"].ToString();
+            userbirthday = Page.Session["userbirthday"].ToString();
+            userbio = Page.Session["userbio"].ToString();
 
 
             SqlCommand cmdInsertUser = new SqlCommand();
