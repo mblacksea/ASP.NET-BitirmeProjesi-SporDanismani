@@ -27,20 +27,24 @@ namespace BitirmeProjesi
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            username = Request.Form["textboxName"];
-            usersurname = Request.Form["textboxSurname"];
-            useremail = Request.Form["textboxEmail"];
-            userpassword = Request.Form["textboxPassword"];
-            usersex = Request.Form["radio"];
-            userbirthday = Request.Form["txtDate"];
-            userbio = Request.Form["textboxBio"];
+            if (!Page.IsPostBack)
+            {
+                Page.Session["username"] = Request.Form["textboxName"];
+                HttpContext.Current.Session["usersurname"] = Request.Form["textboxSurname"];
+                HttpContext.Current.Session["useremail"] = Request.Form["textboxEmail"];
+                HttpContext.Current.Session["userpassword"] = Request.Form["textboxPassword"];
+                HttpContext.Current.Session["usersex"] = Request.Form["radio"];
+                HttpContext.Current.Session["userbirthday"] = Request.Form["txtDate"];
+                userbio = Request.Form["textboxBio"];
+            }
+           
 
             
             StringWriter strWrt = new StringWriter();
 
             HttpUtility.HtmlEncode(userbio,strWrt);
             userbio = strWrt.ToString();
-            
+            HttpContext.Current.Session["userbio"] = userbio;
             testberk.InnerHtml = userbio;
 
 
@@ -72,6 +76,15 @@ namespace BitirmeProjesi
 
         protected void addCertificate(object sender, EventArgs e)
         {
+
+            username = Page.Session["username"].ToString();
+            usersurname = (string)HttpContext.Current.Session["usersurname"];
+            useremail = (string)HttpContext.Current.Session["useremail"];
+            userpassword = (string)HttpContext.Current.Session["userpassword"];
+            usersex = (string)HttpContext.Current.Session["usersex"];
+            userbirthday = (string)HttpContext.Current.Session["userbirthday"];
+            userbio = (string) HttpContext.Current.Session["userbio"];
+
 
             SqlCommand cmdInsertUser = new SqlCommand();
             cmdInsertUser.Connection = con;
