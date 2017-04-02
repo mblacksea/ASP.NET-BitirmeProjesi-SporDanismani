@@ -40,7 +40,12 @@ namespace BitirmeProjesi
 
         protected void addCertificate(object sender, EventArgs e)
         {
+    
+
+            //Mustafa was here ahahhasdkjahsdkjanslkd
+
              /*  SqlCommand cmdInsertUser = new SqlCommand();
+
                cmdInsertUser.Connection = con;
                cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
                cmdInsertUser.Parameters.AddWithValue("@Name", textboxName.Text);
