@@ -14,10 +14,11 @@ namespace BitirmeProjesi
         static string BaglantiAdresi = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(BaglantiAdresi);
         object userID;
-       
+
+        string userName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            string userName = Session["userName"].ToString();
+            userName = Session["userName"].ToString();
             string userSurname = Session["userSurname"].ToString();
             string userEmail = Session["userEmail"].ToString();
             string userPassword = Session["userPassword"].ToString();
@@ -43,7 +44,7 @@ namespace BitirmeProjesi
                SqlCommand cmdInsertUser = new SqlCommand();
                cmdInsertUser.Connection = con;
                cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
-               cmdInsertUser.Parameters.AddWithValue("@Name", textboxName.Text);
+               cmdInsertUser.Parameters.AddWithValue("@Name", userName);
                cmdInsertUser.Parameters.AddWithValue("@Surname", textboxSurname.Text);
                cmdInsertUser.Parameters.AddWithValue("@Email", textboxEmail.Text);
                cmdInsertUser.Parameters.AddWithValue("@Password", FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text,"MD5"));
