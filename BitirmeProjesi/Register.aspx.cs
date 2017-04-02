@@ -49,7 +49,7 @@ namespace BitirmeProjesi
                  Session["userBirthday"] = txtDate.Text.ToString();
                
 
-
+                
               /*  SqlCommand cmdInsertUser = new SqlCommand();
                 cmdInsertUser.Connection = con;
                 cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";

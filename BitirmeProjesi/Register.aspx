@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="BitirmeProjesi.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="Register.aspx.cs" Inherits="BitirmeProjesi.Register" %>
 
 <!DOCTYPE html>
 
