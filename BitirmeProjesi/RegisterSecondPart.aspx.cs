@@ -40,7 +40,7 @@ namespace BitirmeProjesi
 
         protected void addCertificate(object sender, EventArgs e)
         {
-               SqlCommand cmdInsertUser = new SqlCommand();
+             /*  SqlCommand cmdInsertUser = new SqlCommand();
                cmdInsertUser.Connection = con;
                cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
                cmdInsertUser.Parameters.AddWithValue("@Name", textboxName.Text);
@@ -72,7 +72,7 @@ namespace BitirmeProjesi
             cmdInsertUser.Parameters.AddWithValue("@Date", txtdateCertificate.Text);
             
             cmdInsertUser.ExecuteNonQuery();
-            con.Close();
+            con.Close();*/
 
         }
     }
