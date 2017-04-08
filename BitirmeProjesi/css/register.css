@@ -53,7 +53,7 @@ input[type="text"], input[type="password"], input[type="FileUpload"] {
 input[type="submit"], input[type="button"] {
   background: #1FCE6D;
   border: 0;
-  width: 350px;
+  width: 400px;
   height: 40px;
   border-radius: 3px;
   color: #fff;

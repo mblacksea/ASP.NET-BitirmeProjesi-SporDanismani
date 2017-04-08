@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
 <link href="css/register.css" rel="stylesheet">
@@ -10,22 +11,28 @@
 <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
 <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/notifyit/notifIt.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/datepicker.js"></script>
 <link href="css/stylesheet-pure-css.css" rel="stylesheet" />
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+      <script type="text/javascript">
         $(function () {
             $("[id$=txtDate]").datepicker({
-                showOn: 'button',
+                showOn: "button",
+                buttonImage: 'images/calendar.png',
                 buttonImageOnly: true,
-                buttonImage: 'images/calendar.png'
+                dateFormat: 'dd/mm/yy',
+                changeYear: true,
+            
             });
         });
     </script>
+
 <head runat="server">
-    <title></title>
+    <title>Add-Life-Health-Fitness</title>
+      <link rel="shortcut icon" href="images/ico/favicon.ico"> 
 </head>
 <body>
     <form id="form1" runat="server">
@@ -97,7 +104,7 @@
               ErrorMessage="Birthday is required!"
               SetFocusOnError="True" ForeColor="Red"  />
 
-     <asp:TextBox ID="textboxBio" runat="server" TextMode="MultiLine" placeholder='Bio' Height="100px" MaxLength="3000"></asp:TextBox>
+     <asp:TextBox ID="textboxBio" runat="server" TextMode="MultiLine" placeholder='Bio' Height="100px" Width="400px" MaxLength="3000"></asp:TextBox>
      <asp:RequiredFieldValidator id="RequiredFieldValidator2"
               runat="server"
               ControlToValidate="textboxBio"

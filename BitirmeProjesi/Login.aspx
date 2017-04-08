@@ -8,7 +8,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Deneme</title>
+     <link rel="shortcut icon" href="images/ico/favicon.ico"> 
+    <title>Add-Life-Health-Fitness</title>
+     <style type="text/css">
+        pre
+        {
+            border: solid 1px #ccc;
+            background-color: #ffa;
+            padding: 5px;
+            color: #a00;
+            line-height: 1.5em;
+        }
+    </style>
+    <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/notifyit/notifIt.js"></script>
        <style>
 @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -107,7 +121,7 @@ body{
 }
 
 .login input[type=button]{
-	width: 260px;
+	width: 300px;
 	height: 35px;
 	background: #fff;
 	border: 1px solid #fff;
@@ -164,14 +178,28 @@ body{
             <asp:Label ID="lblmsg" runat="server" Text="Label"></asp:Label>
         </div>
 		<div class="header">
-			<div>Coach<span>Login</span></div>
+			<div>Trainer<span>Login</span></div>
 		</div>
-		<br>
+		
 		<div class="login">
-				<input type="text" placeholder="username" name="user"/></br>
-				<input type="password" placeholder="password" name="password"/></br>
-                <br/> <div class="g-recaptcha"  data-sitekey="6LduRBMUAAAAAOpA-nGf5FdvTTjys708mK5xlmHA"></div>
-			    <input id="Submit1" type="button" OnServerClick="btnLogin_Click" runat="server"  value="submit" />
+		    <asp:TextBox ID="textboxEmail" placeholder='Email' runat="server"></asp:TextBox>
+            <br> <br />
+            <asp:RequiredFieldValidator id="emailReq"
+              runat="server"
+              ControlToValidate="textboxEmail"
+              ErrorMessage="Email is required!"
+              SetFocusOnError="True" ForeColor="Red" />
+            <br> <br />
+				 <asp:TextBox ID="textboxPassword" placeholder='Password' runat="server"></asp:TextBox>
+            <br> <br />
+                 <asp:RequiredFieldValidator id="passwordReq"
+                    runat="server"
+                    ControlToValidate="textboxPassword"
+                    ErrorMessage="Password is required!"
+                    SetFocusOnError="True" ForeColor="Red" />
+            <br> <br />
+                <div class="g-recaptcha"  data-sitekey="6LduRBMUAAAAAOpA-nGf5FdvTTjys708mK5xlmHA"></div>
+			    <input id="Submit1" type="button" OnServerClick="btnLogin_Click" runat="server"  value="Login" />
 		</div>
        
 

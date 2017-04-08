@@ -272,6 +272,8 @@
     <Content Include="js\custom-scripts.js" />
     <Content Include="js\datepicker.js" />
     <Content Include="js\html5shiv.js" />
+    <None Include="js\jquery-1.4.1-vsdoc.js" />
+    <Content Include="js\jquery-1.4.1.min.js" />
     <Content Include="js\jquery-2.0.3.min.js" />
     <Content Include="js\jquery.inview.min.js" />
     <Content Include="js\jquery.isotope.min.js" />
@@ -1121,6 +1123,7 @@
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Register.aspx" />
     <Content Include="RegisterSecondPart.aspx" />
+    <Content Include="TrainerPage.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
@@ -1154,6 +1157,13 @@
     </Compile>
     <Compile Include="RegisterSecondPart.aspx.designer.cs">
       <DependentUpon>RegisterSecondPart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerPage.aspx.cs">
+      <DependentUpon>TrainerPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerPage.aspx.designer.cs">
+      <DependentUpon>TrainerPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerPanel.Master.cs">
       <DependentUpon>TrainerPanel.Master</DependentUpon>

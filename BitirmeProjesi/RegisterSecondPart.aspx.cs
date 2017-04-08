@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -50,12 +53,44 @@ namespace BitirmeProjesi
 
         }
 
+        protected void upload(object sender, EventArgs e)
+        {
+            string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
+            string contentType = FileUpload1.PostedFile.ContentType;
+            using (Stream fs = FileUpload1.PostedFile.InputStream)
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                    string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        string query = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @File)";
+                        using (SqlCommand cmd = new SqlCommand(query))
+                        {
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("@Trainer_ID", 2);
+                            cmd.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
+                            cmd.Parameters.AddWithValue("@Instution", textboxInstution.Text);
+                            cmd.Parameters.AddWithValue("@Date", txtdateCertificate.Text);
+                            cmd.Parameters.AddWithValue("@File", bytes);
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+                }
+            }
+    
+        }
+
+
         protected void addCertificate(object sender, EventArgs e)
         {
             SqlCommand cmdInsertUser = new SqlCommand();
             if (Session["userID"]==null)
             {
-              
+     
                 cmdInsertUser.Connection = con;
                 con.Open();
                 cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
@@ -66,7 +101,7 @@ namespace BitirmeProjesi
 
                 cmdInsertUser.Parameters.AddWithValue("@Sex", userSex);
 
-                cmdInsertUser.Parameters.AddWithValue("@Birthday", userBirthday);
+                cmdInsertUser.Parameters.AddWithValue("@Birthday", Convert.ToDateTime(userBirthday));
                 cmdInsertUser.Parameters.AddWithValue("@Role_ID", 2);
                 cmdInsertUser.ExecuteNonQuery();
 
@@ -102,7 +137,39 @@ namespace BitirmeProjesi
 
             cmdInsertUser.ExecuteNonQuery();
 
-            cmdInsertUser = new SqlCommand();
+
+
+
+            string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
+            string contentType = FileUpload1.PostedFile.ContentType;
+            using (Stream fs = FileUpload1.PostedFile.InputStream)
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
+
+    
+                            
+                            cmdInsertUser = new SqlCommand();
+                            cmdInsertUser.Connection = con;
+                            
+                            cmdInsertUser.CommandText = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @File)";
+                            cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
+                            cmdInsertUser.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
+                            cmdInsertUser.Parameters.AddWithValue("@Instution", textboxInstution.Text);
+                            cmdInsertUser.Parameters.AddWithValue("@Date", Convert.ToDateTime(txtdateCertificate.Text));
+                            cmdInsertUser.Parameters.AddWithValue("@File", bytes);
+                            cmdInsertUser.ExecuteNonQuery();
+                         
+                                            
+                }
+            }
+        
+
+            gridview.DataBind();
+
+
+           /* cmdInsertUser = new SqlCommand();
             cmdInsertUser.Connection = con;
             cmdInsertUser.CommandText = "INSERT INTO Certificate (Trainer_ID,Certificate_Name,Instution,Date) VALUES (@Trainer_ID,@Certificate_Name,@Instution,@Date)";
             cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
@@ -114,7 +181,7 @@ namespace BitirmeProjesi
             con.Close();
 
 
-            gridview.DataBind();
+            gridview.DataBind();*/
             
           
 
@@ -122,7 +189,13 @@ namespace BitirmeProjesi
 
         protected void save(object sender, EventArgs e)
         {
-            Response.Write("Save butob basıldı");
+            Session["infoForTrainer"] = "Awaiting approval by admin. You will be notified by e-mail";
+          //  MessageBox.Show("Awaiting approval by admin. You will be notified by e-mail", MessageBox.MesajTipleri.Info, false, 3000);
+            Response.Redirect("Login.aspx");
+               
+            
+            
         }
+
     }
 }

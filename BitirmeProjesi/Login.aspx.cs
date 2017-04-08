@@ -16,14 +16,23 @@ using System.Net;
 using System.Text;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Web.Security;
 
 namespace BitirmeProjesi
 {
     public partial class Login : System.Web.UI.Page
     {
+        int trainer_id;
+        string password;
+        int role_id;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["infoForTrainer"]!=null){
+                MessageBox.Show("Awaiting approval by admin. You will be notified by e-mail", MessageBox.MesajTipleri.Info, false, 3000);
+            }
+           
         }
 
 
@@ -33,13 +42,86 @@ namespace BitirmeProjesi
             //validate Recaptcha
             if (Validate())
             {
-
-          //capcha gecerli
-               // Response.Redirect("Main.aspx");
                 
 
-                Session["user"] = Request.Form["user"];
-                Response.Redirect("Register.aspx");
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
+                conn.Open();
+                string checkUser = "select count(*) from Users where Email='" + textboxEmail.Text + "'";
+                SqlCommand com = new SqlCommand(checkUser,conn);
+                int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
+                conn.Close();
+                if (temp == 1)
+                {
+                    conn.Open();
+                   // string checkPassword = "select Password from Users where Email='" + textboxEmail.Text + "'";
+                    SqlCommand passCom = new SqlCommand();
+                    passCom.Connection = conn;
+                    passCom.CommandText = "select User_ID,Password,Role_ID from Users where Email='" + textboxEmail.Text + "'";
+                    SqlDataReader dr = passCom.ExecuteReader();
+                 
+                    while (dr.Read())
+                    {
+                        trainer_id = Convert.ToInt32(dr[0].ToString());
+                        password = dr[1].ToString();
+                        role_id = Convert.ToInt32(dr[2].ToString());
+                       
+                    }
+
+
+                    conn.Close();
+                    if (password == FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text, "MD5"))
+                    {
+                        conn.Open();
+                        if (role_id == 1)
+                        {   //Admin page e yonlendir......
+                            //Response.Redirect("AdminPage.aspx");
+                        }
+                        else if (role_id == 2)
+                        {
+                            //Trainer page e yonlendir....
+                            SqlCommand controlActivateTrainer = new SqlCommand();
+                            controlActivateTrainer.Connection = conn;
+                            controlActivateTrainer.CommandText = "select Status_ID from TrainersData where Trainer_ID='" + trainer_id + "'";
+                            int status_id = Convert.ToInt32(controlActivateTrainer.ExecuteScalar().ToString());
+                            if (status_id == 1)
+                            {
+                                //Onaylandi...
+                                Session["trainerEmail"] = textboxEmail.Text;
+                                Response.Redirect("TrainerPage.aspx");
+                            }
+                            else if(status_id==2)
+                            {  //Beklemede...
+                                MessageBox.Show("Account not activated", MessageBox.MesajTipleri.Warning, false, 3000);
+                            }
+                            else if (status_id == 3)
+                            {   //Reddedildi...
+                                MessageBox.Show("Your registration has been rejected", MessageBox.MesajTipleri.Error, false, 3000);
+                            }
+
+
+                           
+                        }
+                     
+                      }
+                    else
+                    {
+                        MessageBox.Show("Wrong email or password", MessageBox.MesajTipleri.Warning, false, 3000);
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Wrong email or password", MessageBox.MesajTipleri.Warning, false, 3000);
+                }
+
+                //capcha gecerli
+               // Response.Redirect("Main.aspx");
+                
+                
+
+               //Session["user"] = Request.Form["user"];
+              //  Response.Redirect("Register.aspx");
             }
 
             else
