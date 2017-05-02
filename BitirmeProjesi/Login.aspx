@@ -190,7 +190,7 @@ body{
               ErrorMessage="Email is required!"
               SetFocusOnError="True" ForeColor="Red" />
             <br> <br />
-				 <asp:TextBox ID="textboxPassword" placeholder='Password' runat="server"></asp:TextBox>
+				 <asp:TextBox ID="textboxPassword"  placeholder='Password' runat="server" TextMode="Password"></asp:TextBox>
             <br> <br />
                  <asp:RequiredFieldValidator id="passwordReq"
                     runat="server"

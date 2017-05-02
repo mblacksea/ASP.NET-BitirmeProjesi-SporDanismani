@@ -35,7 +35,7 @@
       <link rel="shortcut icon" href="images/ico/favicon.ico"> 
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
  <div class='login'>
   <h2>Personel Trainer</h2>
      <asp:TextBox ID="textboxName" runat="server" placeholder='Name'></asp:TextBox>
@@ -64,6 +64,7 @@
      <asp:TextBox ID="textboxPassword" runat="server" placeholder='Password' TextMode="Password"></asp:TextBox>
       <asp:RequiredFieldValidator id="passwordReq"
               runat="server"
+              
               ControlToValidate="textboxPassword"
               ErrorMessage="Password is required!"
               SetFocusOnError="True" ForeColor="Red" Display="Dynamic" />

@@ -65,7 +65,7 @@ namespace BitirmeProjesi
                     string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
-                        string query = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @File)";
+                        string query = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
                             cmd.Connection = con;
@@ -73,7 +73,7 @@ namespace BitirmeProjesi
                             cmd.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
                             cmd.Parameters.AddWithValue("@Instution", textboxInstution.Text);
                             cmd.Parameters.AddWithValue("@Date", txtdateCertificate.Text);
-                            cmd.Parameters.AddWithValue("@File", bytes);
+                            cmd.Parameters.AddWithValue("@CertificateFile", bytes);
                             con.Open();
                             cmd.ExecuteNonQuery();
                             con.Close();
@@ -87,87 +87,99 @@ namespace BitirmeProjesi
 
         protected void addCertificate(object sender, EventArgs e)
         {
-            SqlCommand cmdInsertUser = new SqlCommand();
-            if (Session["userID"]==null)
+          
+            if (FileUpload1.PostedFile.ContentType == "application/pdf" || FileUpload1.PostedFile.ContentType==null)
             {
-     
-                cmdInsertUser.Connection = con;
+                SqlCommand cmdInsertUser = new SqlCommand();
+                if (Session["userID"] == null)
+                {
+
+                    cmdInsertUser.Connection = con;
+                    con.Open();
+                    cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
+                    cmdInsertUser.Parameters.AddWithValue("@Name", userName);
+                    cmdInsertUser.Parameters.AddWithValue("@Surname", userSurname);
+                    cmdInsertUser.Parameters.AddWithValue("@Email", userEmail);
+                    cmdInsertUser.Parameters.AddWithValue("@Password", userPassword);
+
+                    cmdInsertUser.Parameters.AddWithValue("@Sex", userSex);
+
+                    cmdInsertUser.Parameters.AddWithValue("@Birthday", Convert.ToDateTime(userBirthday));
+                    cmdInsertUser.Parameters.AddWithValue("@Role_ID", 2);
+                    cmdInsertUser.ExecuteNonQuery();
+
+
+
+                    SqlCommand cmdUserID = new SqlCommand();
+                    cmdUserID.Connection = con;
+                    cmdUserID.CommandText = "SELECT User_ID FROM Users WHERE Email='" + userEmail + "'";
+
+
+                    userID = cmdUserID.ExecuteScalar();
+                    //   Response.Write(userID.ToString());
+
+
+                    Session["userID"] = userID.ToString();
+
+                    cmdInsertUser = new SqlCommand();
+                    cmdInsertUser.Connection = con;
+                    cmdInsertUser.CommandText = "INSERT INTO TrainersData (Trainer_ID,Bio,Status_ID) VALUES (@Trainer_ID,@Bio,@Status_ID)";
+                    cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
+                    cmdInsertUser.Parameters.AddWithValue("@Bio", userBio);
+                    cmdInsertUser.Parameters.AddWithValue("@Status_ID", 2);
+                    cmdInsertUser.ExecuteNonQuery();
+                    con.Close();
+
+                    
+              
+                }
+                else
+                {
+                    userID = Session["userID"].ToString();
+                }
+
+
+
+
+
+
+
                 con.Open();
-                cmdInsertUser.CommandText = "INSERT INTO Users (Name,Surname,Email,Password,Sex,Birthday,Role_ID) VALUES (@Name,@Surname,@Email,@Password,@Sex,@Birthday,@Role_ID)";
-                cmdInsertUser.Parameters.AddWithValue("@Name", userName);
-                cmdInsertUser.Parameters.AddWithValue("@Surname", userSurname);
-                cmdInsertUser.Parameters.AddWithValue("@Email", userEmail);
-                cmdInsertUser.Parameters.AddWithValue("@Password", userPassword);
+                string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
 
-                cmdInsertUser.Parameters.AddWithValue("@Sex", userSex);
-
-                cmdInsertUser.Parameters.AddWithValue("@Birthday", Convert.ToDateTime(userBirthday));
-                cmdInsertUser.Parameters.AddWithValue("@Role_ID", 2);
-                cmdInsertUser.ExecuteNonQuery();
+                using (Stream fs = FileUpload1.PostedFile.InputStream)
+                {
+                    using (BinaryReader br = new BinaryReader(fs))
+                    {
+                        byte[] bytes = br.ReadBytes((Int32)fs.Length);
 
 
 
-                SqlCommand cmdUserID = new SqlCommand();
-                cmdUserID.Connection = con;
-                cmdUserID.CommandText = "SELECT User_ID FROM Users WHERE Email='" + userEmail + "'";
+                        cmdInsertUser = new SqlCommand();
+                        cmdInsertUser.Connection = con;
+
+                        cmdInsertUser.CommandText = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)";
+                        cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
+                        cmdInsertUser.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
+                        cmdInsertUser.Parameters.AddWithValue("@Instution", textboxInstution.Text);
+                        cmdInsertUser.Parameters.AddWithValue("@Date", Convert.ToDateTime(txtdateCertificate.Text));
+                        cmdInsertUser.Parameters.AddWithValue("@CertificateFile", bytes);
+                        cmdInsertUser.ExecuteNonQuery();
 
 
-                userID = cmdUserID.ExecuteScalar();
-                //   Response.Write(userID.ToString());
+                    }
+                }
 
 
-                Session["userID"] = userID.ToString();
-
+                gridview.DataBind();
                 con.Close();
+
             }
             else
             {
-                userID = Session["userID"].ToString();
+                MessageBox.Show("Please, Upload files in pdf format", MessageBox.MesajTipleri.Warning, false, 3000);
             }
-
-
-
-            cmdInsertUser = new SqlCommand();
-            cmdInsertUser.Connection = con;
-            con.Open();
-            cmdInsertUser.CommandText = "INSERT INTO TrainersData (Trainer_ID,Bio,Status_ID) VALUES (@Trainer_ID,@Bio,@Status_ID)";
-            cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
-            cmdInsertUser.Parameters.AddWithValue("@Bio", userBio);
-            cmdInsertUser.Parameters.AddWithValue("@Status_ID", 2);
-
-            cmdInsertUser.ExecuteNonQuery();
-
-
-
-
-            string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
-            string contentType = FileUpload1.PostedFile.ContentType;
-            using (Stream fs = FileUpload1.PostedFile.InputStream)
-            {
-                using (BinaryReader br = new BinaryReader(fs))
-                {
-                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
-
-    
-                            
-                            cmdInsertUser = new SqlCommand();
-                            cmdInsertUser.Connection = con;
-                            
-                            cmdInsertUser.CommandText = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @File)";
-                            cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
-                            cmdInsertUser.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
-                            cmdInsertUser.Parameters.AddWithValue("@Instution", textboxInstution.Text);
-                            cmdInsertUser.Parameters.AddWithValue("@Date", Convert.ToDateTime(txtdateCertificate.Text));
-                            cmdInsertUser.Parameters.AddWithValue("@File", bytes);
-                            cmdInsertUser.ExecuteNonQuery();
-                         
-                                            
-                }
-            }
-        
-
-            gridview.DataBind();
-
+            
 
            /* cmdInsertUser = new SqlCommand();
             cmdInsertUser.Connection = con;
@@ -182,7 +194,7 @@ namespace BitirmeProjesi
 
 
             gridview.DataBind();*/
-            
+           
           
 
         }

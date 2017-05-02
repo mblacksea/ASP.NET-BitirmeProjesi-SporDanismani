@@ -95,10 +95,34 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminConfirmation.aspx" />
+    <Content Include="AdminConfirmationTrainerDetails.aspx" />
     <Content Include="App_Data\bitirmedatabase.mdf" />
     <Content Include="App_Data\bitirmedatabase_log.ldf">
       <DependentUpon>bitirmedatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\demo.css" />
+    <Content Include="assets\css\paper-dashboard.css" />
+    <Content Include="assets\css\themify-icons.css" />
+    <Content Include="assets\fonts\themify.svg" />
+    <Content Include="assets\img\apple-icon.png" />
+    <Content Include="assets\img\background.jpg" />
+    <Content Include="assets\img\faces\face-0.jpg" />
+    <Content Include="assets\img\faces\face-1.jpg" />
+    <Content Include="assets\img\faces\face-2.jpg" />
+    <Content Include="assets\img\faces\face-3.jpg" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\new_logo.png" />
+    <Content Include="assets\img\tim_80x80.png" />
+    <Content Include="assets\js\bootstrap-checkbox-radio.js" />
+    <Content Include="assets\js\bootstrap-notify.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\chartist.min.js" />
+    <Content Include="assets\js\demo.js" />
+    <Content Include="assets\js\jquery-1.10.2.js" />
+    <Content Include="assets\js\paper-dashboard.js" />
     <Content Include="bootstrap\css\bootstrap-theme.css" />
     <Content Include="bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
@@ -118,6 +142,8 @@
     <Content Include="css\style.css" />
     <Content Include="css\styles.css" />
     <Content Include="css\stylesheet-pure-css.css" />
+    <Content Include="AdminDefaultPage.aspx" />
+    <Content Include="Deneme.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -204,6 +230,10 @@
     <Content Include="documentation\docs.js" />
     <Content Include="documentation\index.html" />
     <Content Include="documentation\style.css" />
+    <Content Include="FlowPlayer\flowplayer-3.2.12.min.js" />
+    <Content Include="FlowPlayer\flowplayer-3.2.16.swf" />
+    <Content Include="FlowPlayer\flowplayer.controls-3.2.15.swf" />
+    <Content Include="FlowPlayer\flowplayer.pseudostreaming-3.2.12.swf" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\about.png" />
@@ -268,10 +298,53 @@
     <Content Include="images\team\02.jpg" />
     <Content Include="images\team\03.jpg" />
     <Content Include="images\team\04.jpg" />
+    <Content Include="images\userDefaultImage.jpg" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\custom-scripts.js" />
     <Content Include="js\datepicker.js" />
     <Content Include="js\html5shiv.js" />
+    <Content Include="AdminPanel.Master" />
+    <Content Include="assets\.DS_Store" />
+    <Content Include="assets\css\.DS_Store" />
+    <Content Include="assets\fonts\.DS_Store" />
+    <Content Include="assets\fonts\themify.eot" />
+    <Content Include="assets\fonts\themify.ttf" />
+    <Content Include="assets\fonts\themify.woff" />
+    <Content Include="assets\img\.DS_Store" />
+    <Content Include="assets\img\background\.DS_Store" />
+    <Content Include="assets\img\faces\.DS_Store" />
+    <Content Include="assets\img\tables\.DS_Store" />
+    <Content Include="assets\js\.DS_Store" />
+    <Content Include="assets\sass\.DS_Store" />
+    <Content Include="assets\sass\paper-dashboard.scss" />
+    <Content Include="assets\sass\paper\mixins\_buttons.scss" />
+    <Content Include="assets\sass\paper\mixins\_cards.scss" />
+    <Content Include="assets\sass\paper\mixins\_chartist.scss" />
+    <Content Include="assets\sass\paper\mixins\_icons.scss" />
+    <Content Include="assets\sass\paper\mixins\_inputs.scss" />
+    <Content Include="assets\sass\paper\mixins\_labels.scss" />
+    <Content Include="assets\sass\paper\mixins\_navbars.scss" />
+    <Content Include="assets\sass\paper\mixins\_sidebar.scss" />
+    <Content Include="assets\sass\paper\mixins\_tabs.scss" />
+    <Content Include="assets\sass\paper\mixins\_transparency.scss" />
+    <Content Include="assets\sass\paper\mixins\_vendor-prefixes.scss" />
+    <Content Include="assets\sass\paper\_alerts.scss" />
+    <Content Include="assets\sass\paper\_buttons.scss" />
+    <Content Include="assets\sass\paper\_cards.scss" />
+    <Content Include="assets\sass\paper\_chartist.scss" />
+    <Content Include="assets\sass\paper\_checkbox-radio.scss" />
+    <Content Include="assets\sass\paper\_dropdown.scss" />
+    <Content Include="assets\sass\paper\_footers.scss" />
+    <Content Include="assets\sass\paper\_inputs.scss" />
+    <Content Include="assets\sass\paper\_misc.scss" />
+    <Content Include="assets\sass\paper\_mixins.scss" />
+    <Content Include="assets\sass\paper\_navbars.scss" />
+    <Content Include="assets\sass\paper\_responsive.scss" />
+    <Content Include="assets\sass\paper\_sidebar-and-main-panel.scss" />
+    <Content Include="assets\sass\paper\_tables.scss" />
+    <Content Include="assets\sass\paper\_typography.scss" />
+    <Content Include="assets\sass\paper\_variables.scss" />
+    <Content Include="File.ashx" />
     <None Include="js\jquery-1.4.1-vsdoc.js" />
     <Content Include="js\jquery-1.4.1.min.js" />
     <Content Include="js\jquery-2.0.3.min.js" />
@@ -1123,11 +1196,55 @@
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Register.aspx" />
     <Content Include="RegisterSecondPart.aspx" />
-    <Content Include="TrainerPage.aspx" />
+    <Content Include="TrainerAddCertificate.aspx" />
+    <Content Include="TrainerAddExercise.aspx" />
+    <Content Include="TrainerDefaultPage.aspx" />
+    <Content Include="TrainerMyExercises.aspx" />
+    <Content Include="TrainerMyExercisesDetails.aspx" />
+    <Content Include="TrainerProfileSettings.aspx" />
+    <Content Include="movie.mp4" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminConfirmation.aspx.cs">
+      <DependentUpon>AdminConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminConfirmation.aspx.designer.cs">
+      <DependentUpon>AdminConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminConfirmationTrainerDetails.aspx.cs">
+      <DependentUpon>AdminConfirmationTrainerDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminConfirmationTrainerDetails.aspx.designer.cs">
+      <DependentUpon>AdminConfirmationTrainerDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel.Master.cs">
+      <DependentUpon>AdminPanel.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel.Master.designer.cs">
+      <DependentUpon>AdminPanel.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDefaultPage.aspx.cs">
+      <DependentUpon>AdminDefaultPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDefaultPage.aspx.designer.cs">
+      <DependentUpon>AdminDefaultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Deneme.aspx.cs">
+      <DependentUpon>Deneme.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Deneme.aspx.designer.cs">
+      <DependentUpon>Deneme.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="File.ashx.cs">
+      <DependentUpon>File.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1158,12 +1275,40 @@
     <Compile Include="RegisterSecondPart.aspx.designer.cs">
       <DependentUpon>RegisterSecondPart.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TrainerPage.aspx.cs">
-      <DependentUpon>TrainerPage.aspx</DependentUpon>
+    <Compile Include="TrainerAddCertificate.aspx.cs">
+      <DependentUpon>TrainerAddCertificate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TrainerPage.aspx.designer.cs">
-      <DependentUpon>TrainerPage.aspx</DependentUpon>
+    <Compile Include="TrainerAddCertificate.aspx.designer.cs">
+      <DependentUpon>TrainerAddCertificate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerAddExercise.aspx.cs">
+      <DependentUpon>TrainerAddExercise.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerAddExercise.aspx.designer.cs">
+      <DependentUpon>TrainerAddExercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerDefaultPage.aspx.cs">
+      <DependentUpon>TrainerDefaultPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerDefaultPage.aspx.designer.cs">
+      <DependentUpon>TrainerDefaultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerMyExercises.aspx.cs">
+      <DependentUpon>TrainerMyExercises.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyExercises.aspx.designer.cs">
+      <DependentUpon>TrainerMyExercises.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerMyExercisesDetails.aspx.cs">
+      <DependentUpon>TrainerMyExercisesDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyExercisesDetails.aspx.designer.cs">
+      <DependentUpon>TrainerMyExercisesDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerPanel.Master.cs">
       <DependentUpon>TrainerPanel.Master</DependentUpon>
@@ -1171,6 +1316,13 @@
     </Compile>
     <Compile Include="TrainerPanel.Master.designer.cs">
       <DependentUpon>TrainerPanel.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerProfileSettings.aspx.cs">
+      <DependentUpon>TrainerProfileSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerProfileSettings.aspx.designer.cs">
+      <DependentUpon>TrainerProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -1320,8 +1472,10 @@
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

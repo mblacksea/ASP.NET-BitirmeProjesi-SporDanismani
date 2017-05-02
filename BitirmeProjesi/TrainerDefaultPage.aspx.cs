@@ -13,7 +13,7 @@ namespace BitirmeProjesi
         {
             if (Session["trainerEmail"] != null)
             {
-                Response.Write("Hoşgeldin" + Session["trainerEmail"].ToString());
+              // Response.Write("Hoşgeldin" + Session["trainerEmail"].ToString());
             }
             else
             {

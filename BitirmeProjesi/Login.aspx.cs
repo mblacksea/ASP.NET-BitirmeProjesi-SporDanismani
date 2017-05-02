@@ -27,6 +27,7 @@ namespace BitirmeProjesi
         int trainer_id;
         string password;
         int role_id;
+        string name;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["infoForTrainer"]!=null){
@@ -56,7 +57,7 @@ namespace BitirmeProjesi
                    // string checkPassword = "select Password from Users where Email='" + textboxEmail.Text + "'";
                     SqlCommand passCom = new SqlCommand();
                     passCom.Connection = conn;
-                    passCom.CommandText = "select User_ID,Password,Role_ID from Users where Email='" + textboxEmail.Text + "'";
+                    passCom.CommandText = "select User_ID,Password,Role_ID,Name from Users where Email='" + textboxEmail.Text + "'";
                     SqlDataReader dr = passCom.ExecuteReader();
                  
                     while (dr.Read())
@@ -64,7 +65,9 @@ namespace BitirmeProjesi
                         trainer_id = Convert.ToInt32(dr[0].ToString());
                         password = dr[1].ToString();
                         role_id = Convert.ToInt32(dr[2].ToString());
-                       
+                        name = dr[3].ToString();
+                        Session["trainerName"] = name;
+                        Session["trainerID"] = trainer_id;
                     }
 
 
@@ -74,7 +77,8 @@ namespace BitirmeProjesi
                         conn.Open();
                         if (role_id == 1)
                         {   //Admin page e yonlendir......
-                            //Response.Redirect("AdminPage.aspx");
+                            Session["adminSession"] = textboxEmail.Text;
+                            Response.Redirect("AdminDefaultPage.aspx");
                         }
                         else if (role_id == 2)
                         {
@@ -87,7 +91,7 @@ namespace BitirmeProjesi
                             {
                                 //Onaylandi...
                                 Session["trainerEmail"] = textboxEmail.Text;
-                                Response.Redirect("TrainerPage.aspx");
+                                Response.Redirect("TrainerDefaultPage.aspx");
                             }
                             else if(status_id==2)
                             {  //Beklemede...

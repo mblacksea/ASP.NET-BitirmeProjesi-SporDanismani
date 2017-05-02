@@ -1,0 +1,1 @@
+﻿select u.User_ID,u.Name,u.Surname,u.Sex,u.Birthday from Users u,TrainersData t where u.User_ID=t.Trainer_ID and t.Status_ID=2
