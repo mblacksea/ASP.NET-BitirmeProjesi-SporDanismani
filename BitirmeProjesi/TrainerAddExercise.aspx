@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerAddExercise.aspx.cs" Inherits="BitirmeProjesi.TrainerAddExercise" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
         <link href="js/notifyit/notifIt.css" rel="stylesheet" />
-    <script src="js/notifyit/notifIt.js"></script>
-    <script src="js/jquery-2.0.3.min.js"></script>
+        <script src="js/notifyit/notifIt.js"></script>
+        <script src="js/jquery-2.0.3.min.js"></script>
 </asp:Content>
 
 
@@ -11,9 +11,8 @@
 
     <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Add New Exercise</h3>
+            <h3 class="box-title">Add New Exercise</h3>
 
-      
         </div>
         <!-- /.box-header -->
         <div class="box-body">

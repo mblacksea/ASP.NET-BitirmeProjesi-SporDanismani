@@ -18,7 +18,7 @@ namespace BitirmeProjesi
         {
             if (!this.IsPostBack)
             {
-                MessageBox.Show("Account not activated", MessageBox.MesajTipleri.Warning, false, 3000);
+                
                
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -95,6 +95,7 @@ namespace BitirmeProjesi
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
+                        MessageBox.Show("Added exercise", MessageBox.MesajTipleri.Success, false, 3000);
                     }
                 }
             }
