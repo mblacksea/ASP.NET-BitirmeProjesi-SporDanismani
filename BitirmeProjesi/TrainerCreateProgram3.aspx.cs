@@ -76,14 +76,14 @@ namespace BitirmeProjesi
                         (Panel3.FindControl("TextBoxxx1") as TextBox).Visible = true;
                  
                         TextBoxxx1.Visible = true;
-                        string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @Order, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
+                        string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
                             Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
                             cmd.Connection = con;
                             cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                             cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
-                            cmd.Parameters.AddWithValue("@Order", Convert.ToInt32(Session["order"].ToString()));
+                            cmd.Parameters.AddWithValue("@OrderExercise", Convert.ToInt32(Session["order"].ToString()));
                             cmd.Parameters.AddWithValue("@SetSayisi", DBNull.Value);
                             cmd.Parameters.AddWithValue("@TekrarSayisi", DBNull.Value);
                             cmd.Parameters.AddWithValue("@Agirlik", DBNull.Value);
@@ -105,14 +105,14 @@ namespace BitirmeProjesi
                         for (int i = 1; i <= Convert.ToInt32(setNumber.Text); i++)
                         {
                             string texboxID = "TextBox" + i;
-                            string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @Order, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
+                            string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
                             using (SqlCommand cmd = new SqlCommand(query))
                             {
                                 Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
                                 cmd.Connection = con;
                                 cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                                 cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
-                                cmd.Parameters.AddWithValue("@Order", Convert.ToInt32(Session["order"].ToString()));
+                                cmd.Parameters.AddWithValue("@OrderExercise", Convert.ToInt32(Session["order"].ToString()));
                                 cmd.Parameters.AddWithValue("@SetSayisi", Convert.ToInt32(setNumber.Text));
                                 cmd.Parameters.AddWithValue("@TekrarSayisi", (Panel1.FindControl(texboxID.ToString()) as TextBox).Text);
                                 cmd.Parameters.AddWithValue("@Agirlik", (Panel2.FindControl("TextBoxx" + i) as TextBox).Text);
@@ -160,14 +160,14 @@ namespace BitirmeProjesi
                     {
                         Panel3.Visible = true;
                         (Panel3.FindControl("TextBoxxx1") as TextBox).Visible = true;
-                        string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @Order, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime, @ExerciseTime)SELECT SCOPE_IDENTITY()";
+                        string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime, @ExerciseTime)SELECT SCOPE_IDENTITY()";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
                             Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
                             cmd.Connection = con;
                             cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                             cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
-                            cmd.Parameters.AddWithValue("@Order", Convert.ToInt32(Session["order"].ToString()));
+                            cmd.Parameters.AddWithValue("@OrderExercise", Convert.ToInt32(Session["order"].ToString()));
                             cmd.Parameters.AddWithValue("@SetSayisi", DBNull.Value);
                             cmd.Parameters.AddWithValue("@TekrarSayisi", DBNull.Value);
                             cmd.Parameters.AddWithValue("@Agirlik", DBNull.Value);
@@ -188,7 +188,7 @@ namespace BitirmeProjesi
                         for (int i = 1; i <= Convert.ToInt32(setNumber.Text); i++)
                         {
                             string texboxID = "TextBox" + i;
-                            string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @Order, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
+                            string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
                             using (SqlCommand cmd = new SqlCommand(query))
                             {
 
@@ -197,7 +197,7 @@ namespace BitirmeProjesi
                                 cmd.Connection = con;
                                 cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                                 cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
-                                cmd.Parameters.AddWithValue("@Order", Convert.ToInt32(Session["order"].ToString()));
+                                cmd.Parameters.AddWithValue("@OrderExercise", Convert.ToInt32(Session["order"].ToString()));
                                 cmd.Parameters.AddWithValue("@SetSayisi", Convert.ToInt32(setNumber.Text));
                                 cmd.Parameters.AddWithValue("@TekrarSayisi", (Panel1.FindControl("TextBox"+i) as TextBox).Text);
                                 cmd.Parameters.AddWithValue("@Agirlik", (Panel2.FindControl("TextBoxx" + i) as TextBox).Text);
@@ -226,9 +226,10 @@ namespace BitirmeProjesi
 
         }
 
-        protected void Publish(object sender, EventArgs e)
+        protected void Next_Step(object sender, EventArgs e)
         {
             //Bu butona basildiginda circle kismina gecilecek.
+            Response.Redirect("TrainerCircleExercise.aspx");
         }
 
         protected void CreateSets(object sender, EventArgs e)

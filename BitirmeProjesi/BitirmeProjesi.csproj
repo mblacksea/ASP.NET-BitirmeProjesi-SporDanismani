@@ -1193,6 +1193,7 @@
     <Content Include="RegisterSecondPart.aspx" />
     <Content Include="TrainerAddCertificate.aspx" />
     <Content Include="TrainerAddExercise.aspx" />
+    <Content Include="TrainerCircleExercise.aspx" />
     <Content Include="TrainerCreateProgram1.aspx" />
     <Content Include="TrainerCreateProgram2.aspx" />
     <Content Include="TrainerCreateProgram3.aspx" />
@@ -1232,6 +1233,7 @@
     <Compile Include="AdminDefaultPage.aspx.designer.cs">
       <DependentUpon>AdminDefaultPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ArrraList.cs" />
     <Compile Include="File.ashx.cs">
       <DependentUpon>File.ashx</DependentUpon>
     </Compile>
@@ -1278,6 +1280,13 @@
     </Compile>
     <Compile Include="TrainerAddExercise.aspx.designer.cs">
       <DependentUpon>TrainerAddExercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerCircleExercise.aspx.cs">
+      <DependentUpon>TrainerCircleExercise.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerCircleExercise.aspx.designer.cs">
+      <DependentUpon>TrainerCircleExercise.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerCreateProgram1.aspx.cs">
       <DependentUpon>TrainerCreateProgram1.aspx</DependentUpon>

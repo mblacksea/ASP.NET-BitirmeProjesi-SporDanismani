@@ -223,7 +223,7 @@
                      </div>
 
                     <div class="form-group">
-                        <asp:Button ID="Button1" CssClass="btn btn-block btn-warning" OnClick="Publish" OnClientClick="return confirm('Are you sure you want to publish?');" runat="server" Text="Publish" />
+                        <asp:Button ID="Button1" CssClass="btn btn-block btn-warning" OnClick="Next_Step" OnClientClick="return confirm('Are you sure you want to next?');" runat="server" Text="Next Step" />
                     </div>
                
                    
