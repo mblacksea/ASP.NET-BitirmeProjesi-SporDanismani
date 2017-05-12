@@ -140,7 +140,7 @@
           <ul class="treeview-menu">
            
             <li><a href="TrainerCreateProgram1.aspx">Create Program</a></li>
-            <li><a href="#">My Programs</a></li>
+            <li><a href="TrainerMyPrograms.aspx">My Programs</a></li>
             <li><a href="TrainerAddExercise.aspx">Add Exercise</a></li>
             <li><a href="TrainerMyExercises.aspx">My Exercises</a></li>
           </ul>

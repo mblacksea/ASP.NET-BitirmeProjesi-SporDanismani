@@ -11,8 +11,22 @@ namespace BitirmeProjesi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["programID"] != null)
+            {
+                nextStepButtonID.Visible = true;
+            }
+            else
+            {
+                nextStepButtonID.Visible = false;
+            }
         }
+
+        protected void Next_Step(object sender, EventArgs e)
+        {
+            //Bu butona basildiginda circle kismina gecilecek.
+            Response.Redirect("TrainerCircleExercise.aspx");
+        }
+
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -24,6 +38,11 @@ namespace BitirmeProjesi
             Response.Redirect("TrainerCreateProgram3.aspx");
 
 
+        }
+
+        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Session["order"] = Convert.ToInt32(Session["order"].ToString()) - 1;
         }
     }
 }

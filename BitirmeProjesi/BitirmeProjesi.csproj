@@ -1200,6 +1200,7 @@
     <Content Include="TrainerDefaultPage.aspx" />
     <Content Include="TrainerMyExercises.aspx" />
     <Content Include="TrainerMyExercisesDetails.aspx" />
+    <Content Include="TrainerMyPrograms.aspx" />
     <Content Include="TrainerProfileSettings.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
@@ -1329,6 +1330,13 @@
     </Compile>
     <Compile Include="TrainerMyExercisesDetails.aspx.designer.cs">
       <DependentUpon>TrainerMyExercisesDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerMyPrograms.aspx.cs">
+      <DependentUpon>TrainerMyPrograms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyPrograms.aspx.designer.cs">
+      <DependentUpon>TrainerMyPrograms.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerPanel.Master.cs">
       <DependentUpon>TrainerPanel.Master</DependentUpon>

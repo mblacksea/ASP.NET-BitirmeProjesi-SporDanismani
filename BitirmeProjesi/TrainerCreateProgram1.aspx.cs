@@ -51,6 +51,7 @@ namespace BitirmeProjesi
 
             Session["ProgramSpecID"] = DropDownList1.SelectedValue;
             Session["ProgramDiffID"] = DropDownList2.SelectedValue;
+            Session["ProgramTittle"] = TextBoxProgramTittle.Text;
             Session["order"] = 0;
             Response.Redirect("TrainerCreateProgram2.aspx");
                /* using (SqlConnection con = new SqlConnection(constr))

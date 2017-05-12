@@ -15,45 +15,48 @@ namespace BitirmeProjesi
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
         ArrayList listExerciseName = new ArrayList();
         ArrayList listExerciseID = new ArrayList();
-        protected void Page_LoadComplete(object sender, EventArgs e)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                string c = GridView1.Rows[i].Cells[0].Text;
-              
-            
-            }
-        }
-        
+        ArrayList listOrderExercise = new ArrayList();
+        ArrayList listExerciseCount = new ArrayList();
+        DropDownList ddl;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
               
                 int count = Convert.ToInt32(GridView1.Rows.Count.ToString());
-
-
+                TextBox tb = (TextBox)GridView1.Rows[0].FindControl("TextBox4");
+                tb.Visible = false;
                 conn.Open();
                 SqlCommand trainerData = new SqlCommand();
                 trainerData.Connection = conn;
-                trainerData.CommandText = "select Distinct [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name],MIN([ProgramExercise].[OrderExercise]) FROM [ProgramExercise],[Exercises] where [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and [ProgramExercise].[Program_ID]='" + Convert.ToInt32(Session["programID"].ToString()) + "' GROUP BY [ProgramExercise].[Exercises_ID],[Exercises].[Name],[ProgramExercise].[Program_ID] ORDER BY MIN([ProgramExercise].[OrderExercise] ) ASC";
+                //trainerData.CommandText = "select Distinct [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name],MIN([ProgramExercise].[OrderExercise]) FROM [ProgramExercise],[Exercises] where [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and [ProgramExercise].[Program_ID]='" + Convert.ToInt32(Session["programID"].ToString()) + "' GROUP BY [ProgramExercise].[Exercises_ID],[Exercises].[Name],[ProgramExercise].[Program_ID] ORDER BY MIN([ProgramExercise].[OrderExercise] ) ASC";
+              //  trainerData.CommandText = "select  [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name],[ProgramExercise].[OrderExercise] FROM [ProgramExercise],[Exercises] where [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and [ProgramExercise].[Program_ID]='" + Convert.ToInt32(Session["programID"].ToString()) + "'ORDER BY [ProgramExercise].[OrderExercise] ASC";
+                trainerData.CommandText = "select  p1.Program_ID, p1.Exercises_ID,[Exercises].[Name],p1.OrderExercise,(select count(*) from [ProgramExercise] p2 where p2.Program_ID=p1.Program_ID and p2.Exercises_ID=p1.Exercises_ID) x FROM [ProgramExercise] p1,[Exercises] where p1.Exercises_ID=[Exercises].[Exercises_ID] and p1.Program_ID='"+Convert.ToInt32(Session["programID"].ToString()) +"' ORDER BY p1.OrderExercise ASC";
+
                 SqlDataReader dr = trainerData.ExecuteReader();
                 while (dr.Read())
                 {
                     int exerciseID = Convert.ToInt32(dr[1].ToString());
                     string exerciseName = dr[2].ToString();
+                    int orderExercise = Convert.ToInt32(dr[3].ToString());
+                    int countExercise = Convert.ToInt32(dr[4].ToString());
                     listExerciseName.Add(exerciseName);
                     listExerciseID.Add(exerciseID);
+                    listOrderExercise.Add(orderExercise);
+                    listExerciseCount.Add(countExercise);
 
 
 
 
                 }
+                Session["myIds"] = listOrderExercise;
                 conn.Close();
                 int j;
                 for (int i = 1; i < count; i++)
                 {
-                    DropDownList ddl = (DropDownList)GridView1.Rows[i].FindControl("circleExercise");
+                    ddl = (DropDownList)GridView1.Rows[i].FindControl("circleExercise");
+                    ddl.Items.Add(new ListItem("","NULL"));
                     j = i;
                     while (j >= 0)
                     {
@@ -61,8 +64,16 @@ namespace BitirmeProjesi
                         if ((j - 1) != -1)
                         {
                             j = j - 1;
+                            if (Convert.ToInt32(listExerciseCount[j].ToString()) > 1) 
+                            {
+                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + listOrderExercise[j].ToString(), listExerciseID[j].ToString()));
+                            }
+                            else
+                            {
+                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString(), listExerciseID[j].ToString()));
 
-                            ddl.Items.Add(new ListItem(listExerciseName[j].ToString(), listExerciseID[j].ToString()));
+                            }
+       
                         }
                         else
                         {
@@ -74,7 +85,10 @@ namespace BitirmeProjesi
                     }
 
                 }
+              
+
             }
+
           
 
 
@@ -84,13 +98,43 @@ namespace BitirmeProjesi
         }
         protected void Create(object sender, EventArgs e)
         {
+            conn.Open();
+            SqlCommand trainerDataUpdate = new SqlCommand();
+            trainerDataUpdate.Connection = conn;
+            ArrayList idList = (ArrayList)Session["myIds"];
             int count = Convert.ToInt32(GridView1.Rows.Count.ToString());
-            for (int i = 0; i < count; i++)
+            for (int i = 1; i < count; i++)
             {
                 string c = (GridView1.Rows[i].Cells[1].FindControl("Label2") as Label).Text;
-                Label4.Text = c.ToString();
-                string a;
+                DropDownList dd = (DropDownList)GridView1.Rows[i].FindControl("circleExercise");
+                string c1 = dd.SelectedValue.ToString(); //dropdownlistten secilen deger
+                TextBox tb = (TextBox)GridView1.Rows[i].FindControl("TextBox4");
+               
+
+                if (c1=="NULL")
+                {
+
+                }
+                else
+                {
+                    string dizi = idList[i].ToString(); //order sayisi
+                    //listOrderExercise[j].ToString()
+                    trainerDataUpdate.CommandText = "UPDATE ProgramExercise SET CircleExercise_ID='" + Convert.ToInt32(c1.ToString()) + "', CircleExercise_Repeat='" + Convert.ToInt32(tb.Text) + "' WHERE Program_ID='" + Convert.ToInt32(Session["programID"].ToString()) + "' and OrderExercise='" + Convert.ToInt32(dizi) + "'";
+                    trainerDataUpdate.ExecuteNonQuery();
+                }
+               
+
+
+   
             }
+            conn.Close();
+            Session.Remove("ProgramSpecID");
+            Session.Remove("ProgramDiffID");
+            Session.Remove("order");
+            Session.Remove("createExerciseID");
+            Session.Remove("ExerciseType");
+            Session.Remove("programID");
+            Response.Redirect("TrainerDefaultPage.aspx");
 
         }
         protected void CreateWithoutCircle(object sender, EventArgs e)

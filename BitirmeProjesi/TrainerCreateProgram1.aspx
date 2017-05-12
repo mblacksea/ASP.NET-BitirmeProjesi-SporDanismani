@@ -23,6 +23,15 @@
                         <label>Program Difficulty</label>
                         <asp:DropDownList ID="DropDownList2" CssClass="form-control select2" runat="server"></asp:DropDownList>
                     </div>
+                    <div class="form-group">
+                        <label>Program Tittle</label>
+                        <asp:TextBox ID="TextBoxProgramTittle" CssClass="form-control" runat="server"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="tittleValidator"
+                            runat="server"
+                            ControlToValidate="TextBoxProgramTittle"
+                            ErrorMessage="Tittle is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
 
                 
                       <div class="form-group">

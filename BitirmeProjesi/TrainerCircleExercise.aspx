@@ -34,15 +34,20 @@
                 </ItemTemplate>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="Circle Exercise">
-            <ItemTemplate>
-                <asp:DropDownList ID="circleExercise"  CssClass="form-control select2"  runat="server" AutoPostBack="true" ></asp:DropDownList>
+              <ItemTemplate>
+                <asp:DropDownList ID="circleExercise"  CssClass="form-control select2"  runat="server"></asp:DropDownList>
+            </ItemTemplate>
+        </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Circle Exercise Repeat">
+              <ItemTemplate>
+                <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
             </ItemTemplate>
         </asp:TemplateField>
         
         </Columns>
     </asp:GridView>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Distinct [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name],MIN([ProgramExercise].[OrderExercise])  FROM [ProgramExercise],[Exercises] WHERE  [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID]  and ([Program_ID] = @Program_ID) GROUP BY [ProgramExercise].[Exercises_ID],[Exercises].[Name],[ProgramExercise].[Program_ID] ORDER BY MIN([ProgramExercise].[OrderExercise] ) ASC ">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name] FROM [ProgramExercise],[Exercises] WHERE  [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID]  and ([Program_ID] = @Program_ID) ORDER BY [ProgramExercise].[OrderExercise] ASC ">
         <SelectParameters>
             <asp:SessionParameter DefaultValue="0" Name="Program_ID" SessionField="programID" Type="Int32" />
         </SelectParameters>

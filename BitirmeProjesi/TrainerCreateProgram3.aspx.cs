@@ -137,7 +137,7 @@ namespace BitirmeProjesi
                
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID)SELECT SCOPE_IDENTITY()";
+                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle)SELECT SCOPE_IDENTITY()";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
 
@@ -146,6 +146,7 @@ namespace BitirmeProjesi
                         cmd.Parameters.AddWithValue("@ProgramSpec_ID", Convert.ToInt32(Session["ProgramSpecID"].ToString()));
                         cmd.Parameters.AddWithValue("@ProgramDiff_ID", Convert.ToInt32(Session["ProgramDiffID"].ToString()));
                         cmd.Parameters.AddWithValue("@User_ID", 3);
+                        cmd.Parameters.AddWithValue("@ProgramTittle", Session["ProgramTittle"].ToString());
                         con.Open();
                         int programID = Convert.ToInt32(cmd.ExecuteScalar());
                         Session["programID"] = programID.ToString();
@@ -226,11 +227,7 @@ namespace BitirmeProjesi
 
         }
 
-        protected void Next_Step(object sender, EventArgs e)
-        {
-            //Bu butona basildiginda circle kismina gecilecek.
-            Response.Redirect("TrainerCircleExercise.aspx");
-        }
+    
 
         protected void CreateSets(object sender, EventArgs e)
         {
