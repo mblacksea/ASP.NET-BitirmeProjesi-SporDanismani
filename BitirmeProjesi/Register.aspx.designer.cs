@@ -157,13 +157,13 @@ namespace BitirmeProjesi {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// textboxBio control.
+        /// textBio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textboxBio;
+        protected global::System.Web.UI.WebControls.TextBox textBio;
         
         /// <summary>
         /// RequiredFieldValidator2 control.

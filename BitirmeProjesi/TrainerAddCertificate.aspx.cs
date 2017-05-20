@@ -45,7 +45,7 @@ namespace BitirmeProjesi
                     }
                 }
             }
-            GridView1.DataBind();
+         
         }
     }
 }

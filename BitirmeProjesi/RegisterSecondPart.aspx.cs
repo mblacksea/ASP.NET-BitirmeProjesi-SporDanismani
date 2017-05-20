@@ -88,8 +88,8 @@ namespace BitirmeProjesi
         protected void addCertificate(object sender, EventArgs e)
         {
           
-            if (FileUpload1.PostedFile.ContentType == "application/pdf" || FileUpload1.PostedFile.ContentType==null)
-            {
+          //  if (FileUpload1.PostedFile.ContentType == "application/pdf" || FileUpload1.PostedFile.ContentType==null)
+          //  {
                 SqlCommand cmdInsertUser = new SqlCommand();
                 if (Session["userID"] == null)
                 {
@@ -132,11 +132,11 @@ namespace BitirmeProjesi
 
                     
               
-                }
-                else
-                {
-                    userID = Session["userID"].ToString();
-                }
+              //  }
+             //   else
+             //   {
+             //       userID = Session["userID"].ToString();
+             //   }
 
 
 

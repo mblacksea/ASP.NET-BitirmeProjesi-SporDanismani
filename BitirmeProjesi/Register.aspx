@@ -105,10 +105,10 @@
               ErrorMessage="Birthday is required!"
               SetFocusOnError="True" ForeColor="Red"  />
 
-     <asp:TextBox ID="textboxBio" runat="server" TextMode="MultiLine" placeholder='Bio' Height="100px" Width="400px" MaxLength="3000"></asp:TextBox>
+     <asp:TextBox ID="textBio" runat="server"  placeholder='Bio Max(2500)' Height="100px" Width="400px" MaxLength="2500"></asp:TextBox>
      <asp:RequiredFieldValidator id="RequiredFieldValidator2"
               runat="server"
-              ControlToValidate="textboxBio"
+              ControlToValidate="textBio"
               ErrorMessage="Bio is required!"
               SetFocusOnError="True" ForeColor="Red" />
 

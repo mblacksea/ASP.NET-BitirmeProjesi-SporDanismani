@@ -39,6 +39,7 @@ C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.Web
 C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Deployment.xml
 C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Razor.xml
 C:\Users\berka\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.pdb
+C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.dll.config
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.dll
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\BitirmeProjesi.pdb
@@ -56,6 +57,5 @@ C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.R
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.xml
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Deployment.xml
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\bin\System.Web.WebPages.Razor.xml
-C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.csprojResolveAssemblyReference.cache
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.dll
 C:\Users\MUSTAFA\Documents\GitHub\BitirmeProjesi\BitirmeProjesi\obj\Debug\BitirmeProjesi.pdb

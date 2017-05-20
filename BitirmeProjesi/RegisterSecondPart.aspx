@@ -77,12 +77,28 @@
         <br> </br>
        <asp:GridView ID="gridview"   CssClass= "table table-striped table-bordered table-condensed" runat="server" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1" AllowPaging="True">
            <Columns>
-               <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+               <asp:TemplateField ShowHeader="False">
+                   <EditItemTemplate>
+                       <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
+                       &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                   </EditItemTemplate>
+                   <ItemTemplate>
+                       <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
+                       &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName="Delete" Text="Delete"></asp:LinkButton>
+                   </ItemTemplate>
+               </asp:TemplateField>
                <asp:BoundField DataField="Certificate_ID" HeaderText="Certificate_ID" InsertVisible="False" ReadOnly="True" SortExpression="Certificate_ID" Visible="False" />
                <asp:BoundField DataField="Trainer_ID" HeaderText="Trainer_ID" SortExpression="Trainer_ID" Visible="False" />
                <asp:BoundField DataField="Certificate_Name" HeaderText="Certificate_Name" SortExpression="Certificate_Name" />
                <asp:BoundField DataField="Instution" HeaderText="Instution" SortExpression="Instution" />
-               <asp:BoundField DataField="Date" HeaderText="Date" SortExpression="Date" />
+               <asp:TemplateField HeaderText="Date" SortExpression="Date">
+                   <EditItemTemplate>
+                       <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Date","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                   </EditItemTemplate>
+                   <ItemTemplate>
+                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("Date","{0:MM/dd/yyyy}") %>'></asp:Label>
+                   </ItemTemplate>
+               </asp:TemplateField>
            </Columns>
       </asp:GridView>
 &nbsp;<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Certificate] WHERE [Certificate_ID] = @original_Certificate_ID" InsertCommand="INSERT INTO [Certificate] ([Trainer_ID], [Certificate_Name], [Instution], [Date], [CertificateFile]) VALUES (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Certificate] WHERE ([Trainer_ID] = @Trainer_ID)" UpdateCommand="UPDATE [Certificate] SET [Certificate_Name] = @Certificate_Name, [Instution] = @Instution, [Date] = @Date WHERE [Certificate_ID] = @original_Certificate_ID">

@@ -3,9 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="box-header with-border">
-            <h3 class="box-title">Circle Exercise</h3>
+        <h3 class="box-title">Circle Exercise</h3>
 
-        </div>
+    </div>
 
     <asp:GridView ID="GridView1" runat="server" CssClass= "table table-striped table-bordered table-condensed" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
         <Columns>

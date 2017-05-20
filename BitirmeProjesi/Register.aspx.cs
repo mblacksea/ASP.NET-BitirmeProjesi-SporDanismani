@@ -49,9 +49,10 @@ namespace BitirmeProjesi
 
                  Session["userBirthday"] = txtDate.Text.ToString();
 
-                 StringWriter strWrtr = new StringWriter();
-                 HttpUtility.HtmlEncode(textboxBio.Text.ToString(), strWrtr);
-                 Session["userBio"] = strWrtr.ToString();
+                // StringWriter strWrtr = new StringWriter();
+                 //HttpUtility.HtmlEncode(textboxBio.Text.ToString(), strWrtr);
+                 Session["userBio"] = textBio.Text;
+               
                
 
 

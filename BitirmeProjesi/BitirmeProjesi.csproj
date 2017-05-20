@@ -1198,11 +1198,16 @@
     <Content Include="TrainerCreateProgram2.aspx" />
     <Content Include="TrainerCreateProgram3.aspx" />
     <Content Include="TrainerDefaultPage.aspx" />
+    <Content Include="TrainerMyCertificates.aspx" />
     <Content Include="TrainerMyExercises.aspx" />
     <Content Include="TrainerMyExercisesDetails.aspx" />
     <Content Include="TrainerMyPrograms.aspx" />
+    <Content Include="TrainerMyProgramsDetails.aspx" />
+    <Content Include="TrainerMyProgramsDetails2.aspx" />
     <Content Include="TrainerProfileSettings.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -1234,7 +1239,6 @@
     <Compile Include="AdminDefaultPage.aspx.designer.cs">
       <DependentUpon>AdminDefaultPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ArrraList.cs" />
     <Compile Include="File.ashx.cs">
       <DependentUpon>File.ashx</DependentUpon>
     </Compile>
@@ -1317,6 +1321,13 @@
     <Compile Include="TrainerDefaultPage.aspx.designer.cs">
       <DependentUpon>TrainerDefaultPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TrainerMyCertificates.aspx.cs">
+      <DependentUpon>TrainerMyCertificates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyCertificates.aspx.designer.cs">
+      <DependentUpon>TrainerMyCertificates.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TrainerMyExercises.aspx.cs">
       <DependentUpon>TrainerMyExercises.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1337,6 +1348,20 @@
     </Compile>
     <Compile Include="TrainerMyPrograms.aspx.designer.cs">
       <DependentUpon>TrainerMyPrograms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerMyProgramsDetails.aspx.cs">
+      <DependentUpon>TrainerMyProgramsDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyProgramsDetails.aspx.designer.cs">
+      <DependentUpon>TrainerMyProgramsDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerMyProgramsDetails2.aspx.cs">
+      <DependentUpon>TrainerMyProgramsDetails2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerMyProgramsDetails2.aspx.designer.cs">
+      <DependentUpon>TrainerMyProgramsDetails2.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerPanel.Master.cs">
       <DependentUpon>TrainerPanel.Master</DependentUpon>

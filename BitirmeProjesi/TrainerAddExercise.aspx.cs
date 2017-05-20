@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -38,6 +40,69 @@ namespace BitirmeProjesi
             }
         }
 
+
+        private MemoryStream ResizeImage(FileUpload fileUpload)
+        {
+            // Create a bitmap with the uploaded file content
+            Bitmap originalBMP = new Bitmap(fileUpload.FileContent);
+
+            // get the original dimensions
+            int origWidth = originalBMP.Width;
+            int origHeight = originalBMP.Height;
+
+            //calculate the current aspect ratio
+            int aspectRatio = origWidth / origHeight;
+
+            //if the aspect ration is less than 0, default to 1
+            if (aspectRatio <= 0)
+                aspectRatio = 1;
+
+            //new width of the thumbnail image           
+            int newWidth = 300;
+
+            //calculate the height based on the aspect ratio
+            int newHeight = newWidth / aspectRatio;
+
+            // Create a new bitmap to store the new image
+            Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
+
+            // Create a graphic based on the new bitmap
+            Graphics graphics = Graphics.FromImage(newBMP);
+
+            // Set the properties for the new graphic file
+            graphics.SmoothingMode = SmoothingMode.AntiAlias; graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            // Draw the new graphic based on the resized bitmap
+            graphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
+
+            //save the bitmap into a memory stream
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            newBMP.Save(stream, GetImageFormat(System.IO.Path.GetExtension(fileUpload.FileName)));
+
+            // dispose drawing objects
+            originalBMP.Dispose();
+            newBMP.Dispose();
+            graphics.Dispose();
+
+            return stream;
+        }
+
+
+        private System.Drawing.Imaging.ImageFormat GetImageFormat(string extension)
+        {
+            switch (extension.ToLower())
+            {
+                case "jpg":
+                    return System.Drawing.Imaging.ImageFormat.Jpeg;
+                case "bmp":
+                    return System.Drawing.Imaging.ImageFormat.Bmp;
+                case "png":
+                    return System.Drawing.Imaging.ImageFormat.Png;
+            }
+            return System.Drawing.Imaging.ImageFormat.Jpeg;
+        }
+
+
         protected void addNewExercise(object sender, EventArgs e)
         {
             LabelVideo.Visible = false;
@@ -69,14 +134,22 @@ namespace BitirmeProjesi
 
 
                         //Photo 1 file
-                        byte[] myimage = new byte[FileUpload2.PostedFile.ContentLength];
+                        MemoryStream thumbnailPhotoStream1 = ResizeImage(FileUpload2);
+                        byte[] thumbnailImageBytes1 = thumbnailPhotoStream1.ToArray();
+
+                     /*   byte[] myimage = new byte[FileUpload2.PostedFile.ContentLength];
                         HttpPostedFile Image = FileUpload2.PostedFile;
-                        Image.InputStream.Read(myimage, 0, (int)FileUpload2.PostedFile.ContentLength);
+                        Image.InputStream.Read(myimage, 0, (int)FileUpload2.PostedFile.ContentLength);*/
 
                         //Photo 2 file
-                        byte[] myimage2 = new byte[FileUpload3.PostedFile.ContentLength];
+                        MemoryStream thumbnailPhotoStream2 = ResizeImage(FileUpload3);
+                        byte[] thumbnailImageBytes2 = thumbnailPhotoStream2.ToArray();
+
+
+
+                      /*  byte[] myimage2 = new byte[FileUpload3.PostedFile.ContentLength];
                         HttpPostedFile Image2 = FileUpload3.PostedFile;
-                        Image2.InputStream.Read(myimage2, 0, (int)FileUpload3.PostedFile.ContentLength);
+                        Image2.InputStream.Read(myimage2, 0, (int)FileUpload3.PostedFile.ContentLength);*/
 
                         SqlConnection con = new SqlConnection(constr);
                         string query = "insert into Exercises values (@Name, @Tittle, @Description, @Video, @Photo1, @Photo2, @Type_ID,@Trainer_ID)";
@@ -87,8 +160,8 @@ namespace BitirmeProjesi
                         cmd.Parameters.AddWithValue("@Tittle", tittleName.Text);
                         cmd.Parameters.AddWithValue("@Description", descriptionarea.InnerText);
                         cmd.Parameters.AddWithValue("@Video", bytes);
-                        cmd.Parameters.Add("@Photo1", SqlDbType.Image, myimage.Length).Value = myimage;
-                        cmd.Parameters.Add("@Photo2", SqlDbType.Image, myimage2.Length).Value = myimage2;
+                        cmd.Parameters.Add("@Photo1", SqlDbType.Image, thumbnailImageBytes1.Length).Value = thumbnailImageBytes1;
+                        cmd.Parameters.Add("@Photo2", SqlDbType.Image, thumbnailImageBytes2.Length).Value = thumbnailImageBytes2;
                         cmd.Parameters.AddWithValue("@Type_ID", DropDownList1.SelectedValue);
                         cmd.Parameters.AddWithValue("@Trainer_ID", Convert.ToInt32(Session["trainerID"].ToString()));
 

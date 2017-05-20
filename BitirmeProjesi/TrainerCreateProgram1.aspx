@@ -33,6 +33,15 @@
                             SetFocusOnError="True" ForeColor="Red" />
                     </div>
 
+                     <div class="form-group">
+                         <label>Program Image</label>
+                         <asp:Image ID="Image1" CssClass="img-responsive" ImageUrl="images/userDefaultImage.jpg" runat="server" />
+                    </div>
+                    <div class="form-group">
+                        <label for="FileUpload1">Image</label>
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                    </div>
+
                 
                       <div class="form-group">
                         <button type="button" runat="server" onserverclick="next" class="btn btn-block btn-success">Next</button>

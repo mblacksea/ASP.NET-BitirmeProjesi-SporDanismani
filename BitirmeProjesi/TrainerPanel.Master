@@ -130,8 +130,27 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="TrainerProfileSettings.aspx"><i class="fa fa-link"></i> <span>Profile Settings</span></a></li>
-        <li><a href="TrainerAddCertificate.aspx"><i class="fa fa-link"></i> <span>Add Certificate</span></a></li>
-        <li class="treeview">
+       
+         <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Certificate</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+           
+            <li><a href="TrainerAddCertificate.aspx">Add Certificate</a></li>
+            <li><a href="TrainerMyCertificates.aspx">My Certificates</a></li>
+          
+          </ul>
+
+          
+        </li>
+          
+          
+          
+          
+            <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Programs</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -144,6 +163,8 @@
             <li><a href="TrainerAddExercise.aspx">Add Exercise</a></li>
             <li><a href="TrainerMyExercises.aspx">My Exercises</a></li>
           </ul>
+
+          
         </li>
       </ul>
       <!-- /.sidebar-menu -->

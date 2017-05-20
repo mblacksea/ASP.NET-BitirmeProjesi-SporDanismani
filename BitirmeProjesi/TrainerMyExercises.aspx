@@ -52,7 +52,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Description" SortExpression="Description">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Description") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox3"  runat="server" Text='<%# Bind("Description") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("Description") %>'></asp:Label>

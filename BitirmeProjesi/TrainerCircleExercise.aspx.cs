@@ -134,6 +134,7 @@ namespace BitirmeProjesi
             Session.Remove("createExerciseID");
             Session.Remove("ExerciseType");
             Session.Remove("programID");
+            Session.Remove("adminID");
             Response.Redirect("TrainerDefaultPage.aspx");
 
         }
@@ -146,6 +147,7 @@ namespace BitirmeProjesi
             Session.Remove("createExerciseID");
             Session.Remove("ExerciseType");
             Session.Remove("programID");
+            Session.Remove("adminID");
             Response.Redirect("TrainerDefaultPage.aspx");
 
         }
