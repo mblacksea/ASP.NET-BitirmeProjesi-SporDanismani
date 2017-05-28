@@ -32,6 +32,15 @@
                             ErrorMessage="Tittle is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                     </div>
+                        <div class="form-group">
+                        <label>Program Description</label>
+                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                            runat="server"
+                            ControlToValidate="TextBox1"
+                            ErrorMessage="Description is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
 
                      <div class="form-group">
                          <label>Program Image</label>

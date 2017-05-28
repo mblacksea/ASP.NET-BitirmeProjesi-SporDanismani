@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 namespace BitirmeProjesi
 {
     public partial class Register : System.Web.UI.Page
@@ -17,6 +19,22 @@ namespace BitirmeProjesi
             radio1.Checked = true;
         
         }
+        public string encryption(String password)
+        {
+          
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encrypt;
+            UTF8Encoding encode = new UTF8Encoding();
+            //encrypt the given password string into Encrypted data  
+            encrypt = md5.ComputeHash(encode.GetBytes(password));
+            StringBuilder encryptdata = new StringBuilder();
+            //Create a new string by using the encrypted data  
+            for (int i = 0; i < encrypt.Length; i++)
+            {
+                encryptdata.Append(encrypt[i].ToString());
+            }
+            return encryptdata.ToString();
+        }  
         protected void nextButton(object sender, EventArgs e)
         {
 
@@ -37,7 +55,7 @@ namespace BitirmeProjesi
                 Session["userName"] = textboxName.Text.ToString();
                 Session["userSurname"] = textboxSurname.Text.ToString();
                 Session["userEmail"] = textboxEmail.Text.ToString();
-                Session["userPassword"] = FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text,"MD5");
+                Session["userPassword"] = encryption(textboxPassword.Text);
                  if (radio1.Checked == true && radio2.Checked==false)
                 {
                     Session["userSex"] = radio1.Value;
