@@ -134,7 +134,8 @@ namespace BitirmeProjesi
             Session["ProgramSpecID"] = DropDownList1.SelectedValue;
             Session["ProgramDiffID"] = DropDownList2.SelectedValue;
             Session["ProgramTittle"] = TextBoxProgramTittle.Text;
-            Session["ProgramDescription"] = TextBox1.Text;
+            Session["ProgramDescription"] = TextBoxArea.InnerText;
+            Session["ProgramPrice"] = TextBoxPrice.Text;
             Session["order"] = 0;
             if (FileUpload1.HasFile)
             {

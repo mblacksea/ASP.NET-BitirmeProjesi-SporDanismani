@@ -20,14 +20,14 @@ namespace BitirmeProjesi
 
             if (!Page.IsPostBack)
             {
-                videoExercise.Src = "File.ashx?Id=" + Session["exerciseID"].ToString();
-        
-      
+                //videoExercise.Src = "File.ashx?Id=" + Session["exerciseID"].ToString();
+                //vlc-record-2017-04-23-20h16m30s-4snMOV_0029-.mp4
+               // videoExercise.Src = "videos/vlc-record-2017-04-23-20h16m30s-4snMOV_0029-.mp4";
 
                 conn.Open();
                 SqlCommand exerciseDetails = new SqlCommand();
                 exerciseDetails.Connection = conn;
-                exerciseDetails.CommandText = "select Photo1,Photo2,Video from Exercises where Exercises_ID='" + Convert.ToInt32(Session["exerciseID"].ToString()) + "'";
+                exerciseDetails.CommandText = "select Photo1,Photo2,VideoPath from Exercises where Exercises_ID='" + Convert.ToInt32(Session["exerciseID"].ToString()) + "'";
                 //trainerData.CommandText = "select Photo from TrainersData where Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
                 //byte[] _bytes = (byte[])trainerData.ExecuteScalar();
                 // Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);  
@@ -43,7 +43,7 @@ namespace BitirmeProjesi
                 
                         Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);
                         Image2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes1);
-
+                        videoExercise.Src = dr[2].ToString();
 
 
 

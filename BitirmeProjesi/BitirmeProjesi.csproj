@@ -297,6 +297,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\custom-scripts.js" />
     <Content Include="js\datepicker.js" />
+    <Content Include="js\deneme.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="AdminPanel.Master" />
     <Content Include="assets\.DS_Store" />
@@ -1528,7 +1529,10 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="mustafa\" />
+    <Folder Include="videos\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

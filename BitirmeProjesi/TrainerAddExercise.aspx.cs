@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -131,6 +132,11 @@ namespace BitirmeProjesi
                         //Video file
                         BinaryReader br = new BinaryReader(FileUpload1.PostedFile.InputStream);
                         byte[] bytes = br.ReadBytes((int)FileUpload1.PostedFile.InputStream.Length);
+                        //video file server a kaydetme islemi.
+
+                        string FileName = DateTime.Now.ToString("yyyyMMddHHmmss") +Path.GetFileName(FileUpload1.PostedFile.FileName);
+                   
+                        FileUpload1.SaveAs(Server.MapPath("mustafa/" + FileName));
 
 
                         //Photo 1 file
@@ -152,19 +158,20 @@ namespace BitirmeProjesi
                         Image2.InputStream.Read(myimage2, 0, (int)FileUpload3.PostedFile.ContentLength);*/
 
                         SqlConnection con = new SqlConnection(constr);
-                        string query = "insert into Exercises values (@Name, @Tittle, @Description, @Video, @Photo1, @Photo2, @Type_ID,@Trainer_ID)";
+                        string query = "insert into Exercises values (@Name, @Tittle, @Description, @Photo1, @Photo2, @Type_ID,@Trainer_ID,@VideoName,@VideoPath)";
                         SqlCommand cmd = new SqlCommand(query);
 
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@Name", exerciseName.Text);
                         cmd.Parameters.AddWithValue("@Tittle", tittleName.Text);
                         cmd.Parameters.AddWithValue("@Description", descriptionarea.InnerText);
-                        cmd.Parameters.AddWithValue("@Video", bytes);
+                   
                         cmd.Parameters.Add("@Photo1", SqlDbType.Image, thumbnailImageBytes1.Length).Value = thumbnailImageBytes1;
                         cmd.Parameters.Add("@Photo2", SqlDbType.Image, thumbnailImageBytes2.Length).Value = thumbnailImageBytes2;
                         cmd.Parameters.AddWithValue("@Type_ID", DropDownList1.SelectedValue);
                         cmd.Parameters.AddWithValue("@Trainer_ID", Convert.ToInt32(Session["trainerID"].ToString()));
-
+                        cmd.Parameters.AddWithValue("@VideoName",FileName);
+                        cmd.Parameters.AddWithValue("@VideoPath", "mustafa/" + FileName);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();

@@ -31,7 +31,7 @@
                             <label>Video</label>
                             <asp:FileUpload ID="FileUpload3" runat="server" />
                             <asp:Label ID="LabelVideo" runat="server" Visible="false" ForeColor="Red" Text="Please, Upload video!"></asp:Label>
-                            <video id="videoExercise" width="500" height="500" runat="server" controls="controls">
+                            <video id="videoExercise" width="400" height="400" runat="server" controls="controls">
                                 <source src="movie.mp4" type="video/mp4" />
                             </video>
                         </div>

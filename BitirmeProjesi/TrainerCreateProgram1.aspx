@@ -1,9 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerCreateProgram1.aspx.cs" Inherits="BitirmeProjesi.TrainerCreateProgram1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
+   
+    <script src="js/deneme.js"></script>
     <div class="box box-default">
         <div class="box-header with-border">
             <h3 class="box-title">Create Program</h3>
@@ -32,15 +34,29 @@
                             ErrorMessage="Tittle is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                     </div>
-                        <div class="form-group">
+                    <div class="form-group">
                         <label>Program Description</label>
-                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                        <textarea class="form-control" rows="5" placeholder="Max(2000)" runat="server" id="TextBoxArea" maxlength="2000"></textarea>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                             runat="server"
-                            ControlToValidate="TextBox1"
+                            ControlToValidate="TextBoxArea"
                             ErrorMessage="Description is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                     </div>
+
+                    <div class="form-group">
+                        <label>Program Price</label>
+                       <asp:TextBox ID="TextBoxPrice" onblur="checknegative(this)" CssClass="form-control" TextMode="Number" runat="server"></asp:TextBox>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                            runat="server"
+                            ControlToValidate="TextBoxPrice"
+                            ErrorMessage="Program Price is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+
+
 
                      <div class="form-group">
                          <label>Program Image</label>
@@ -65,3 +81,7 @@
         </div>
 
 </asp:Content>
+
+
+   
+         

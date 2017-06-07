@@ -138,7 +138,7 @@ namespace BitirmeProjesi
                
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle,@ProgramPhoto,@ProgramDescription)SELECT SCOPE_IDENTITY()";
+                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle,@ProgramPhoto,@ProgramDescription,@ProgramPrice)SELECT SCOPE_IDENTITY()";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
 
@@ -149,6 +149,7 @@ namespace BitirmeProjesi
                         cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["AdminID"].ToString()));
                         cmd.Parameters.AddWithValue("@ProgramTittle", Session["ProgramTittle"].ToString());
                         cmd.Parameters.AddWithValue("@ProgramDescription", Session["ProgramDescription"].ToString());
+                        cmd.Parameters.AddWithValue("@ProgramPrice", Session["ProgramPrice"].ToString());
                         var res = (byte[])Session["ProgramPhoto"];
                         cmd.Parameters.Add("@ProgramPhoto", SqlDbType.Image, res.Length).Value = res;
                         con.Open();

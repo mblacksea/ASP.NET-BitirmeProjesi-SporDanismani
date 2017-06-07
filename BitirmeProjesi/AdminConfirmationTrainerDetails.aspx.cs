@@ -71,11 +71,11 @@ namespace BitirmeProjesi
             conn.Close();
            Response.Clear();
            Response.Buffer = true;
-            Response.ContentType = "application/pdf";
+           Response.ContentType = "application/pdf";
 //Response.AddHeader("content-disposition", "attachment;filename="test.pdf");
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.BinaryWrite(bytes);
-            Response.End();
+           Response.Cache.SetCacheability(HttpCacheability.NoCache);
+           Response.BinaryWrite(bytes);
+           Response.End();
 
         }
 

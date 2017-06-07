@@ -66,11 +66,11 @@ namespace BitirmeProjesi
                             j = j - 1;
                             if (Convert.ToInt32(listExerciseCount[j].ToString()) > 1) 
                             {
-                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + listOrderExercise[j].ToString(), listExerciseID[j].ToString()));
+                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + listOrderExercise[j].ToString(), listOrderExercise[j].ToString()));
                             }
                             else
                             {
-                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString(), listExerciseID[j].ToString()));
+                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString(), listOrderExercise[j].ToString()));
 
                             }
        
