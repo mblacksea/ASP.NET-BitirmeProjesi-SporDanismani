@@ -1,4 +1,4 @@
 *.js linguist-language=C#
-*.css linguist-language=css
+*.css linguist-language=C#
 *.html linguist-language=html
 *.ftl linguist-language=C#
