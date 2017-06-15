@@ -136,7 +136,7 @@ namespace BitirmeProjesi
 
                         string FileName = DateTime.Now.ToString("yyyyMMddHHmmss") +Path.GetFileName(FileUpload1.PostedFile.FileName);
                    
-                        FileUpload1.SaveAs(Server.MapPath("mustafa/" + FileName));
+                        FileUpload1.SaveAs(Server.MapPath("videos/" + FileName));
 
 
                         //Photo 1 file
@@ -171,7 +171,7 @@ namespace BitirmeProjesi
                         cmd.Parameters.AddWithValue("@Type_ID", DropDownList1.SelectedValue);
                         cmd.Parameters.AddWithValue("@Trainer_ID", Convert.ToInt32(Session["trainerID"].ToString()));
                         cmd.Parameters.AddWithValue("@VideoName",FileName);
-                        cmd.Parameters.AddWithValue("@VideoPath", "mustafa/" + FileName);
+                        cmd.Parameters.AddWithValue("@VideoPath", "videos/" + FileName);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();

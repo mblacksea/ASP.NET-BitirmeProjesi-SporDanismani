@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerAddCertificate.aspx.cs" Inherits="BitirmeProjesi.TrainerCreateProgram" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <link href="js/notifyit/notifIt.css" rel="stylesheet" />
+        <script src="js/notifyit/notifIt.js"></script>
+        <script src="js/jquery-2.0.3.min.js"></script>
+</asp:Content>
+
+     
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
@@ -16,7 +24,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Certificate Name</label>
-                        <asp:TextBox ID="certificateName" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="certificateName" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="certificatenameReq"
                             runat="server"
                             ControlToValidate="certificateName"
@@ -25,7 +33,7 @@
                     </div>
                      <div class="form-group">
                         <label>Instution</label>
-                        <asp:TextBox ID="instutionName" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="instutionName" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
                          <asp:RequiredFieldValidator ID="instutionnameReq"
                             runat="server"
                             ControlToValidate="instutionName"

@@ -12,6 +12,7 @@ namespace BitirmeProjesi
 {
     public partial class TrainerCreateProgram : System.Web.UI.Page
     {
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -41,11 +42,22 @@ namespace BitirmeProjesi
                             con.Open();
                             cmd.ExecuteNonQuery();
                             con.Close();
+                            MessageBox.Show("Added certificate", MessageBox.MesajTipleri.Success, false, 3000);
                         }
                     }
                 }
             }
-         
+            certificateName.Text = null;
+            instutionName.Text = null;
+            date.Text = null;
+
+            conn.Open();
+            SqlCommand trainerStatusUpdate = new SqlCommand();
+            trainerStatusUpdate.Connection = conn;
+            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+            trainerStatusUpdate.ExecuteNonQuery();
+            conn.Close();
+
         }
     }
 }

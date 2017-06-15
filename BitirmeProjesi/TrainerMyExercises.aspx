@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerMyExercises.aspx.cs" Inherits="BitirmeProjesi.TrainerMyExercises" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   
-
+    <link href="js/notifyit/notifIt.css" rel="stylesheet" />
+    <script src="js/notifyit/notifIt.js"></script>
+    <script src="js/jquery-2.0.3.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   
@@ -16,6 +18,11 @@
     <asp:GridView ID="GridView1" OnSelectedIndexChanged = "OnSelectedIndexChanged"  CssClass= "table table-striped table-bordered table-condensed"  runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Exercises_ID" AllowSorting="True">
         <Columns>
             <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:Button ID="Button3" runat="server" OnClientClick="return confirm('Are you sure you want to delete?'); " OnClick="Button3_Click" CausesValidation="False"  Text="Delete" />
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField ShowHeader="False">
                 <EditItemTemplate>
                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
                     &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
@@ -23,7 +30,7 @@
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
                     &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName="Delete" Text="Delete"></asp:LinkButton>
+                   
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Exercises_ID" InsertVisible="False" SortExpression="Exercises_ID" Visible="False">
@@ -71,7 +78,7 @@
 
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Exercises] WHERE [Exercises_ID] = @Exercises_ID" InsertCommand="INSERT INTO [Exercises] ([Name], [Tittle], [Description]) VALUES (@Name, @Tittle, @Description)" SelectCommand="SELECT [Exercises_ID], [Name], [Tittle], [Description],[Type_Name] FROM [Exercises],[ExercisesType] WHERE [Exercises].[Type_ID]=[ExercisesType].[Type_ID]  and ([Trainer_ID] = @Trainer_ID)" UpdateCommand="UPDATE [Exercises] SET [Name] = @Name, [Tittle] = @Tittle, [Description] = @Description WHERE [Exercises_ID] = @Exercises_ID">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO [Exercises] ([Name], [Tittle], [Description]) VALUES (@Name, @Tittle, @Description)" SelectCommand="SELECT [Exercises_ID], [Name], [Tittle], [Description],[Type_Name] FROM [Exercises],[ExercisesType] WHERE [Exercises].[Type_ID]=[ExercisesType].[Type_ID]  and ([Trainer_ID] = @Trainer_ID)" UpdateCommand="UPDATE [Exercises] SET [Name] = @Name, [Tittle] = @Tittle, [Description] = @Description WHERE [Exercises_ID] = @Exercises_ID">
         <DeleteParameters>
             <asp:Parameter Name="Exercises_ID" Type="Int32" />
         </DeleteParameters>

@@ -107,7 +107,7 @@ function notif(config) {
             $("#ui_notifIt").addClass("success");
             break;
         case "info":
-            $("#ui_notifIt").addClass("info");
+            $("#ui_notifIt").addClass("infoo");
             break;
         case "warning":
             $("#ui_notifIt").addClass("warning");

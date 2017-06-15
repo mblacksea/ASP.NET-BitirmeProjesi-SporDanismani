@@ -27,6 +27,8 @@ namespace BitirmeProjesi
                 int count = Convert.ToInt32(GridView1.Rows.Count.ToString());
                 TextBox tb = (TextBox)GridView1.Rows[0].FindControl("TextBox4");
                 tb.Visible = false;
+                DropDownList removeDD =  (DropDownList)GridView1.Rows[0].FindControl("circleExercise");
+                removeDD.Visible = false;
                 conn.Open();
                 SqlCommand trainerData = new SqlCommand();
                 trainerData.Connection = conn;
@@ -35,6 +37,7 @@ namespace BitirmeProjesi
                 trainerData.CommandText = "select  p1.Program_ID, p1.Exercises_ID,[Exercises].[Name],p1.OrderExercise,(select count(*) from [ProgramExercise] p2 where p2.Program_ID=p1.Program_ID and p2.Exercises_ID=p1.Exercises_ID) x FROM [ProgramExercise] p1,[Exercises] where p1.Exercises_ID=[Exercises].[Exercises_ID] and p1.Program_ID='"+Convert.ToInt32(Session["programID"].ToString()) +"' ORDER BY p1.OrderExercise ASC";
 
                 SqlDataReader dr = trainerData.ExecuteReader();
+               int labelId = 1; 
                 while (dr.Read())
                 {
                     int exerciseID = Convert.ToInt32(dr[1].ToString());
@@ -45,8 +48,14 @@ namespace BitirmeProjesi
                     listExerciseID.Add(exerciseID);
                     listOrderExercise.Add(orderExercise);
                     listExerciseCount.Add(countExercise);
-
-
+                    if (countExercise > 1)
+                    {
+                        Label tblabel = (Label)GridView1.Rows[orderExercise - 1].FindControl("Label3");
+                        tblabel.Text = tblabel.Text + " " + orderExercise;
+                        labelId++;
+                    }
+                  
+                    
 
 
                 }
@@ -66,7 +75,7 @@ namespace BitirmeProjesi
                             j = j - 1;
                             if (Convert.ToInt32(listExerciseCount[j].ToString()) > 1) 
                             {
-                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + listOrderExercise[j].ToString(), listOrderExercise[j].ToString()));
+                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + " " + listOrderExercise[j].ToString(), listOrderExercise[j].ToString()));
                             }
                             else
                             {

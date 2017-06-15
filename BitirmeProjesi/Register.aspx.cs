@@ -55,7 +55,7 @@ namespace BitirmeProjesi
                 Session["userName"] = textboxName.Text.ToString();
                 Session["userSurname"] = textboxSurname.Text.ToString();
                 Session["userEmail"] = textboxEmail.Text.ToString();
-                Session["userPassword"] = encryption(textboxPassword.Text);
+                Session["userPassword"] = FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text, "MD5");
                  if (radio1.Checked == true && radio2.Checked==false)
                 {
                     Session["userSex"] = radio1.Value;
@@ -65,7 +65,7 @@ namespace BitirmeProjesi
                     Session["userSex"] = radio2.Value;
                 }
 
-                 Session["userBirthday"] = txtDate.Text.ToString();
+                 Session["userBirthday"] = txtDate.Text;
 
                 // StringWriter strWrtr = new StringWriter();
                  //HttpUtility.HtmlEncode(textboxBio.Text.ToString(), strWrtr);

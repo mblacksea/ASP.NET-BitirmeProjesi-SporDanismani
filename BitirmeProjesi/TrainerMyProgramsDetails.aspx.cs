@@ -47,7 +47,7 @@ namespace BitirmeProjesi
                 DropDownList2.DataBind();
                 con.Close();
 
-                SqlCommand cmd3 = new SqlCommand("SELECT ProgramTittle,ProgramPhoto FROM Program where Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'");
+                SqlCommand cmd3 = new SqlCommand("SELECT ProgramTittle,ProgramPhoto,ProgramSpec_Name,ProgramDiff_Name FROM Program,ProgramDifficulty,ProgramSpec where ProgramSpec.ProgramSpec_ID=Program.ProgramSpec_ID and Program.ProgramDiff_ID=ProgramDifficulty.ProgramDiff_ID and Program.Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'");
                 cmd3.CommandType = CommandType.Text;
                 cmd3.Connection = con;
                 con.Open();
@@ -58,7 +58,12 @@ namespace BitirmeProjesi
                     TextBoxProgramTittle.Text = dr[0].ToString();
                     byte[] _bytes = (byte[])dr[1];
                     Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);
-
+                    String value1 = dr[2].ToString();
+                    String value2 = dr[3].ToString();
+                    DropDownList1.SelectedIndex = DropDownList1.Items.IndexOf(DropDownList1.Items.FindByText(value1));
+                    DropDownList2.SelectedIndex = DropDownList2.Items.IndexOf(DropDownList2.Items.FindByText(value2));
+                    //DropDownList1.SelectedValue = dr[2].ToString();
+                    //DropDownList2.SelectedValue = dr[3].ToString();
 
 
                 }

@@ -18,6 +18,7 @@ namespace BitirmeProjesi
         {
              if (!Page.IsPostBack)
             {
+                reasonDeclineSection.Visible = false;
                 if (Session["trainerDetailsID"] == null)
                 {
                     Response.Redirect("AdminConfirmation.aspx");
@@ -53,7 +54,7 @@ namespace BitirmeProjesi
 
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
         {
-
+         
             //Label1.Text = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
             string certificateID= (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
             byte[] bytes;
@@ -69,13 +70,17 @@ namespace BitirmeProjesi
                 
             }
             conn.Close();
-           Response.Clear();
+            Session["PdfFile"] = bytes;
+            Response.Write("<script>");
+            Response.Write("window.open('PdfDisplay.aspx','_blank')");
+            Response.Write("</script>");
+            
+         /*Response.Clear();
            Response.Buffer = true;
            Response.ContentType = "application/pdf";
-//Response.AddHeader("content-disposition", "attachment;filename="test.pdf");
            Response.Cache.SetCacheability(HttpCacheability.NoCache);
            Response.BinaryWrite(bytes);
-           Response.End();
+           Response.End();*/
 
         }
 
@@ -92,11 +97,96 @@ namespace BitirmeProjesi
             trainerStatusUpdate.ExecuteNonQuery();
             conn.Close();
             Session["trainerDetailsID"] = null;
-            //sendEmailForConfirm();
+            sendEmailForConfirm();
             Response.Redirect("AdminConfirmation.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)
+        {
+            reasonDeclineSection.Visible = true;
+            Button1.Visible = false;
+            Button2.Visible = false;
+          
+           /* conn.Open();
+            SqlCommand trainerStatusUpdate = new SqlCommand();
+            trainerStatusUpdate.Connection = conn;
+            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=3 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerDetailsID"].ToString()) + "'";
+            trainerStatusUpdate.ExecuteNonQuery();
+            conn.Close();
+            
+            Session["trainerDetailsID"] = null;
+            Response.Redirect("AdminConfirmation.aspx");*/
+        }
+
+        protected void sendEmailForConfirm()
+        {
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            mail.To.Add(Session["trainerDetailsEmail"].ToString());
+            mail.From = new MailAddress("mustafa.blacksea93@gmail.com", "Email head", System.Text.Encoding.UTF8);
+            mail.Subject = "Trainer Confirmantion";
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.Body = "Your membership is approved. Congratulations !!!";
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("mustafa.blacksea93@gmail.com", "WalkAlone3442");
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(mail);
+                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Successfully Send...');if(alert){ window.location='SendMail.aspx';}</script>");
+            }
+            catch (Exception ex)
+            {
+                Exception ex2 = ex;
+                string errorMessage = string.Empty;
+                while (ex2 != null)
+                {
+                    errorMessage += ex2.ToString();
+                    ex2 = ex2.InnerException;
+                }
+                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Sending Failed...');if(alert){ window.location='SendMail.aspx';}</script>");
+            }
+       }
+
+        protected void sendEmailForDecline(String text)
+        {
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            mail.To.Add(Session["trainerDetailsEmail"].ToString());
+            mail.From = new MailAddress("mustafa.blacksea93@gmail.com", "Email head", System.Text.Encoding.UTF8);
+            mail.Subject = "Trainer Confirmantion";
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.Body = "Your request was rejected for this reason << " + text + " >> ";
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("mustafa.blacksea93@gmail.com", "WalkAlone3442");
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(mail);
+                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Successfully Send...');if(alert){ window.location='SendMail.aspx';}</script>");
+            }
+            catch (Exception ex)
+            {
+                Exception ex2 = ex;
+                string errorMessage = string.Empty;
+                while (ex2 != null)
+                {
+                    errorMessage += ex2.ToString();
+                    ex2 = ex2.InnerException;
+                }
+                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Sending Failed...');if(alert){ window.location='SendMail.aspx';}</script>");
+            }
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
         {
             conn.Open();
             SqlCommand trainerStatusUpdate = new SqlCommand();
@@ -104,68 +194,25 @@ namespace BitirmeProjesi
             trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=3 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerDetailsID"].ToString()) + "'";
             trainerStatusUpdate.ExecuteNonQuery();
             conn.Close();
+
+            //Burada decline reason i al ve database e kaydet.
+            conn.Open();
+            SqlCommand trainerStatusUpdate2 = new SqlCommand();
+            trainerStatusUpdate2.Connection = conn;
+            trainerStatusUpdate2.CommandText = "UPDATE Users SET DeclineReason='" + reasonTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerDetailsID"].ToString()) + "'";
+            trainerStatusUpdate2.ExecuteNonQuery();
+            conn.Close();
+
+
+
             Session["trainerDetailsID"] = null;
-            Response.Redirect("AdminConfirmation.aspx");
+            reasonDeclineSection.Visible = false;
+            MessageBox.Show("Your reply has been sent", MessageBox.MesajTipleri.Info, false, 3000);
+            sendEmailForDecline(reasonTextArea.InnerText);
+
+            
+          
         }
-
-        protected void sendEmailForConfirm()
-        {
-            MailMessage mail = new MailMessage(); 
- 
-            //mesaj sınıfından mail nesnesi oluşturuyoruz. 
- 
-            mail.To.Add("mustafa.blacksea93@gmail.com"); 
- 
-            //gönderilecek olan mail adresi
-
-            mail.From = new MailAddress("mustafa.blacksea93@gmail.com");
- 
-            //kimden gönderilecek. 
-
-            mail.Subject = "arifceylan.com üzerinden... Adı: ";
- 
-            //mailin konusu... txtad adlı texboxtan da ismini aldırdım. kaldırabilirsiniz... 
-
-            mail.Body = "deneme123";
- 
-            //mailin içeriği. txtmesaj ve txteposta textboxları kullandım. 
- 
-            mail.IsBodyHtml = true;
- 
-            //html kodlarına izin verilsin. 
- 
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
- 
-            //gmail smtp adresi tanımlaması
- 
-            client.EnableSsl = true;
- 
-            // Gmail için sslin aktif olması gerekiyor. 
-
-            NetworkCredential credentials = new NetworkCredential("mustafa.blacksea93@gmail.com", "WalkAlone3442");
- 
-            //gmail kullanıcı adı ve şifre... Şifre bölümünü değiştirin(***)
- 
-            client.Credentials = credentials;
- 
-            try
- 
-            {
- 
-            client.Send(mail);
- 
-           
- 
-            }
- 
-            catch (Exception hata)
- 
-            {
- 
-            Response.Write(hata);  //hata ayıklama ile hata olduğunda hata mesajı yazdırılacak.
- 
-            }
-       }
 
     
 

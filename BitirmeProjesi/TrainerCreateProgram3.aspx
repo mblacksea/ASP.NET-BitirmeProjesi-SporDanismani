@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+       <script src="js/checknegative.js"></script>
     <style>
 
 .mrmuscle {
@@ -30,9 +30,9 @@
     
                        <div class="form-group" id="setnumberGroup" runat="server">
                         <label>Set Number</label>
-                        <asp:TextBox ID="setNumber" CssClass="form-control" runat="server" TextMode="Number" ></asp:TextBox>
+                        <asp:TextBox ID="setNumber" onblur="checknegative(this)" CssClass="form-control" runat="server" TextMode="Number" ></asp:TextBox>
                       <br />
-                        <asp:Button ID="Button2" OnClick="CreateSets" CssClass="btn btn-warning" runat="server" Text="Create Sets" />
+                        <asp:Button ID="Button2" OnClick="CreateSets" CausesValidation="False" CssClass="btn btn-warning" runat="server" Text="Create Sets" />
                    
                          <asp:RequiredFieldValidator ID="reqsetNumber"
                             runat="server"
@@ -44,70 +44,70 @@
                     </div>
                     <asp:Panel ID="Panel1" CssClass="form-group musti-rep" runat="server">
                           <label>Repetition</label>
-                         <asp:TextBox ID="TextBox1" placeholder="1. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox1" onblur="checknegative(this)" placeholder="1. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                             runat="server"
                             ControlToValidate="TextBox1"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox2" placeholder="2. Rep" CssClass="form-control" runat="server"   Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox2" onblur="checknegative(this)" placeholder="2. Rep" CssClass="form-control" runat="server"   Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                             runat="server"
                             ControlToValidate="TextBox2"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox3" placeholder="3. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox3" onblur="checknegative(this)" placeholder="3. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
                             runat="server"
                             ControlToValidate="TextBox3"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox4" placeholder="4. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox4" onblur="checknegative(this)" placeholder="4. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
                             runat="server"
                             ControlToValidate="TextBox4"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox5" placeholder="5. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox5" onblur="checknegative(this)" placeholder="5. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                             runat="server"
                             ControlToValidate="TextBox5"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox6" placeholder="6. Rep" CssClass="form-control" runat="server" TextMode="Number" Width="100px" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox6" onblur="checknegative(this)" placeholder="6. Rep" CssClass="form-control" runat="server" TextMode="Number" Width="100px" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                             runat="server"
                             ControlToValidate="TextBox6"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox7" placeholder="7. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox7" onblur="checknegative(this)" placeholder="7. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
                             runat="server"
                             ControlToValidate="TextBox7"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox8" placeholder="8. Rep" CssClass="form-control" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox8" onblur="checknegative(this)" placeholder="8. Rep" CssClass="form-control" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
                             runat="server"
                             ControlToValidate="TextBox8"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox9" placeholder="9. Rep" CssClass="form-control" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox9" onblur="checknegative(this)" placeholder="9. Rep" CssClass="form-control" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                             runat="server"
                             ControlToValidate="TextBox9"
                             ErrorMessage="Repetetion is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBox10" placeholder="10. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBox10" onblur="checknegative(this)" placeholder="10. Rep" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
                             runat="server"
                             ControlToValidate="TextBox10"
@@ -122,32 +122,32 @@
                     <!--</div>-->
                        <asp:Panel ID="Panel2" CssClass="form-group musti-rep" runat="server">
                           <label>Weight (kg)</label>
-                         <asp:TextBox ID="TextBoxx1" CssClass="form-control" Text="0" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx1" onblur="checknegative(this)" CssClass="form-control" Text="0" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx2" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx2"  onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx3" CssClass="form-control" Text="0"  runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx3" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx4" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx4"  onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx5" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx5" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx6" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx6" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx7" CssClass="form-control" Text="0"  runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx7" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx8" CssClass="form-control" Text="0" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx8" onblur="checknegative(this)" CssClass="form-control" Text="0" runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx9" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx9" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
                               <br />
-                         <asp:TextBox ID="TextBoxx10" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxx10" onblur="checknegative(this)" CssClass="form-control" Text="0"  runat="server" Width="100px" TextMode="Number" ></asp:TextBox>
 
                     </asp:Panel>
 
                 
                     <div class="form-group" id="timeGroup" runat="server">
                         <label>Time (minutes)</label>
-                        <asp:TextBox ID="timeEx" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="timeEx" onblur="checknegative(this)" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                             runat="server"
                             ControlToValidate="timeEx"
@@ -159,70 +159,70 @@
 
                      <asp:Panel ID="Panel3" CssClass="form-group mrmuscle" runat="server">
                           <label>Rest (second)</label>
-                         <asp:TextBox ID="TextBoxxx1" placeholder="1. Rest" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx1" onblur="checknegative(this)" placeholder="1. Rest" CssClass="form-control" runat="server"  Width="100px" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
                             runat="server"
                             ControlToValidate="TextBoxxx1"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx2" placeholder="2. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx2" onblur="checknegative(this)" placeholder="2. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
                             runat="server"
                             ControlToValidate="TextBoxxx2"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx3" placeholder="3. Rest" CssClass="form-control"   Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx3" onblur="checknegative(this)" placeholder="3. Rest" CssClass="form-control"   Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                             runat="server"
                             ControlToValidate="TextBoxxx3"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx4"  placeholder="4. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx4" onblur="checknegative(this)"  placeholder="4. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                             runat="server"
                             ControlToValidate="TextBoxxx4"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx5" placeholder="5. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx5" onblur="checknegative(this)" placeholder="5. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
                             runat="server"
                             ControlToValidate="TextBoxxx5"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx6" placeholder="6. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx6" onblur="checknegative(this)" placeholder="6. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator17"
                             runat="server"
                             ControlToValidate="TextBoxxx6"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx7" placeholder="7. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx7" onblur="checknegative(this)" placeholder="7. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator18"
                             runat="server"
                             ControlToValidate="TextBoxxx7"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx8" placeholder="8. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx8" onblur="checknegative(this)" placeholder="8. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator19"
                             runat="server"
                             ControlToValidate="TextBoxxx8"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx9" placeholder="9. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx9" onblur="checknegative(this)" placeholder="9. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator20"
                             runat="server"
                             ControlToValidate="TextBoxxx9"
                             ErrorMessage="Rest is required!"
                             SetFocusOnError="True" ForeColor="Red" />
                               <br />
-                         <asp:TextBox ID="TextBoxxx10" placeholder="10. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
+                         <asp:TextBox ID="TextBoxxx10" onblur="checknegative(this)" placeholder="10. Rest" CssClass="form-control"  Width="100px" runat="server" TextMode="Number" ></asp:TextBox>
                          <asp:RequiredFieldValidator ID="RequiredFieldValidator21"
                             runat="server"
                             ControlToValidate="TextBoxxx10"

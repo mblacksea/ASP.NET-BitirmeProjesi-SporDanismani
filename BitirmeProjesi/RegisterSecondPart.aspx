@@ -93,10 +93,10 @@
                <asp:BoundField DataField="Instution" HeaderText="Instution" SortExpression="Instution" />
                <asp:TemplateField HeaderText="Date" SortExpression="Date">
                    <EditItemTemplate>
-                       <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Date","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                       <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:TextBox>
                    </EditItemTemplate>
                    <ItemTemplate>
-                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("Date","{0:MM/dd/yyyy}") %>'></asp:Label>
+                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:Label>
                    </ItemTemplate>
                </asp:TemplateField>
            </Columns>

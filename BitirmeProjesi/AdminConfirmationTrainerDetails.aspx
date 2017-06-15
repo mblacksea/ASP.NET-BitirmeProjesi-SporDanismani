@@ -1,7 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanel.Master" AutoEventWireup="true" CodeBehind="AdminConfirmationTrainerDetails.aspx.cs" Inherits="BitirmeProjesi.AdminConfirmationTrainerDetails" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      
+    <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/notifyit/notifIt.js"></script>
+    
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -9,6 +22,11 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Drag and Drop scripti -->
+   
+
+
 
 
     <div class="content">
@@ -20,9 +38,11 @@
                                
                             </div>
                          <div class="content">
+
+                             
+
                          
-                                       
-                                 
+                                    
                                 
                              
                                        <div class="row">
@@ -35,7 +55,7 @@
                                  
                                     </div>
 
-                             <asp:GridView ID="GridView1" OnSelectedIndexChanged = "OnSelectedIndexChanged"  CssClass= "table table-striped table-bordered table-condensed" runat="server" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1" AllowPaging="True">
+                             <asp:GridView ID="GridView1"  OnSelectedIndexChanged = "OnSelectedIndexChanged"  CssClass= "table table-striped table-bordered table-condensed" runat="server" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1" AllowPaging="True">
                                  <Columns>
                                      <asp:CommandField SelectText="Download" ShowSelectButton="True" />
                                      <asp:TemplateField HeaderText="Certificate_ID" InsertVisible="False" SortExpression="Certificate_ID" Visible="False">
@@ -91,6 +111,34 @@
                     </div>
                 </div>
         </div>
+        <div id="reasonDeclineSection" runat="server" class="col-md-6">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Reason for Decline</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form  role="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Reason</label>
+                            <textarea class="form-control" rows="5" placeholder="Max(2000)" runat="server" id="reasonTextArea" maxlength="2000"></textarea>
+                        </div>
+                         <div class="box-footer">
+                             <asp:Button ID="Button3" CssClass="btn btn-primary" OnClick="Button3_Click" runat="server" Text="Send" />
+                             
+                             
+                    </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
+     <div class="row">
+        <!-- left column -->
+        
+         </div>
 
 </asp:Content>

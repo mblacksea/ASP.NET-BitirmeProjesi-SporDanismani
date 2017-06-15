@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPanel.Master" AutoEventWireup="true" CodeBehind="AdminConfirmation.aspx.cs" Inherits="BitirmeProjesi.AdminConfirmation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -9,12 +12,13 @@
 
      <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                     <div class="card">
-                            <div class="header">
+                  <div class="header">
                                 <h4 class="title">Trainer Confirmation</h4>
                                 
                             </div>
+                <div class="row">
+                     <div class="card">
+                          
                          <asp:GridView ID="GridView1" OnSelectedIndexChanged = "OnSelectedIndexChanged" CssClass= "table table-striped table-bordered table-condensed"  runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="User_ID" DataSourceID="SqlDataSource1">
                              <Columns>
                                  <asp:CommandField SelectText="Details" ShowSelectButton="True" />

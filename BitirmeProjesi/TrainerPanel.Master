@@ -130,7 +130,7 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="TrainerProfileSettings.aspx"><i class="fa fa-link"></i> <span>Profile Settings</span></a></li>
-       
+        <li><a href="TrainerChangePassword.aspx"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
          <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Certificate</span>
             <span class="pull-right-container">
@@ -150,22 +150,27 @@
           
           
           
-            <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Programs</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-           
-            <li><a href="TrainerCreateProgram1.aspx">Create Program</a></li>
-            <li><a href="TrainerMyPrograms.aspx">My Programs</a></li>
-            <li><a href="TrainerAddExercise.aspx">Add Exercise</a></li>
-            <li><a href="TrainerMyExercises.aspx">My Exercises</a></li>
-          </ul>
+          <li id="programVisible" runat="server" class="treeview">
+              <a href="#"><i class="fa fa-link"></i><span>Programs</span>
+                  <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+              </a>
+              <ul class="treeview-menu">
 
-          
-        </li>
+                  <li><a href="TrainerCreateProgram1.aspx">Create Program</a></li>
+                  <li><a href="TrainerMyPrograms.aspx">My Programs</a></li>
+                  <li><a href="TrainerAddExercise.aspx">Add Exercise</a></li>
+                  <li><a href="TrainerMyExercises.aspx">My Exercises</a></li>
+
+              </ul>
+
+
+          </li>
+          <li>
+               <button type="button" causesvalidation="false" runat="server" onserverclick="logout" class="btn btn-block btn-danger">Logout</button>
+
+          </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

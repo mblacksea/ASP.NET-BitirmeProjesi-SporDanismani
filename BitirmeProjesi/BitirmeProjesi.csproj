@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.17.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -97,6 +100,7 @@
   <ItemGroup>
     <Content Include="AdminConfirmation.aspx" />
     <Content Include="AdminConfirmationTrainerDetails.aspx" />
+    <Content Include="AdminInsertParameter.aspx" />
     <Content Include="App_Data\bitirmedatabase.mdf" />
     <Content Include="App_Data\bitirmedatabase_log.ldf">
       <DependentUpon>bitirmedatabase.mdf</DependentUpon>
@@ -143,6 +147,7 @@
     <Content Include="css\styles.css" />
     <Content Include="css\stylesheet-pure-css.css" />
     <Content Include="AdminDefaultPage.aspx" />
+    <Content Include="css\tablednd.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -179,6 +184,7 @@
     <Content Include="dist\css\skins\skin-yellow.min.css" />
     <Content Include="dist\css\skins\_all-skins.css" />
     <Content Include="dist\css\skins\_all-skins.min.css" />
+    <Content Include="dist\css\styleforgotpassword.css" />
     <Content Include="dist\img\avatar.png" />
     <Content Include="dist\img\avatar04.png" />
     <Content Include="dist\img\avatar2.png" />
@@ -231,6 +237,7 @@
     <Content Include="documentation\style.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="images\about.png" />
     <Content Include="images\banner\banner - Copy.jpg" />
     <Content Include="images\banner\banner.jpg" />
@@ -295,6 +302,7 @@
     <Content Include="images\team\04.jpg" />
     <Content Include="images\userDefaultImage.jpg" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\checknegative.js" />
     <Content Include="js\custom-scripts.js" />
     <Content Include="js\datepicker.js" />
     <Content Include="js\deneme.js" />
@@ -341,6 +349,9 @@
     <Content Include="assets\sass\paper\_typography.scss" />
     <Content Include="assets\sass\paper\_variables.scss" />
     <Content Include="File.ashx" />
+    <Content Include="TrainerChangePassword.aspx" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
     <None Include="js\jquery-1.4.1-vsdoc.js" />
     <Content Include="js\jquery-1.4.1.min.js" />
     <Content Include="js\jquery-2.0.3.min.js" />
@@ -348,6 +359,7 @@
     <Content Include="js\jquery.isotope.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\jquery.prettyPhoto.js" />
+    <Content Include="js\jquery.tablednd.js" />
     <Content Include="js\mousescroll.js" />
     <Content Include="js\notifyit\notifIt.css" />
     <Content Include="js\notifyit\notifIt.js" />
@@ -390,6 +402,7 @@
     <Content Include="pages\UI\sliders.html" />
     <Content Include="pages\UI\timeline.html" />
     <Content Include="pages\widgets.html" />
+    <Content Include="PdfDisplay.aspx" />
     <Content Include="plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="plugins\bootstrap-slider\slider.css" />
     <Content Include="plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -1209,7 +1222,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminConfirmation.aspx.cs">
@@ -1225,6 +1237,13 @@
     </Compile>
     <Compile Include="AdminConfirmationTrainerDetails.aspx.designer.cs">
       <DependentUpon>AdminConfirmationTrainerDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminInsertParameter.aspx.cs">
+      <DependentUpon>AdminInsertParameter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminInsertParameter.aspx.designer.cs">
+      <DependentUpon>AdminInsertParameter.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel.Master.cs">
       <DependentUpon>AdminPanel.Master</DependentUpon>
@@ -1243,6 +1262,13 @@
     <Compile Include="File.ashx.cs">
       <DependentUpon>File.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1258,6 +1284,13 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MessageBox.cs" />
+    <Compile Include="PdfDisplay.aspx.cs">
+      <DependentUpon>PdfDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PdfDisplay.aspx.designer.cs">
+      <DependentUpon>PdfDisplay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -1286,6 +1319,13 @@
     </Compile>
     <Compile Include="TrainerAddExercise.aspx.designer.cs">
       <DependentUpon>TrainerAddExercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerChangePassword.aspx.cs">
+      <DependentUpon>TrainerChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerChangePassword.aspx.designer.cs">
+      <DependentUpon>TrainerChangePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerCircleExercise.aspx.cs">
       <DependentUpon>TrainerCircleExercise.aspx</DependentUpon>
@@ -1384,6 +1424,13 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1530,7 +1577,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="mustafa\" />
     <Folder Include="videos\" />
   </ItemGroup>
   <PropertyGroup>

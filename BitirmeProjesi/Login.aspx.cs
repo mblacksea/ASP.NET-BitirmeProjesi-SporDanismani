@@ -19,6 +19,7 @@ using System.Web.Script.Serialization;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Security;
+using System.Security.Cryptography;
 
 namespace BitirmeProjesi
 {
@@ -72,7 +73,7 @@ namespace BitirmeProjesi
 
 
                     conn.Close();
-                    if (password == FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text, "MD5"))
+                    if (password ==FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text, "MD5"))
                     {
                         conn.Open();
                         if (role_id == 1)
@@ -91,6 +92,7 @@ namespace BitirmeProjesi
                             {
                                 //Onaylandi...
                                 Session["trainerEmail"] = textboxEmail.Text;
+                                Session["rejectedTrainer"] = "false";
                                 Response.Redirect("TrainerDefaultPage.aspx");
                             }
                             else if(status_id==2)
@@ -99,6 +101,9 @@ namespace BitirmeProjesi
                             }
                             else if (status_id == 3)
                             {   //Reddedildi...
+                                //tekrar certifica yukleyebilsin.
+                                Session["rejectedTrainer"] = "true";
+                                Response.Redirect("TrainerRejectedPage.aspx");
                                 MessageBox.Show("Your registration has been rejected", MessageBox.MesajTipleri.Error, false, 3000);
                             }
 
@@ -174,11 +179,32 @@ namespace BitirmeProjesi
 
 
         }
+        public string encryption(String password)
+        {
+
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encrypt;
+            UTF8Encoding encode = new UTF8Encoding();
+            //encrypt the given password string into Encrypted data  
+            encrypt = md5.ComputeHash(encode.GetBytes(password));
+            StringBuilder encryptdata = new StringBuilder();
+            //Create a new string by using the encrypted data  
+            for (int i = 0; i < encrypt.Length; i++)
+            {
+                encryptdata.Append(encrypt[i].ToString());
+            }
+            return encryptdata.ToString();
+        } 
 
 
         public class MyObject
         {
             public string success { get; set; }
+        }
+
+        protected void LinkButton1_Click(object sender, System.EventArgs e)
+        {
+            Response.Redirect("ForgotPassword.aspx");
         }
     }
 }

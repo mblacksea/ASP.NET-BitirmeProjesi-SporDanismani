@@ -4,54 +4,58 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-     <meta charset="utf-8">
-    <title>MessageBox</title>
-    <style type="text/css">
-        pre
-        {
-            border: solid 1px #ccc;
-            background-color: #ffa;
-            padding: 5px;
-            color: #a00;
-            line-height: 1.5em;
-        }
-    </style>
-    <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
-    <script src="/js/jquery-2.0.3.min.js"></script>
-    <script src="/js/notifyit/notifIt.js"></script>
+    <title></title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("[id*=gvLocations]").sortable({
+            items: 'tr:not(tr:first-child)',
+            cursor: 'pointer',
+            axis: 'y',
+            dropOnEmpty: false,
+            start: function (e, ui) {
+                ui.item.addClass("selected");
+            },
+            stop: function (e, ui) {
+                ui.item.removeClass("selected");
+            },
+            receive: function (e, ui) {
+                jQuery(this).find("tbody").append(ui.item);
+            }
+        });
+    });
+</script>
+
+
 </head>
 <body>
-   <form id="form1" runat="server">
-    <div style="margin: 100px 0px 30px 0px;">
-        <asp:CheckBox ID="cbOtoKapa" runat="server" Text="Otomatik kapansın" />
-        <br />
-        Gösterim süresi:
-        <asp:TextBox ID="txtSure" runat="server" Text="2000" />
-        milisaniye
-        <br />
-        <br />
-        <asp:Button ID="btnSuccess" runat="server" Text="Success" OnClick="btnSuccess_Click" />
-        &nbsp;
-        <asp:Button ID="btnWarning" runat="server" Text="Warning" OnClick="btnWarning_Click" />
-        &nbsp;
-        <asp:Button ID="btnInfo" runat="server" Text="Info" OnClick="btnInfo_Click" />
-        &nbsp;
-        <asp:Button ID="btnError" runat="server" Text="Error" OnClick="btnError_Click" />
+    <form id="form1" runat="server">
+    <div>
+    
+      
+        <asp:GridView ID="gvLocations" runat="server" AutoGenerateColumns="false">
+            <Columns>
+                <asp:TemplateField HeaderText="Siralama" ItemStyle-Width="30">
+                    <ItemTemplate>
+                        <%# Eval("Siralama") %>
+                        <input type="hidden" name="Siralama" value='<%# Eval("Siralama") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="Type_ID" HeaderText="Type_ID" ItemStyle-Width="150" />
+                <asp:BoundField DataField="Type_Name" HeaderText="Type_Name" ItemStyle-Width="100" />
+                  <asp:BoundField DataField="Siralama" HeaderText="Siralama" ItemStyle-Width="100" />
+            </Columns>
+        </asp:GridView>
+<br />
+        <asp:Button Text="Update Preference" runat="server" OnClick="UpdatePreference" />
+
+
+
+
     </div>
-    <hr />
-    <b>Örnek kullanımlar</b>
-    <pre>
-MessageBox.Show("Deneme metni", MessageBox.MesajTipleri.Success);
-MessageBox.Show("Deneme metni", MessageBox.MesajTipleri.Success, false);
-MessageBox.Show("Deneme metni", MessageBox.MesajTipleri.Success, true, 2000);
-MessageBox.Show("Deneme metni", MessageBox.MesajTipleri.Success, 2000);
-MessageBox.Show(new MessageBox.MessageBoxInfo
-{
-    Mesaj = "Deneme metni",
-    MesajTipi = MessageBox.MesajTipleri.Info,
-    OtoKapa = true,
-    Sure = 3500
-});    </pre>
     </form>
 </body>
 </html>

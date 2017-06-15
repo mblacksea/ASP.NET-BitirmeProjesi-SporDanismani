@@ -1,13 +1,41 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerCreateProgram2.aspx.cs" Inherits="BitirmeProjesi.TrainerCreateProgram2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function ($) {
+            $("[id*=GridView2]").sortable({
+                items: 'tr:not(tr:first-child)',
+                cursor: 'pointer',
+                axis: 'y',
+                dropOnEmpty: false,
+                start: function (e, ui) {
+                    ui.item.addClass("selected");
+                },
+                stop: function (e, ui) {
+                    ui.item.removeClass("selected");
+                },
+                receive: function (e, ui) {
+                    $(this).find("tbody").append(ui.item);
+                }
+            });
+        });
+    </script>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
       <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title">Create Program</h3>
+            <h3 id="header" runat="server" class="box-title">PROGRAM -> </h3>
         </div>
     </div>
+
+    <div class="box-header with-border">
+            <h3 class="box-title">Select Exercise</h3>
+      </div>
 
     <asp:GridView ID="GridView1"  OnSelectedIndexChanged = "OnSelectedIndexChanged" CssClass= "table table-striped table-bordered table-condensed" runat="server" AutoGenerateColumns="False" DataKeyNames="Exercises_ID" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
         <Columns>
@@ -71,7 +99,11 @@
 
     <asp:GridView ID="GridView2" runat="server" OnRowDeleting="OnRowDeleting"  CssClass= "table table-striped table-bordered table-condensed" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource2">
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" />
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName="Delete" Text="Delete"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Program_ID" SortExpression="Program_ID" Visible="False">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Program_ID") %>'></asp:TextBox>
@@ -105,18 +137,20 @@
                 </ItemTemplate>
             </asp:TemplateField>
               <asp:TemplateField HeaderText="OrderExercise" SortExpression="OrderExercise">
-                <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("OrderExercise") %>'></asp:TextBox>
-                </EditItemTemplate>
-                <ItemTemplate>      
-                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("OrderExercise") %>'></asp:Label>
+               
+                <ItemTemplate>     
+                          <%# Eval("OrderExercise") %>
+                        <input type="hidden" name="Siralama" value='<%# Eval("OrderExercise") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
+          
         </Columns>
       </asp:GridView>
+    <br />
+        <asp:Button Text="Update Preference" runat="server" OnClick="UpdatePreference" />
 
 
-      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [ProgramExercise] WHERE [ID] = @ID" InsertCommand="INSERT INTO [ProgramExercise] ([Program_ID], [Exercises_ID]) VALUES (@Program_ID, @Exercises_ID)" SelectCommand="SELECT [Program_ID], [Exercises].[Exercises_ID], [ID],[Exercises].[Name],[ProgramExercise].[OrderExercise] FROM [ProgramExercise],[Exercises] WHERE [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and ([Program_ID] = @Program_ID)" UpdateCommand="UPDATE [ProgramExercise] SET [Program_ID] = @Program_ID, [Exercises_ID] = @Exercises_ID WHERE [ID] = @ID">
+      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [ProgramExercise] WHERE [ID] = @ID" InsertCommand="INSERT INTO [ProgramExercise] ([Program_ID], [Exercises_ID]) VALUES (@Program_ID, @Exercises_ID)" SelectCommand="SELECT [Program_ID], [Exercises].[Exercises_ID], [ID],[Exercises].[Name],[ProgramExercise].[OrderExercise] FROM [ProgramExercise],[Exercises] WHERE [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and ([Program_ID] = @Program_ID) ORDER BY OrderExercise " UpdateCommand="UPDATE [ProgramExercise] SET [Program_ID] = @Program_ID, [Exercises_ID] = @Exercises_ID WHERE [ID] = @ID">
           <DeleteParameters>
               <asp:Parameter Name="ID" Type="Int32" />
           </DeleteParameters>

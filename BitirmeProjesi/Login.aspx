@@ -200,6 +200,8 @@ body{
             <br> <br />
                 <div class="g-recaptcha"  data-sitekey="6LduRBMUAAAAAOpA-nGf5FdvTTjys708mK5xlmHA"></div>
 			    <input id="Submit1" type="button" OnServerClick="btnLogin_Click" runat="server"  value="Login" />
+               <br> <br />
+            <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" Font-Size="Large" runat="server" BackColor="White">Forgot my password</asp:LinkButton>
 		</div>
        
 

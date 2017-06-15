@@ -49,6 +49,15 @@ namespace BitirmeProjesi {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// programVisible control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl programVisible;
+        
+        /// <summary>
         /// labelContent control.
         /// </summary>
         /// <remarks>

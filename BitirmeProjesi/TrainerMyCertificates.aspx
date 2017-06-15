@@ -1,17 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerMyCertificates.aspx.cs" Inherits="BitirmeProjesi.TrainerMyCertificates" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="js/notifyit/notifIt.css" rel="stylesheet" />
+    <script src="js/notifyit/notifIt.js"></script>
+    <script src="js/jquery-2.0.3.min.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-        <asp:GridView ID="GridView1" runat="server" CssClass= "table table-striped table-bordered table-condensed"   AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1">
+        <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged = "OnSelectedIndexChanged1" CssClass= "table table-striped table-bordered table-condensed"   AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1">
         <Columns>
             <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField ShowHeader="False">
                 <EditItemTemplate>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" runat="server" Visible="False" CausesValidation="True"  CommandName="Update" Text="Update"></asp:LinkButton>
+                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" Visible="False" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" Visible="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
                     &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName="Delete" Text="Delete"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -59,10 +68,10 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Date" SortExpression="Date">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Date","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("Date", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("Date", "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -91,6 +100,50 @@
             <asp:Parameter Name="Certificate_ID" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+
+     <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Certificate Name</label>
+                        <asp:TextBox ID="certificateName" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="certificatenameReq"
+                            runat="server"
+                            ControlToValidate="certificateName"
+                            ErrorMessage="Certificate Name is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                     <div class="form-group">
+                        <label>Instution</label>
+                        <asp:TextBox ID="instutionName" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="instutionnameReq"
+                            runat="server"
+                            ControlToValidate="instutionName"
+                            ErrorMessage="Instution Name is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                     <div class="form-group">
+                        <label>Date</label>
+                        <asp:TextBox ID="date" CssClass="form-control" runat="server" TextMode="Date"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="dateReq"
+                            runat="server"
+                            ControlToValidate="date"
+                            ErrorMessage="Date is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                    <div class="form-group">
+                        <label>File(Optional)</label>
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                    </div>
+                     <div class="form-group">
+                        <button type="button" id="updateID" runat="server" onserverclick="updateCertificate" class="btn btn-block btn-success">Update Certificate</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="showCertificateID" onserverclick="showCertificate" runat="server" class="btn btn-block btn-warning">Show Certificate File</button>
+                    </div>
+                    </div>
+                </div>
+         </div>
 
 
 </asp:Content>

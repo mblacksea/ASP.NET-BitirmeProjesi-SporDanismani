@@ -12,7 +12,47 @@
 
            <form role="form">
                     <div class="box-body">
-                      
+                        <div class="col-md-8">
+
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <asp:TextBox ID="Name" placeholder="Name" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="confirmPasswordReq"
+                                    runat="server"
+                                    ControlToValidate="Name"
+                                    ForeColor="Red"
+                                    ErrorMessage="Name is required!"
+                                    SetFocusOnError="True"
+                                    Display="Dynamic" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Tittle">Tittle</label>
+                                <asp:TextBox ID="Tittle" placeholder="Tittle" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                                    runat="server"
+                                    ControlToValidate="Tittle"
+                                    ForeColor="Red"
+                                    ErrorMessage="Tittle is required!"
+                                    SetFocusOnError="True"
+                                    Display="Dynamic" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <asp:TextBox ID="Description" placeholder="Description" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                                    runat="server"
+                                    ControlToValidate="Description"
+                                    ForeColor="Red"
+                                    ErrorMessage="Description is required!"
+                                    SetFocusOnError="True"
+                                    Display="Dynamic" />
+                            </div>
+                            <div class="form-group">
+                                <label>Exercise Type Name</label>
+                                <asp:DropDownList ID="DropDownList2" CssClass="form-control select2" runat="server"></asp:DropDownList>
+                            </div>
+
+                        </div>
              
 
                         <div class="col-lg-6">
@@ -41,6 +81,7 @@
                         <div class="col-lg-6">
                          
                         </div>
+               </div>
                     </div>
                     <!-- /.box-body -->
 
@@ -60,7 +101,7 @@
 
 
 
-    </div>
+ 
 
 
 </asp:Content>

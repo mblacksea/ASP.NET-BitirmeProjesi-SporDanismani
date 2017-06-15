@@ -13,5 +13,14 @@ namespace BitirmeProjesi
         {
 
         }
+
+        protected void logout(object sender, EventArgs e)
+        {
+
+            Session.Remove("trainerName");
+            Session.Remove("rejectedTrainer");
+            Response.Redirect("Main.aspx");
+        }
+
     }
 }

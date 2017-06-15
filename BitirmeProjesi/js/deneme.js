@@ -1,9 +1,17 @@
-﻿      function checknegative(str) {
-          if (parseFloat(document.getElementById(str.id).value) < 0) {
-              document.getElementById(str.id).value = "";
-              document.getElementById(str.id).focus();
-              alert('Negative Values Not allowed');
-              return false;
-          }
-      }
-         
+﻿$(function ad() {
+    $("[id*=gvLocations]").sortable({
+        items: 'tr:not(tr:first-child)',
+        cursor: 'pointer',
+        axis: 'y',
+        dropOnEmpty: false,
+        start: function (e, ui) {
+            ui.item.addClass("selected");
+        },
+        stop: function (e, ui) {
+            ui.item.removeClass("selected");
+        },
+        receive: function (e, ui) {
+            $(this).find("tbody").append(ui.item);
+        }
+    });
+});

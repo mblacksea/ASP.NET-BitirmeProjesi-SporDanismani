@@ -26,11 +26,11 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label>Biography</label>
-                            <textarea class="form-control" rows="3" runat="server" id="bioTextArea" maxlength="2000"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Max(2000)" runat="server" id="bioTextArea" maxlength="2000"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Introduction</label>
-                            <textarea class="form-control" rows="3" runat="server" id="introTextArea" maxlength="1500"></textarea>
+                            <textarea class="form-control" rows="3" runat="server" placeholder="Max(1500)" id="introTextArea" maxlength="1500"></textarea>
                         </div>
 
                         <div class="col-lg-6">

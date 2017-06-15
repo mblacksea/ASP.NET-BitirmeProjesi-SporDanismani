@@ -23,12 +23,12 @@ namespace BitirmeProjesi
         string userEmail;
         string userPassword;
         string userSex;
-        string userBirthday ;
+        string userBirthday;
         string userBio;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            
+            if (!Page.IsPostBack)
+            {
                 userName = Session["userName"].ToString();
                 userSurname = Session["userSurname"].ToString();
                 userEmail = Session["userEmail"].ToString();
@@ -37,6 +37,9 @@ namespace BitirmeProjesi
                 userBirthday = Session["userBirthday"].ToString();
                 userBio = Session["userBio"].ToString();
             
+            }
+            
+       
           
 
 
@@ -88,7 +91,7 @@ namespace BitirmeProjesi
         protected void addCertificate(object sender, EventArgs e)
         {
           
-          //  if (FileUpload1.PostedFile.ContentType == "application/pdf" || FileUpload1.PostedFile.ContentType==null)
+          // if (FileUpload1.PostedFile.ContentType == "application/pdf" || FileUpload1.PostedFile.ContentType==null)
           //  {
                 SqlCommand cmdInsertUser = new SqlCommand();
                 if (Session["userID"] == null)
@@ -175,11 +178,7 @@ namespace BitirmeProjesi
                 con.Close();
 
             }
-            else
-            {
-                MessageBox.Show("Please, Upload files in pdf format", MessageBox.MesajTipleri.Warning, false, 3000);
-            }
-            
+         
 
            /* cmdInsertUser = new SqlCommand();
             cmdInsertUser.Connection = con;
@@ -202,6 +201,7 @@ namespace BitirmeProjesi
         protected void save(object sender, EventArgs e)
         {
             Session["infoForTrainer"] = "Awaiting approval by admin. You will be notified by e-mail";
+            Session.Remove("userID");
           //  MessageBox.Show("Awaiting approval by admin. You will be notified by e-mail", MessageBox.MesajTipleri.Info, false, 3000);
             Response.Redirect("Login.aspx");
                

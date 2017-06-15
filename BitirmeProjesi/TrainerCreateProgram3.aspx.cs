@@ -236,10 +236,16 @@ namespace BitirmeProjesi
 
         protected void CreateSets(object sender, EventArgs e)
         {
+            int setSayisi = Convert.ToInt32(setNumber.Text);
+       
+            if (setSayisi > 0 && setSayisi <= 10)
+            {
             Panel1.Visible = true;
             Panel2.Visible = true;
             Panel3.Visible = true;
-            int setSayisi = Convert.ToInt32(setNumber.Text);
+          
+
+         
             for (int i = 1; i <= setSayisi; i++)
             {
                 string texboxIDPanel1 = "TextBox" + i;
@@ -269,10 +275,10 @@ namespace BitirmeProjesi
                 }
                 
             }
-            
-                
-            
 
+
+
+            }
 
 
 

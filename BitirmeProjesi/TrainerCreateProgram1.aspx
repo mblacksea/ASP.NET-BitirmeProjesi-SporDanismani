@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    
-    <script src="js/deneme.js"></script>
+    <script src="js/checknegative.js"></script>
     <div class="box box-default">
         <div class="box-header with-border">
             <h3 class="box-title">Create Program</h3>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label>Program Tittle</label>
-                        <asp:TextBox ID="TextBoxProgramTittle" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBoxProgramTittle" placeholder="Max(200)" maxlength="200" CssClass="form-control" runat="server"></asp:TextBox>
                          <asp:RequiredFieldValidator ID="tittleValidator"
                             runat="server"
                             ControlToValidate="TextBoxProgramTittle"
