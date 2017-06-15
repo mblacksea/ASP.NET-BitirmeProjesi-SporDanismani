@@ -103,7 +103,7 @@ namespace BitirmeProjesi
                 {
                     errorMessage += ex2.ToString();
                     ex2 = ex2.InnerException;
-                }
+                } 
                 //  Page.RegisterStartupScript("UserMsg", "<script>alert('Sending Failed...');if(alert){ window.location='SendMail.aspx';}</script>");
             }
         }
