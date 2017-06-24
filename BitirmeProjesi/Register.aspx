@@ -17,7 +17,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-      <script type="text/javascript">
+    <!--  <script type="text/javascript">
         $(function () {
             $("[id$=txtDate]").datepicker({
                 showOn: "button",
@@ -29,7 +29,7 @@
             });
         });
     </script>
-
+        -->
 <head runat="server">
     <title>Add-Life-Health-Fitness</title>
       <link rel="shortcut icon" href="images/ico/favicon.ico"> 
@@ -98,7 +98,7 @@
       
     </div>
 
-  <asp:TextBox ID="txtDate" runat="server"  placeholder='Birthday' ></asp:TextBox>
+  <asp:TextBox ID="txtDate" runat="server" TextMode="Date"  placeholder='Birthday' ></asp:TextBox>
        <asp:RequiredFieldValidator id="RequiredFieldValidator1"
               runat="server"
               ControlToValidate="txtDate"

@@ -27,8 +27,7 @@ namespace BitirmeProjesi
         string userBio;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
+            
                 userName = Session["userName"].ToString();
                 userSurname = Session["userSurname"].ToString();
                 userEmail = Session["userEmail"].ToString();
@@ -37,7 +36,7 @@ namespace BitirmeProjesi
                 userBirthday = Session["userBirthday"].ToString();
                 userBio = Session["userBio"].ToString();
             
-            }
+            
             
        
           
@@ -161,11 +160,11 @@ namespace BitirmeProjesi
                         cmdInsertUser = new SqlCommand();
                         cmdInsertUser.Connection = con;
 
-                        cmdInsertUser.CommandText = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)";
+                        cmdInsertUser.CommandText = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @DateCertificate, @CertificateFile)";
                         cmdInsertUser.Parameters.AddWithValue("@Trainer_ID", userID);
                         cmdInsertUser.Parameters.AddWithValue("@Certificate_Name", textboxCertificateName.Text);
                         cmdInsertUser.Parameters.AddWithValue("@Instution", textboxInstution.Text);
-                        cmdInsertUser.Parameters.AddWithValue("@Date", Convert.ToDateTime(txtdateCertificate.Text));
+                        cmdInsertUser.Parameters.AddWithValue("@DateCertificate", Convert.ToDateTime(txtdateCertificate.Text));
                         cmdInsertUser.Parameters.AddWithValue("@CertificateFile", bytes);
                         cmdInsertUser.ExecuteNonQuery();
 

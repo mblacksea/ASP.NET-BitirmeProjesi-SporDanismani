@@ -98,8 +98,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminComplain.aspx" />
     <Content Include="AdminConfirmation.aspx" />
     <Content Include="AdminConfirmationTrainerDetails.aspx" />
+    <Content Include="AdminDisplayTrainer.aspx" />
+    <Content Include="AdminDisplayTrainerDetails.aspx" />
+    <Content Include="AdminEmailSettings.aspx" />
     <Content Include="AdminInsertParameter.aspx" />
     <Content Include="App_Data\bitirmedatabase.mdf" />
     <Content Include="App_Data\bitirmedatabase_log.ldf">
@@ -303,6 +307,7 @@
     <Content Include="images\userDefaultImage.jpg" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\checknegative.js" />
+    <Content Include="js\circleRepeatCheck.js" />
     <Content Include="js\custom-scripts.js" />
     <Content Include="js\datepicker.js" />
     <Content Include="js\deneme.js" />
@@ -350,8 +355,7 @@
     <Content Include="assets\sass\paper\_variables.scss" />
     <Content Include="File.ashx" />
     <Content Include="TrainerChangePassword.aspx" />
-    <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
+    <Content Include="TrainerCircleExerciseUpdate.aspx" />
     <None Include="js\jquery-1.4.1-vsdoc.js" />
     <Content Include="js\jquery-1.4.1.min.js" />
     <Content Include="js\jquery-2.0.3.min.js" />
@@ -1224,6 +1228,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminComplain.aspx.cs">
+      <DependentUpon>AdminComplain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminComplain.aspx.designer.cs">
+      <DependentUpon>AdminComplain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminConfirmation.aspx.cs">
       <DependentUpon>AdminConfirmation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1237,6 +1248,27 @@
     </Compile>
     <Compile Include="AdminConfirmationTrainerDetails.aspx.designer.cs">
       <DependentUpon>AdminConfirmationTrainerDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayTrainer.aspx.cs">
+      <DependentUpon>AdminDisplayTrainer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayTrainer.aspx.designer.cs">
+      <DependentUpon>AdminDisplayTrainer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayTrainerDetails.aspx.cs">
+      <DependentUpon>AdminDisplayTrainerDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayTrainerDetails.aspx.designer.cs">
+      <DependentUpon>AdminDisplayTrainerDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminEmailSettings.aspx.cs">
+      <DependentUpon>AdminEmailSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminEmailSettings.aspx.designer.cs">
+      <DependentUpon>AdminEmailSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminInsertParameter.aspx.cs">
       <DependentUpon>AdminInsertParameter.aspx</DependentUpon>
@@ -1284,6 +1316,8 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MessageBox.cs" />
+    <Compile Include="MyEmail.cs" />
+    <Compile Include="MyEmailParameters.cs" />
     <Compile Include="PdfDisplay.aspx.cs">
       <DependentUpon>PdfDisplay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1333,6 +1367,13 @@
     </Compile>
     <Compile Include="TrainerCircleExercise.aspx.designer.cs">
       <DependentUpon>TrainerCircleExercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerCircleExerciseUpdate.aspx.cs">
+      <DependentUpon>TrainerCircleExerciseUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerCircleExerciseUpdate.aspx.designer.cs">
+      <DependentUpon>TrainerCircleExerciseUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerCreateProgram1.aspx.cs">
       <DependentUpon>TrainerCreateProgram1.aspx</DependentUpon>
@@ -1417,20 +1458,6 @@
     </Compile>
     <Compile Include="TrainerProfileSettings.aspx.designer.cs">
       <DependentUpon>TrainerProfileSettings.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -106,6 +106,10 @@ namespace BitirmeProjesi
                                 Response.Redirect("TrainerRejectedPage.aspx");
                                 MessageBox.Show("Your registration has been rejected", MessageBox.MesajTipleri.Error, false, 3000);
                             }
+                            else if (status_id == 4)
+                            {   //Banlanmis
+                                MessageBox.Show("Your account is banned", MessageBox.MesajTipleri.Error, false, 3000);
+                            }
 
 
                            

@@ -20,6 +20,17 @@ namespace BitirmeProjesi
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
+            header.InnerText = header.InnerText + Session["createExerciseName"].ToString();
+
+
+
+
             if (!Page.IsPostBack)
             {
                 TextBox1.Visible = false;
@@ -80,7 +91,15 @@ namespace BitirmeProjesi
                         string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
-                            Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
+                            try
+                            {
+                                Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
+                            }
+                            catch
+                            {
+                                Session["order"] = 1;
+                            }
+                        
                             cmd.Connection = con;
                             cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                             cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
@@ -109,7 +128,19 @@ namespace BitirmeProjesi
                             string query = "insert into ProgramExercise values (@Program_ID, @Exercises_ID, @OrderExercise, @SetSayisi, @TekrarSayisi, @Agirlik,@CircleExercise_ID,@CircleExercise_Repeat,@RestTime,@ExerciseTime)SELECT SCOPE_IDENTITY()";
                             using (SqlCommand cmd = new SqlCommand(query))
                             {
-                                Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
+
+
+                                try
+                                {
+                                    Session["order"] = Convert.ToInt32(Session["order"].ToString()) + 1;
+                                }
+                                catch
+                                {
+                                    Session["order"] = 1;
+                                }
+
+
+
                                 cmd.Connection = con;
                                 cmd.Parameters.AddWithValue("@Program_ID", Convert.ToInt32(Session["programID"].ToString()));
                                 cmd.Parameters.AddWithValue("@Exercises_ID", Convert.ToInt32(Session["createExerciseID"].ToString()));
@@ -138,7 +169,8 @@ namespace BitirmeProjesi
                
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle,@ProgramPhoto,@ProgramDescription,@ProgramPrice)SELECT SCOPE_IDENTITY()";
+
+                    string query = "insert into Program (Trainer_ID, ProgramSpec_ID, ProgramDiff_ID,User_ID,ProgramTittle,ProgramPhoto,ProgramDescription,ProgramPrice,Status_ID,isBanned,CreationDate) values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle,@ProgramPhoto,@ProgramDescription,@ProgramPrice,@Status_ID,@isBanned,@CreationDate)SELECT SCOPE_IDENTITY()";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
 
@@ -152,12 +184,43 @@ namespace BitirmeProjesi
                         cmd.Parameters.AddWithValue("@ProgramPrice", Session["ProgramPrice"].ToString());
                         var res = (byte[])Session["ProgramPhoto"];
                         cmd.Parameters.Add("@ProgramPhoto", SqlDbType.Image, res.Length).Value = res;
+                        cmd.Parameters.AddWithValue("@Status_ID", 2);
+                        cmd.Parameters.AddWithValue("@isBanned", 'N'.ToString());
+                        cmd.Parameters.AddWithValue("@CreationDate",  Convert.ToDateTime(DateTime.Now.ToString("dd-MM-yyyy")));
                         con.Open();
                         int programID = Convert.ToInt32(cmd.ExecuteScalar());
                         Session["programID"] = programID.ToString();
                         con.Close();
 
                     }
+
+
+                  /*  //string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle,@ProgramPhoto,@ProgramDescription,@ProgramPrice)SELECT SCOPE_IDENTITY()";
+                    string query = "insert into Program values (@Trainer_ID, @ProgramSpec_ID, @ProgramDiff_ID,@User_ID,@ProgramTittle)SELECT SCOPE_IDENTITY()";
+                    
+                    
+                    using (SqlCommand cmd = new SqlCommand(query))
+                    {
+
+                        cmd.Connection = con;
+                        cmd.Parameters.AddWithValue("@Trainer_ID", Convert.ToInt32(Session["trainerID"].ToString()));
+                        cmd.Parameters.AddWithValue("@ProgramSpec_ID", Convert.ToInt32(Session["ProgramSpecID"].ToString()));
+                        cmd.Parameters.AddWithValue("@ProgramDiff_ID", Convert.ToInt32(Session["ProgramDiffID"].ToString()));
+                        cmd.Parameters.AddWithValue("@User_ID", Convert.ToInt32(Session["AdminID"].ToString()));
+                        cmd.Parameters.AddWithValue("@ProgramTittle", Session["ProgramTittle"].ToString());
+                        //var res = (byte[])Session["ProgramPhoto"];
+                        //cmd.Parameters.Add("@ProgramPhoto", SqlDbType.Image, res.Length).Value = res;
+                        //cmd.Parameters.AddWithValue("@ProgramDescription", Session["ProgramDescription"].ToString());
+                        //cmd.Parameters.AddWithValue("@ProgramPrice", Session["ProgramPrice"].ToString());
+                      //  cmd.Parameters.AddWithValue("@Status_ID", 2);
+                      //  cmd.Parameters.AddWithValue("@isBanned", 'N'.ToString());
+                       
+                        con.Open();
+                        int programID = Convert.ToInt32(cmd.ExecuteScalar());
+                        Session["programID"] = programID.ToString();
+                        con.Close();
+
+                    }*/
                 }
 
                 using (SqlConnection con = new SqlConnection(constr))

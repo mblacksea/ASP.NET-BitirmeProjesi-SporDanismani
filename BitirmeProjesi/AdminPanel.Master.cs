@@ -11,7 +11,10 @@ namespace BitirmeProjesi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["adminSession"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
         }
 
         protected void logout(object sender, EventArgs e)

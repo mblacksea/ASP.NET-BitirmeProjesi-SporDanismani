@@ -16,6 +16,7 @@ namespace BitirmeProjesi
     public partial class ForgotPassword : System.Web.UI.Page
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
+        MyEmailParameters myEmailParam = MyEmail.getEmailParameters();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,7 +25,7 @@ namespace BitirmeProjesi
         protected void sendEmail(object sender, EventArgs e)
         {
             String randomPassword = generateRandomPassword();
-            sendEmailForConfirm(randomPassword);
+            MyEmail.sendEmailForConfirm(randomPassword, introTextArea.InnerText, Request.Url.GetLeftPart(UriPartial.Authority), myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail,myEmailParam.SmtpServer);
 
             string sql = "UPDATE Users SET Password=@Password where Email='" + introTextArea.InnerText + "'";
             SqlCommand komut = new SqlCommand(sql, conn);
@@ -74,39 +75,7 @@ namespace BitirmeProjesi
            
         }
 
-        protected void sendEmailForConfirm(String randomPassword)
-        {
-            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
-            mail.To.Add(introTextArea.InnerText);
-            mail.From = new MailAddress("mustafa.blacksea93@gmail.com", "Email head", System.Text.Encoding.UTF8);
-            mail.Subject = "Password Refresh";
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;
-            mail.Body = "Your Temporary Password = " + randomPassword + "  " + Request.Url.GetLeftPart(UriPartial.Authority)+"/Login.aspx"  ;
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-            mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("mustafa.blacksea93@gmail.com", "WalkAlone3442");
-            client.Port = 587;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;
-            try
-            {
-                client.Send(mail);
-                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Successfully Send...');if(alert){ window.location='SendMail.aspx';}</script>");
-            }
-            catch (Exception ex)
-            {
-                Exception ex2 = ex;
-                string errorMessage = string.Empty;
-                while (ex2 != null)
-                {
-                    errorMessage += ex2.ToString();
-                    ex2 = ex2.InnerException;
-                } 
-                //  Page.RegisterStartupScript("UserMsg", "<script>alert('Sending Failed...');if(alert){ window.location='SendMail.aspx';}</script>");
-            }
-        }
+     
 
 
     }

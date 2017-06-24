@@ -21,6 +21,14 @@ namespace BitirmeProjesi
         string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+         
+
             if (!this.IsPostBack)
             {
 
@@ -56,6 +64,7 @@ namespace BitirmeProjesi
                 {
 
                     TextBoxProgramTittle.Text = dr[0].ToString();
+                    Session["ProgramTittle"] = TextBoxProgramTittle.Text;
                     byte[] _bytes = (byte[])dr[1];
                     Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);
                     String value1 = dr[2].ToString();
@@ -70,6 +79,32 @@ namespace BitirmeProjesi
 
               
                 con.Close();
+
+
+
+
+                con.Open();
+                string checkSalesProgram = "select count(*) from UserProgram where Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'";
+                SqlCommand com = new SqlCommand(checkSalesProgram, con);
+                int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
+                con.Close();
+                //Bu program birileri tarafindan satin alinmistir. Edit edilemez.
+                if (temp > 0)
+                {
+                    Session["editProgramPermission"] = false;
+                    updateButton.Visible = false;
+                    DropDownList1.Enabled = false;
+                    DropDownList2.Enabled = false;
+                    TextBoxProgramTittle.Enabled = false;
+                    FileUpload1.Enabled = false;
+                    MessageBox.Show(" Can not be edited because this program is purchased!", MessageBox.MesajTipleri.Info, false, 3000);
+
+                   
+                }
+                else
+                {
+                    Session.Remove("editProgramPermission");
+                }
               
 
 
@@ -169,11 +204,17 @@ namespace BitirmeProjesi
                 con.Close();
             }
 
+            MessageBox.Show("Updated!", MessageBox.MesajTipleri.Success, false, 3000);
+
+
            
         }
         protected void continueWithoutUpdate(object sender, EventArgs e)
         {
-            Response.Redirect("TrainerMyProgramsDetails2.aspx");
+          //Response.Redirect("TrainerMyProgramsDetails2.aspx");
+            Session["updateSession"] = "1";
+            Session["programID"] = Session["updateProgramID"].ToString();
+            Response.Redirect("TrainerCreateProgram2.aspx");
         }
 
     }

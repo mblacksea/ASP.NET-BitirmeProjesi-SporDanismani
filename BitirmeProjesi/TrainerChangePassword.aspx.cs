@@ -17,7 +17,11 @@ namespace BitirmeProjesi
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
         }
 
         protected void Unnamed_ServerClick(object sender, EventArgs e)

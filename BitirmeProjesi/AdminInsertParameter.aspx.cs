@@ -15,7 +15,10 @@ namespace BitirmeProjesi
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["adminSession"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
             if (DropDownList1.SelectedValue == "Program Difficulty")
             {
                 FirstGridview.Visible = true;
@@ -65,10 +68,21 @@ namespace BitirmeProjesi
                          cmd.Connection = con;
                          cmd.Parameters.AddWithValue("@ProgramDiff_Name", TextBox1.Text);
                          con.Open();
-                         cmd.ExecuteNonQuery();
-                         con.Close();
-                         GridView1.DataBind();
-                         MessageBox.Show("Record added", MessageBox.MesajTipleri.Success, false, 3000);
+                         try
+                         {
+                             cmd.ExecuteNonQuery();
+                             con.Close();
+                             GridView1.DataBind();
+                             MessageBox.Show("Record added", MessageBox.MesajTipleri.Success, false, 3000);
+                         }
+                         catch
+                         {
+
+                             con.Close();
+                             MessageBox.Show("You cannot insert same value!", MessageBox.MesajTipleri.Error, false, 3000);
+                         }
+                        
+                         
                      }
                 }
                 else
@@ -80,11 +94,24 @@ namespace BitirmeProjesi
                          cmd.Connection = con;
                          cmd.Parameters.AddWithValue("@ProgramSpec_Name", TextBox1.Text);
                          con.Open();
-                         cmd.ExecuteNonQuery();
-                         con.Close();
-                         GridView2.DataBind();
-                         MessageBox.Show("Record added", MessageBox.MesajTipleri.Success, false, 3000);
-                     }
+
+                         try
+                         {
+                             cmd.ExecuteNonQuery();
+                             con.Close();
+                             GridView2.DataBind();
+                             MessageBox.Show("Record added", MessageBox.MesajTipleri.Success, false, 3000);
+                         }
+                         catch
+                         {
+
+                             con.Close();
+                             MessageBox.Show("You cannot insert same value!", MessageBox.MesajTipleri.Error, false, 3000);
+                         }
+
+
+                   
+                          }
                 }
                
                 
@@ -120,7 +147,7 @@ namespace BitirmeProjesi
            if (Convert.ToInt32(count) > 0)
            {
                //silmesine izin verme.
-               MessageBox.Show("You cannot this record!", MessageBox.MesajTipleri.Error, false, 3000);
+               MessageBox.Show("You cannot this record! There is a program connected to it", MessageBox.MesajTipleri.Error, false, 3000);
            }
            else
            {

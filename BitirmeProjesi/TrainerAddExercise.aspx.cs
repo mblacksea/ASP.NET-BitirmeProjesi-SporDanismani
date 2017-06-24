@@ -19,6 +19,13 @@ namespace BitirmeProjesi
         string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
             if (!this.IsPostBack)
             {
                 
@@ -175,6 +182,13 @@ namespace BitirmeProjesi
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
+
+
+                        exerciseName.Text=null;
+                        tittleName.Text=null;
+                        descriptionarea.InnerText = null;
+
+
                         MessageBox.Show("Added exercise", MessageBox.MesajTipleri.Success, false, 3000);
                     }
                 }

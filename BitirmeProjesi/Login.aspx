@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
      <link rel="shortcut icon" href="images/ico/favicon.ico"> 
-    <title>Add-Life-Health-Fitness</title>
+    <title>Fitness 7/24</title>
      <style type="text/css">
         pre
         {

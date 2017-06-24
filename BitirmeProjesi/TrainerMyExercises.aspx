@@ -9,17 +9,56 @@
   
 
 
-    <div class="box box-default">
-        <div class="box-header with-border">
-            <h3 class="box-title">My Exercises</h3>
+    <div class="col-lg-8 col-sm-8">
+
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-5">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">My Exercise</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Search</label>
+                            <asp:DropDownList CssClass="form-control select2" ID="DropDownList1" runat="server">
+                                <asp:ListItem>Name</asp:ListItem>
+                                <asp:ListItem>Tittle</asp:ListItem>
+                                <asp:ListItem>Type_Name</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group">
+                            <asp:TextBox ID="textField" placeHolder="SearchQuery" CssClass="form-control" runat="server"></asp:TextBox>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" runat="server" onserverclick="searchButton" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+
+
+
+
 
     <asp:GridView ID="GridView1" OnSelectedIndexChanged = "OnSelectedIndexChanged"  CssClass= "table table-striped table-bordered table-condensed"  runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Exercises_ID" AllowSorting="True">
         <Columns>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:Button ID="Button3" runat="server" OnClientClick="return confirm('Are you sure you want to delete?'); " OnClick="Button3_Click" CausesValidation="False"  Text="Delete" />
+                                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField ShowHeader="False">
@@ -28,8 +67,9 @@
                     &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" Visible="false" runat="server" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
+                                        <asp:LinkButton ID="Button3" runat="server" OnClientClick="return confirm('Are you sure you want to delete?'); " OnClick="Button3_Click" CausesValidation="False"  Text="Delete" />
+
                    
                 </ItemTemplate>
             </asp:TemplateField>

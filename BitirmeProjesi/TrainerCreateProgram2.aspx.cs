@@ -13,19 +13,81 @@ namespace BitirmeProjesi
 {
     public partial class TrainerCreateProgram2 : System.Web.UI.Page
     {
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            header.InnerText =  header.InnerText + Session["ProgramTittle"].ToString();
-            if (Session["programID"] != null)
+       
+
+
+
+            if (Session["trainerID"] == null)
             {
-                nextStepButtonID.Visible = true;
-         
-             
+                Response.Redirect("Main.aspx");
             }
-            else
+
+            try
             {
-                nextStepButtonID.Visible = false;
+                if ((bool)Session["editProgramPermission"] == false)
+                {
+                    GridView1.Visible = false;
+                    ReOrder.Visible = false;
+                    searchBox.Visible = false;
+                    foreach (GridViewRow row in GridView2.Rows)
+                    {
+                        LinkButton lb = (LinkButton)row.FindControl("LinkButtonEdit");
+                        lb.Visible = false;
+                        lb = (LinkButton)row.FindControl("LinkButton1");
+                        lb.Visible = false;
+                    }
+                }
             }
+            catch
+            {
+                if (Session["programID"] != null)
+                {
+                    nextStepButtonID.Visible = true;
+                    ReOrder.Visible = true;
+
+                    conn.Open();
+                    SqlCommand trainerData = new SqlCommand();
+                    trainerData.Connection = conn;
+                    trainerData.CommandText = "select MAX(OrderExercise) from ProgramExercise where Program_ID='" + Convert.ToInt32(Session["programID"].ToString()) + "'";
+
+
+                    SqlDataReader dr = trainerData.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Session["order"] = dr[0].ToString();
+                    }
+
+
+
+                    conn.Close();
+
+
+
+                }
+                else
+                {
+
+
+                    nextStepButtonID.Visible = false;
+                    ReOrder.Visible = false;
+                }
+            }
+          
+          
+                
+            
+
+            if (!Page.IsPostBack)
+            {
+                header.InnerText = header.InnerText + Session["ProgramTittle"].ToString();
+
+            }
+
+           
         }
 
 
@@ -118,7 +180,15 @@ namespace BitirmeProjesi
         protected void Next_Step(object sender, EventArgs e)
         {
             //Bu butona basildiginda circle kismina gecilecek.
-            Response.Redirect("TrainerCircleExercise.aspx");
+            if (Session["updateSession"] != null)
+            {
+                Response.Redirect("TrainerCircleExerciseUpdate.aspx");
+            }
+            else
+            {
+                Response.Redirect("TrainerCircleExercise.aspx");
+
+            }
         }
 
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
@@ -128,6 +198,7 @@ namespace BitirmeProjesi
             // Session["trainerDetailsID"] = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
             //  Session["trainerDetailsEmail"] = (GridView1.SelectedRow.FindControl("Label4") as Label).Text;
             Session["createExerciseID"] = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
+            Session["createExerciseName"] = (GridView1.SelectedRow.FindControl("Label2") as Label).Text;
             Session["ExerciseType"] = (GridView1.SelectedRow.FindControl("Label5") as Label).Text;
             Response.Redirect("TrainerCreateProgram3.aspx");
 
@@ -138,5 +209,41 @@ namespace BitirmeProjesi
         {
             Session["order"] = Convert.ToInt32(Session["order"].ToString()) - 1;
         }
+
+        protected void searchButton(object sender, EventArgs e)
+        {
+            string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
+            SqlDataSource1.FilterParameters.Clear();
+            SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField", "Text"));
+            SqlDataSource1.FilterExpression = FilterExpression;
+        }
+
+       
+  
+       
+
+        protected void gvMaint_RowDataBound(Object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowState == DataControlRowState.Edit)
+            {
+                Label labelSetSayisi = (Label)e.Row.FindControl("Label5");
+                if (labelSetSayisi.Text == "")
+                {
+                    e.Row.FindControl("TextBoxRepeat").Visible = false;
+                    e.Row.FindControl("TextBoxWeight").Visible = false;
+                }
+                else
+                {
+                    e.Row.FindControl("TextBoxExerciseTime").Visible = false;
+                }
+
+
+             /*   TextBox txtFreqMiles = (TextBox)e.Row.FindControl("TextBoxWeight");
+
+                // At this point, you can change the value as normal
+                txtFreqMiles.Text = "some new text";*/
+            }
+        }
+
     }
 }

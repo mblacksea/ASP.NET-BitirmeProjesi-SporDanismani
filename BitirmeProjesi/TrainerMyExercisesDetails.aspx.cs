@@ -19,6 +19,13 @@ namespace BitirmeProjesi
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
+
             if (!Page.IsPostBack)
             {
                 //videoExercise.Src = "File.ashx?Id=" + Session["exerciseID"].ToString();

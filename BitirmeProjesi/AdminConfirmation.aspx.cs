@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +12,10 @@ namespace BitirmeProjesi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["adminSession"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
         }
 
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
@@ -24,6 +28,7 @@ namespace BitirmeProjesi
          
             
         }
+     
 
 
     }

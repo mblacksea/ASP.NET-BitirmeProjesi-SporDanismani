@@ -13,6 +13,24 @@ namespace BitirmeProjesi {
     public partial class TrainerProfileSettings {
         
         /// <summary>
+        /// emailTextArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea emailTextArea;
+        
+        /// <summary>
+        /// surnameReq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator surnameReq;
+        
+        /// <summary>
         /// bioTextArea control.
         /// </summary>
         /// <remarks>

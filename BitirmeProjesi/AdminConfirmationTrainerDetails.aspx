@@ -90,12 +90,12 @@
                                              <asp:Label ID="Label4" runat="server" Text='<%# Bind("Instution") %>'></asp:Label>
                                          </ItemTemplate>
                                      </asp:TemplateField>
-                                     <asp:TemplateField HeaderText="Date" SortExpression="Date">
+                                     <asp:TemplateField HeaderText="DateCertificate" SortExpression="DateCertificate">
                                          <EditItemTemplate>
-                                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Date") %>'></asp:TextBox>
+                                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("DateCertificate") %>'></asp:TextBox>
                                          </EditItemTemplate>
                                          <ItemTemplate>
-                                             <asp:Label ID="Label5" runat="server" Text='<%# Bind("Date", "{0:dd/MM/yyyy}") %>'></asp:Label>
+                                             <asp:Label ID="Label5" runat="server" Text='<%# Bind("DateCertificate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                                          </ItemTemplate>
                                      </asp:TemplateField>
                                  </Columns>

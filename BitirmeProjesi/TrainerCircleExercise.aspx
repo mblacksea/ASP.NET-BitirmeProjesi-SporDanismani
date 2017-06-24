@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerCircleExercise.aspx.cs" Inherits="BitirmeProjesi.TrainerCircleExercise" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="js/circleRepeatCheck.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="box-header with-border">
@@ -40,7 +41,7 @@
         </asp:TemplateField>
                  <asp:TemplateField HeaderText="Circle Exercise Repeat">
               <ItemTemplate>
-                <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="TextBox4" onblur="checkcircle(this)" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
             </ItemTemplate>
         </asp:TemplateField>
         

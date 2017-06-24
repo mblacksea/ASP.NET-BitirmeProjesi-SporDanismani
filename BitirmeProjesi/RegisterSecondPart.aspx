@@ -91,12 +91,12 @@
                <asp:BoundField DataField="Trainer_ID" HeaderText="Trainer_ID" SortExpression="Trainer_ID" Visible="False" />
                <asp:BoundField DataField="Certificate_Name" HeaderText="Certificate_Name" SortExpression="Certificate_Name" />
                <asp:BoundField DataField="Instution" HeaderText="Instution" SortExpression="Instution" />
-               <asp:TemplateField HeaderText="Date" SortExpression="Date">
+               <asp:TemplateField HeaderText="DateCertificate" SortExpression="DateCertificate">
                    <EditItemTemplate>
-                       <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                       <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("DateCertificate","{0:dd/MM/yyyy}") %>'></asp:TextBox>
                    </EditItemTemplate>
                    <ItemTemplate>
-                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:Label>
+                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("DateCertificate","{0:dd/MM/yyyy}") %>'></asp:Label>
                    </ItemTemplate>
                </asp:TemplateField>
            </Columns>

@@ -16,6 +16,11 @@ namespace BitirmeProjesi
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
         }
         protected void addNewCertificate(object sender, EventArgs e)
         {
@@ -50,13 +55,16 @@ namespace BitirmeProjesi
             certificateName.Text = null;
             instutionName.Text = null;
             date.Text = null;
-
-            conn.Open();
-            SqlCommand trainerStatusUpdate = new SqlCommand();
-            trainerStatusUpdate.Connection = conn;
-            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-            trainerStatusUpdate.ExecuteNonQuery();
-            conn.Close();
+            if (Session["rejectedTrainer"].ToString() == "true")
+            {
+                conn.Open();
+                SqlCommand trainerStatusUpdate = new SqlCommand();
+                trainerStatusUpdate.Connection = conn;
+                trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                trainerStatusUpdate.ExecuteNonQuery();
+                conn.Close();
+            }
+          
 
         }
     }

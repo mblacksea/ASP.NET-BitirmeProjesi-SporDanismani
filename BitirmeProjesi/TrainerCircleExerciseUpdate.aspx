@@ -1,0 +1,72 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TrainerPanel.Master" AutoEventWireup="true" CodeBehind="TrainerCircleExerciseUpdate.aspx.cs" Inherits="BitirmeProjesi.TrainerCircleExerciseUpdate" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script src="js/circleRepeatCheck.js"></script>
+
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="box-header with-border">
+        <h3 class="box-title">Circle Exercise Update</h3>
+
+    </div>
+
+    <asp:GridView ID="GridView1" runat="server" CssClass= "table table-striped table-bordered table-condensed" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+        <Columns>
+            <asp:TemplateField HeaderText="Program_ID" SortExpression="Program_ID" Visible="False">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Program_ID") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Program_ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Exercises_ID" SortExpression="Exercises_ID" Visible="False">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Exercises_ID") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Exercises_ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="Circle Exercise">
+              <ItemTemplate>
+                <asp:DropDownList ID="circleExercise"  CssClass="form-control select2"  runat="server"></asp:DropDownList>
+            </ItemTemplate>
+        </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Circle Exercise Repeat">
+              <ItemTemplate>
+                <asp:TextBox ID="TextBox4" onblur="checkcircle(this)" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
+        
+        </Columns>
+    </asp:GridView>
+
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProgramExercise].[Program_ID], [ProgramExercise].[Exercises_ID],[Exercises].[Name] FROM [ProgramExercise],[Exercises] WHERE  [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID]  and ([Program_ID] = @Program_ID) ORDER BY [ProgramExercise].[OrderExercise] ASC ">
+        <SelectParameters>
+            <asp:SessionParameter DefaultValue="0" Name="Program_ID" SessionField="programID" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
+        <div class="box-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <asp:Button ID="Button1" OnClick="Update" OnClientClick="return confirm('Are you sure you want to update?');" CssClass="btn btn-block btn-success" runat="server" Text="Update" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</asp:Content>

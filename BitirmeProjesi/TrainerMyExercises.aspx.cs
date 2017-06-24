@@ -16,6 +16,19 @@ namespace BitirmeProjesi
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+        }
+
+
+        protected void searchButton(object sender, EventArgs e)
+        {
+            string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
+            SqlDataSource1.FilterParameters.Clear();
+            SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField", "Text"));
+            SqlDataSource1.FilterExpression = FilterExpression;
         }
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -29,14 +42,19 @@ namespace BitirmeProjesi
 
         }
 
-      
 
 
+       
+           /* string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
+            SqlDataSource1.FilterParameters.Clear();
+            SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField", "Text"));
+            SqlDataSource1.FilterExpression = FilterExpression;*/
+        
    
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
+            LinkButton btn = (LinkButton)sender;
 
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
@@ -63,7 +81,7 @@ namespace BitirmeProjesi
             if (Convert.ToInt32(count) > 0)
             {
                 //silmesine izin verme.
-                MessageBox.Show("You cannot this record!", MessageBox.MesajTipleri.Error, false, 3000);
+                MessageBox.Show("You cannot this record! There is a program connected to it", MessageBox.MesajTipleri.Error, false, 3000);
             }
             else
             {
@@ -78,6 +96,8 @@ namespace BitirmeProjesi
                 //sildir
             }
         }
+
+    
 
      
       

@@ -21,6 +21,13 @@ namespace BitirmeProjesi
        
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
+
             if (!Page.IsPostBack)
             {
               
@@ -51,7 +58,7 @@ namespace BitirmeProjesi
                     if (countExercise > 1)
                     {
                         Label tblabel = (Label)GridView1.Rows[orderExercise - 1].FindControl("Label3");
-                        tblabel.Text = tblabel.Text + " " + orderExercise;
+                        tblabel.Text = orderExercise + " " +  tblabel.Text;
                         labelId++;
                     }
                   
@@ -75,7 +82,7 @@ namespace BitirmeProjesi
                             j = j - 1;
                             if (Convert.ToInt32(listExerciseCount[j].ToString()) > 1) 
                             {
-                                ddl.Items.Add(new ListItem(listExerciseName[j].ToString() + " " + listOrderExercise[j].ToString(), listOrderExercise[j].ToString()));
+                                ddl.Items.Add(new ListItem(listOrderExercise[j].ToString() + " " + listExerciseName[j].ToString(), listOrderExercise[j].ToString()));
                             }
                             else
                             {
@@ -144,6 +151,7 @@ namespace BitirmeProjesi
             Session.Remove("ExerciseType");
             Session.Remove("programID");
             Session.Remove("adminID");
+            Session["CreateProgramSuccess"] = true;
             Response.Redirect("TrainerDefaultPage.aspx");
 
         }
@@ -157,6 +165,7 @@ namespace BitirmeProjesi
             Session.Remove("ExerciseType");
             Session.Remove("programID");
             Session.Remove("adminID");
+            Session["CreateProgramSuccess"] = "true";
             Response.Redirect("TrainerDefaultPage.aspx");
 
         }

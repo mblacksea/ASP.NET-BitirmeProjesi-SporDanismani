@@ -24,50 +24,61 @@ namespace BitirmeProjesi
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+     
+           
             if (!Page.IsPostBack)
             {
 
-
-                conn.Open();
-                SqlCommand trainerData = new SqlCommand();
-                trainerData.Connection = conn;
-                trainerData.CommandText = "select Photo,Intro,Bio from TrainersData where Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                //trainerData.CommandText = "select Photo from TrainersData where Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                //byte[] _bytes = (byte[])trainerData.ExecuteScalar();
-                // Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);  
-
-
-                SqlDataReader dr = trainerData.ExecuteReader();
-                while (dr.Read())
+                if (Session["trainerID"] == null)
                 {
-                    try
-                    {
-                        byte[] _bytes = (byte[])dr[0];
-                        Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);
-
-
-                    }
-                    catch
-                    {
-                        Image1.ImageUrl = "images/userDefaultImage.jpg";
-
-                    }
-                    introTextArea.InnerText = dr[1].ToString();
-                    bioTextArea.InnerText = dr[2].ToString();
-
-
-
-
+                    Response.Redirect("Main.aspx");
                 }
+                else
+                {
+
+
+                    conn.Open();
+                    SqlCommand trainerData = new SqlCommand();
+                    trainerData.Connection = conn;
+                    trainerData.CommandText = "select td.Photo,td.Intro,td.Bio,u.Email from TrainersData td,Users u where u.User_ID=td.Trainer_ID and td.Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                    //trainerData.CommandText = "select Photo from TrainersData where Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                    //byte[] _bytes = (byte[])trainerData.ExecuteScalar();
+                    // Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);  
+
+
+                    SqlDataReader dr = trainerData.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            byte[] _bytes = (byte[])dr[0];
+                            Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(_bytes);
+
+
+                        }
+                        catch
+                        {
+                            Image1.ImageUrl = "images/userDefaultImage.jpg";
+
+                        }
+                        introTextArea.InnerText = dr[1].ToString();
+                        bioTextArea.InnerText = dr[2].ToString();
+                        emailTextArea.InnerText = dr[3].ToString();
 
 
 
-                conn.Close();
+
+                    }
+
+
+
+                    conn.Close();
+                }
+                // Response.Write(Session["trainerID"].ToString());
             }
-            // Response.Write(Session["trainerID"].ToString());
-
         }
+
+     
 
 
         private MemoryStream ResizeImage(FileUpload fileUpload)
@@ -145,32 +156,24 @@ namespace BitirmeProjesi
                 trainerDataUpdate.Connection = conn;
                 trainerDataUpdate.CommandText = "UPDATE TrainersData SET Intro='" + introTextArea.InnerText + "', Bio='" + bioTextArea.InnerText + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
                 trainerDataUpdate.ExecuteNonQuery();
+                conn.Close();
+
+                conn.Open();
+                SqlCommand trainerDataUpdate2 = new SqlCommand();
+                trainerDataUpdate2.Connection = conn;
+                trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                trainerDataUpdate2.ExecuteNonQuery();
+                conn.Close();
             }
             else
-            {  /*
-                int fileSize = FileUpload1.PostedFile.ContentLength;
+            {
                
-                    using (Stream fs = FileUpload1.PostedFile.InputStream)
-                    {
-                        using (BinaryReader br = new BinaryReader(fs))
-                        {
-                            byte[] bytes = br.ReadBytes((Int32)fs.Length);
-                            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                            Image1.ImageUrl = "data:image/jpeg;base64," + base64String;
-                            trainerDataUpdate.CommandText = "UPDATE TrainersData SET Intro='" + introTextArea.InnerText + "', Photo='" + base64String + "', Bio='" + bioTextArea.InnerText + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                            trainerDataUpdate.ExecuteNonQuery();
-                        }
-                    }
-
-                */
-
                 byte[] myimage = new byte[FileUpload1.PostedFile.ContentLength];
                 HttpPostedFile Image = FileUpload1.PostedFile;
                 Image.InputStream.Read(myimage, 0, (int)FileUpload1.PostedFile.ContentLength);
                 MemoryStream thumbnailPhotoStream = ResizeImage(FileUpload1);
                 byte[] thumbnailImageBytes = thumbnailPhotoStream.ToArray();
-                // trainerDataUpdate.CommandText = "UPDATE TrainersData SET Intro=@intro, Photo=@photo, Bio=@bio WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                // trainerDataUpdate.ExecuteNonQuery();
+         
                 Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(thumbnailImageBytes);
                 string sql = "UPDATE TrainersData SET Intro=@intro, Photo=@photo, Bio=@bio WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
                 SqlCommand komut = new SqlCommand(sql, conn);
@@ -180,24 +183,34 @@ namespace BitirmeProjesi
                 conn.Open();
 
                 komut.ExecuteNonQuery();
+                conn.Close();
 
-
-
+                conn.Open();
+                SqlCommand trainerDataUpdate2 = new SqlCommand();
+                trainerDataUpdate2.Connection = conn;
+                trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                trainerDataUpdate2.ExecuteNonQuery();
+                conn.Close();
 
 
 
             }
 
+            MessageBox.Show("Successful !!!", MessageBox.MesajTipleri.Success, false, 3000);
 
-            conn.Close();
+         
+            if (Session["rejectedTrainer"].ToString() == "true")
+            {
+                conn.Open();
+                SqlCommand trainerStatusUpdate = new SqlCommand();
+                trainerStatusUpdate.Connection = conn;
+                trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                trainerStatusUpdate.ExecuteNonQuery();
+                conn.Close();
+            }
+          
 
-
-            conn.Open();
-            SqlCommand trainerStatusUpdate = new SqlCommand();
-            trainerStatusUpdate.Connection = conn;
-            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-            trainerStatusUpdate.ExecuteNonQuery();
-            conn.Close();
+          
 
 
 

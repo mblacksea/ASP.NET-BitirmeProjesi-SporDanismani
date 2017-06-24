@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,13 @@ namespace BitirmeProjesi
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["trainerID"] == null)
+            {
+                Response.Redirect("Main.aspx");
+            }
+
+
             if (!Page.IsPostBack)
             {
                 showCertificateID.Visible = false;
@@ -23,6 +31,59 @@ namespace BitirmeProjesi
             }
         }
 
+
+        protected void searchButton(object sender, EventArgs e)
+        {
+
+            if (DateStart.Text == "" && DateEnd.Text == "" && textField2.Text!="")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if(DateStart.Text!="" && DateEnd.Text!="" && textField2.Text!="")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'   AND DateCertificate>='{1}' AND DateCertificate<='{2}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text != "" && DateEnd.Text != "" && textField2.Text == "")
+            {
+                string FilterExpression = string.Concat("DateCertificate>='{0}' AND DateCertificate<='{1}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }else if(DateStart.Text!="" && DateEnd.Text=="" && textField2.Text=="")
+            {
+                string FilterExpression = string.Concat("DateCertificate>='{0}'  ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text == "" && DateEnd.Text != "" && textField2.Text == "")
+            {
+                string FilterExpression = string.Concat("DateCertificate<='{0}'  ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+            }
+            else if (DateStart.Text == "" && DateEnd.Text == "" && textField2.Text == "")
+            {
+                SqlDataSource1.FilterParameters.Clear();
+            }
+            
+        }
+
+     
 
         protected void OnSelectedIndexChanged1(object sender, EventArgs e)
         {

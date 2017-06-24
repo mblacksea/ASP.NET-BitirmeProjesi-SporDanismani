@@ -6,6 +6,88 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <section class="content-header">
+      <h1>
+        My Certificates
+        
+      </h1>
+     
+    </section>
+        <div class="row">
+        <!-- left column -->
+            <div class="col-md-3">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                 
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Search</label>
+                            <asp:DropDownList CssClass="form-control select2" ID="DropDownList1" runat="server">
+                                <asp:ListItem>Certificate_Name</asp:ListItem>
+                                <asp:ListItem>Instution</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                            <div class="form-group">
+                                <label>Start</label>
+                            <asp:TextBox ID="DateStart" TextMode="Date" runat="server"></asp:TextBox>
+
+                        </div>
+                        <div class="form-group">
+                                 <label>End  </label>
+                            <asp:TextBox ID="DateEnd" TextMode="Date" runat="server"></asp:TextBox>
+
+                        </div>
+
+                        <div class="form-group">
+                            <asp:TextBox ID="textField2" placeHolder="SearchQuery" CssClass="form-control" runat="server"></asp:TextBox>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="box-footer">
+                         <asp:Button ID ="d" OnClick="searchButton" CausesValidation="false" runat="server" />
+                       
+                    </div>
+                </div>
+            </div>
+
+
+
+               <div class="col-md-3">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                  
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Search</label>
+                            
+                                 
+                          
+                        </div>
+                      
+
+
+
+                    </div>
+                   
+                </div>
+            </div>
+            </div>
+
+
+
+      
+
+
 
         <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged = "OnSelectedIndexChanged1" CssClass= "table table-striped table-bordered table-condensed"   AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Certificate_ID" DataSourceID="SqlDataSource1">
         <Columns>
@@ -66,19 +148,21 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("Instution") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Date" SortExpression="Date">
+            <asp:TemplateField HeaderText="DateCertificate" SortExpression="DateCertificate">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Date","{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("DateCertificate","{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("Date", "{0:dd/MM/yyyy}") %>'></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("DateCertificate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
  
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Certificate] WHERE [Certificate_ID] = @original_Certificate_ID" InsertCommand="INSERT INTO [Certificate] ([Trainer_ID], [Certificate_Name], [Instution], [Date], [CertificateFile]) VALUES (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Certificate] WHERE ([Trainer_ID] = @Trainer_ID)" UpdateCommand="UPDATE [Certificate] SET [Certificate_Name] = @Certificate_Name, [Instution] = @Instution, [Date] = @Date WHERE [Certificate_ID] = @original_Certificate_ID">
-        <DeleteParameters>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Certificate] WHERE [Certificate_ID] = @original_Certificate_ID" InsertCommand="INSERT INTO [Certificate] ([Trainer_ID], [Certificate_Name], [Instution], [DateCertificate], [CertificateFile]) VALUES (@Trainer_ID, @Certificate_Name, @Instution, @DateCertificate, @CertificateFile)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Certificate] WHERE ([Trainer_ID] = @Trainer_ID)"   UpdateCommand="UPDATE [Certificate] SET [Certificate_Name] = @Certificate_Name, [Instution] = @Instution, [DateCertificate] = @DateCertificate WHERE [Certificate_ID] = @original_Certificate_ID">
+       
+
+         <DeleteParameters>
             <asp:Parameter Name="Certificate_ID" Type="Int32" />
         </DeleteParameters>
         <InsertParameters>
@@ -135,7 +219,12 @@
                         <label>File(Optional)</label>
                         <asp:FileUpload ID="FileUpload1" runat="server" />
                     </div>
-                     <div class="form-group">
+                  
+                    </div>
+                  <div class="col-md-6">
+                    <br />
+                    
+                      <div class="form-group">
                         <button type="button" id="updateID" runat="server" onserverclick="updateCertificate" class="btn btn-block btn-success">Update Certificate</button>
                     </div>
                     <div class="form-group">

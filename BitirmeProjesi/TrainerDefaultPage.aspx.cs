@@ -20,6 +20,12 @@ namespace BitirmeProjesi
                 Response.Redirect("Main.aspx");
             }
 
+            if (Session["CreateProgramSuccess"]!= null)
+            {
+                MessageBox.Show("Successful", MessageBox.MesajTipleri.Success, false, 3000);
+                Session.Remove("CreateProgramSuccess");
+            }
+
         }
     }
 }

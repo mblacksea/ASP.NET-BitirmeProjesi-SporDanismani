@@ -4,6 +4,10 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/notifyit/notifIt.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -24,6 +28,15 @@
                 <!-- form start -->
                 <form role="form">
                     <div class="box-body">
+                         <div class="form-group">
+                            <label>Email</label>
+                            <textarea class="form-control" rows="1" placeholder="Max(100)" runat="server" id="emailTextArea" maxlength="100"></textarea>
+                             <asp:RequiredFieldValidator ID="surnameReq"
+                                 runat="server"
+                                 ControlToValidate="emailTextArea"
+                                 ErrorMessage="Email is required!"
+                                 SetFocusOnError="True" ForeColor="Red" />
+                        </div>
                         <div class="form-group">
                             <label>Biography</label>
                             <textarea class="form-control" rows="3" placeholder="Max(2000)" runat="server" id="bioTextArea" maxlength="2000"></textarea>

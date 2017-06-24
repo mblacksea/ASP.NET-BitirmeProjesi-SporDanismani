@@ -63,6 +63,12 @@
             </div>
 
             <ul class="nav">
+                  <li>
+                    <a href="AdminEmailSettings.aspx">
+                        <i class="ti-email"></i>
+                        <p>Email Settings</p>
+                    </a>
+                </li>
                 <li>
                     <a href="AdminConfirmation.aspx">
                         <i class="ti-thumb-up"></i>
@@ -73,6 +79,20 @@
                     <a href="AdminInsertParameter.aspx">
                         <i class="ti-pencil-alt2"></i>
                         <p>Insert Parameters</p>
+                    </a>
+                </li>
+
+                  <li>
+                    <a href="AdminComplain.aspx">
+                        <i class="ti-clipboard"></i>
+                        <p>Complaints</p>
+                    </a>
+                </li>
+
+                   <li>
+                    <a href="AdminDisplayTrainer.aspx">
+                        <i class="ti-stamp"></i>
+                        <p>All Trainers</p>
                     </a>
                 </li>
 
