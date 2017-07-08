@@ -56,6 +56,7 @@
     <Reference Include="Recaptcha.Web">
       <HintPath>..\packages\RecaptchaNet.2.1.0\lib\net45\Recaptcha.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -101,8 +102,14 @@
     <Content Include="AdminComplain.aspx" />
     <Content Include="AdminConfirmation.aspx" />
     <Content Include="AdminConfirmationTrainerDetails.aspx" />
+    <Content Include="AdminDisplayAllDetails.aspx" />
+    <Content Include="AdminDisplayGeneralDetails.aspx" />
+    <Content Include="AdminDisplayPrograms.aspx" />
+    <Content Include="AdminDisplayProgramsDetails.aspx" />
     <Content Include="AdminDisplayTrainer.aspx" />
     <Content Include="AdminDisplayTrainerDetails.aspx" />
+    <Content Include="AdminDisplayUsers.aspx" />
+    <Content Include="AdminDisplayUsersDetails.aspx" />
     <Content Include="AdminEmailSettings.aspx" />
     <Content Include="AdminInsertParameter.aspx" />
     <Content Include="App_Data\bitirmedatabase.mdf" />
@@ -139,6 +146,7 @@
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
+    <Content Include="Chart\Chart.js" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
@@ -152,6 +160,7 @@
     <Content Include="css\stylesheet-pure-css.css" />
     <Content Include="AdminDefaultPage.aspx" />
     <Content Include="css\tablednd.css" />
+    <Content Include="Deneme.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -1216,6 +1225,10 @@
     <Content Include="TrainerCreateProgram2.aspx" />
     <Content Include="TrainerCreateProgram3.aspx" />
     <Content Include="TrainerDefaultPage.aspx" />
+    <Content Include="TrainerDisplayUsersGraphics.aspx" />
+    <Content Include="TrainerGraphics.aspx" />
+    <Content Include="TrainerGraphicsDetails.aspx" />
+    <Content Include="TrainerGraphicsProgramDetails.aspx" />
     <Content Include="TrainerMyCertificates.aspx" />
     <Content Include="TrainerMyExercises.aspx" />
     <Content Include="TrainerMyExercisesDetails.aspx" />
@@ -1249,6 +1262,34 @@
     <Compile Include="AdminConfirmationTrainerDetails.aspx.designer.cs">
       <DependentUpon>AdminConfirmationTrainerDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDisplayAllDetails.aspx.cs">
+      <DependentUpon>AdminDisplayAllDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayAllDetails.aspx.designer.cs">
+      <DependentUpon>AdminDisplayAllDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayGeneralDetails.aspx.cs">
+      <DependentUpon>AdminDisplayGeneralDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayGeneralDetails.aspx.designer.cs">
+      <DependentUpon>AdminDisplayGeneralDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayPrograms.aspx.cs">
+      <DependentUpon>AdminDisplayPrograms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayPrograms.aspx.designer.cs">
+      <DependentUpon>AdminDisplayPrograms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayProgramsDetails.aspx.cs">
+      <DependentUpon>AdminDisplayProgramsDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayProgramsDetails.aspx.designer.cs">
+      <DependentUpon>AdminDisplayProgramsDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDisplayTrainer.aspx.cs">
       <DependentUpon>AdminDisplayTrainer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1262,6 +1303,20 @@
     </Compile>
     <Compile Include="AdminDisplayTrainerDetails.aspx.designer.cs">
       <DependentUpon>AdminDisplayTrainerDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayUsers.aspx.cs">
+      <DependentUpon>AdminDisplayUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayUsers.aspx.designer.cs">
+      <DependentUpon>AdminDisplayUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDisplayUsersDetails.aspx.cs">
+      <DependentUpon>AdminDisplayUsersDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDisplayUsersDetails.aspx.designer.cs">
+      <DependentUpon>AdminDisplayUsersDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminEmailSettings.aspx.cs">
       <DependentUpon>AdminEmailSettings.aspx</DependentUpon>
@@ -1290,6 +1345,13 @@
     </Compile>
     <Compile Include="AdminDefaultPage.aspx.designer.cs">
       <DependentUpon>AdminDefaultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Deneme.aspx.cs">
+      <DependentUpon>Deneme.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Deneme.aspx.designer.cs">
+      <DependentUpon>Deneme.aspx</DependentUpon>
     </Compile>
     <Compile Include="File.ashx.cs">
       <DependentUpon>File.ashx</DependentUpon>
@@ -1402,6 +1464,34 @@
     </Compile>
     <Compile Include="TrainerDefaultPage.aspx.designer.cs">
       <DependentUpon>TrainerDefaultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerDisplayUsersGraphics.aspx.cs">
+      <DependentUpon>TrainerDisplayUsersGraphics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerDisplayUsersGraphics.aspx.designer.cs">
+      <DependentUpon>TrainerDisplayUsersGraphics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerGraphics.aspx.cs">
+      <DependentUpon>TrainerGraphics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerGraphics.aspx.designer.cs">
+      <DependentUpon>TrainerGraphics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerGraphicsDetails.aspx.cs">
+      <DependentUpon>TrainerGraphicsDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerGraphicsDetails.aspx.designer.cs">
+      <DependentUpon>TrainerGraphicsDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerGraphicsProgramDetails.aspx.cs">
+      <DependentUpon>TrainerGraphicsProgramDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerGraphicsProgramDetails.aspx.designer.cs">
+      <DependentUpon>TrainerGraphicsProgramDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerMyCertificates.aspx.cs">
       <DependentUpon>TrainerMyCertificates.aspx</DependentUpon>

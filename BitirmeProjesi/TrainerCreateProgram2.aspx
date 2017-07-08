@@ -120,7 +120,7 @@
      <div class="box-header with-border">
             <h3 class="box-title">Added Exercises</h3>
       </div>
-
+             
     <asp:GridView ID="GridView2" runat="server"  OnRowDataBound="gvMaint_RowDataBound"   CssClass= "table table-striped table-bordered table-condensed" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource2" ToolTip="You can re-order added exercises with drag and drop">
         <Columns>
             <asp:TemplateField ShowHeader="False">
@@ -235,9 +235,10 @@
 
     </div>
 
-     <div class="col-md-3">
+    <div class="col-md-3">
         <asp:Button Text="ReOrder" ID="ReOrder" CssClass="btn btn-block btn-success" runat="server" OnClick="UpdatePreference" ToolTip="You can re-order added exercises with drag and drop" />
-         </div>
+    </div>
+       <label>(You can drag and drop. Dont forget press re order button after changing order.</label>
 
       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [ProgramExercise] WHERE [ID] = @ID" InsertCommand="INSERT INTO [ProgramExercise] ([Program_ID], [Exercises_ID]) VALUES (@Program_ID, @Exercises_ID)" SelectCommand="SELECT [Program_ID], [Exercises].[Exercises_ID], [ID],[Exercises].[Name],[ProgramExercise].[OrderExercise],[ProgramExercise].[SetSayisi] as SetNumber,[ProgramExercise].[TekrarSayisi] as Repeat, [ProgramExercise].[Agirlik] as Weight,[ProgramExercise].[RestTime] as RestTime,[ProgramExercise].[ExerciseTime] as ExerciseTime FROM [ProgramExercise],[Exercises] WHERE [ProgramExercise].[Exercises_ID]=[Exercises].[Exercises_ID] and ([Program_ID] = @Program_ID) ORDER BY OrderExercise " UpdateCommand="UPDATE [ProgramExercise] SET [TekrarSayisi] = @Repeat, [Agirlik] = @Weight,[RestTime]=@RestTime,[ExerciseTime]=@ExerciseTime WHERE [ID] = @ID">
           <DeleteParameters>

@@ -147,7 +147,7 @@ namespace BitirmeProjesi
            if (Convert.ToInt32(count) > 0)
            {
                //silmesine izin verme.
-               MessageBox.Show("You cannot this record! There is a program connected to it", MessageBox.MesajTipleri.Error, false, 3000);
+               MessageBox.Show("You cannot delete this record! There is a program connected to it", MessageBox.MesajTipleri.Error, false, 3000);
            }
            else
            {
@@ -198,7 +198,8 @@ namespace BitirmeProjesi
             if (Convert.ToInt32(count) > 0)
             {
                 //silmesine izin verme.
-                MessageBox.Show("You cannot this record!", MessageBox.MesajTipleri.Error, false, 3000);
+                MessageBox.Show("You cannot delete this record! There is a program connected to it", MessageBox.MesajTipleri.Error, false, 3000);
+
             }
             else
             {

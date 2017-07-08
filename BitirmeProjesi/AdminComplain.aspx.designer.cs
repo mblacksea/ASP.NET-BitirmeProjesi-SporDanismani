@@ -112,22 +112,40 @@ namespace BitirmeProjesi {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl textBanned;
         
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
         /// reasonTextArea control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea reasonTextArea;
+        protected global::System.Web.UI.WebControls.TextBox reasonTextArea;
         
         /// <summary>
-        /// RequiredFieldValidator2 control.
+        /// banForDateSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl banForDateSection;
+        
+        /// <summary>
+        /// banDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox banDate;
         
         /// <summary>
         /// ButtonSend control.

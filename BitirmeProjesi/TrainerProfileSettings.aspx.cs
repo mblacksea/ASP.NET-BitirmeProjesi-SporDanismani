@@ -142,61 +142,104 @@ namespace BitirmeProjesi
         }
 
 
-
-        protected void profileSettingsUpdate(object sender, EventArgs e)
+        protected Boolean emailControl(String email)
         {
-
-
-
-            if (!FileUpload1.HasFile)
+            int count = 0;
+            if (Session["trainerEmail"].ToString().Equals(email))
             {
-
-                conn.Open();
-                SqlCommand trainerDataUpdate = new SqlCommand();
-                trainerDataUpdate.Connection = conn;
-                trainerDataUpdate.CommandText = "UPDATE TrainersData SET Intro='" + introTextArea.InnerText + "', Bio='" + bioTextArea.InnerText + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                trainerDataUpdate.ExecuteNonQuery();
-                conn.Close();
-
-                conn.Open();
-                SqlCommand trainerDataUpdate2 = new SqlCommand();
-                trainerDataUpdate2.Connection = conn;
-                trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                trainerDataUpdate2.ExecuteNonQuery();
-                conn.Close();
+                return true;
             }
             else
             {
-               
-                byte[] myimage = new byte[FileUpload1.PostedFile.ContentLength];
-                HttpPostedFile Image = FileUpload1.PostedFile;
-                Image.InputStream.Read(myimage, 0, (int)FileUpload1.PostedFile.ContentLength);
-                MemoryStream thumbnailPhotoStream = ResizeImage(FileUpload1);
-                byte[] thumbnailImageBytes = thumbnailPhotoStream.ToArray();
-         
-                Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(thumbnailImageBytes);
-                string sql = "UPDATE TrainersData SET Intro=@intro, Photo=@photo, Bio=@bio WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                SqlCommand komut = new SqlCommand(sql, conn);
-                komut.Parameters.AddWithValue("@intro", introTextArea.InnerText);
-                komut.Parameters.Add("@photo", SqlDbType.Image, thumbnailImageBytes.Length).Value = thumbnailImageBytes;
-                komut.Parameters.Add("@bio", bioTextArea.InnerText);
                 conn.Open();
+                SqlCommand trainerData = new SqlCommand();
+                trainerData.Connection = conn;
+                trainerData.CommandText = "select count(*) from Users where Email='" + email + "'";
+                SqlDataReader dr = trainerData.ExecuteReader();
+                while (dr.Read())
+                {
+                    count = Convert.ToInt32(dr[0].ToString());
+                  
 
-                komut.ExecuteNonQuery();
+                }
                 conn.Close();
-
-                conn.Open();
-                SqlCommand trainerDataUpdate2 = new SqlCommand();
-                trainerDataUpdate2.Connection = conn;
-                trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
-                trainerDataUpdate2.ExecuteNonQuery();
-                conn.Close();
-
-
-
+                if (count != 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
 
-            MessageBox.Show("Successful !!!", MessageBox.MesajTipleri.Success, false, 3000);
+
+   
+        }
+
+
+        protected void profileSettingsUpdate(object sender, EventArgs e)
+        {
+             Boolean control = emailControl(emailTextArea.InnerText);
+             if (control == true)
+             {
+                 if (!FileUpload1.HasFile)
+                 {
+
+                     conn.Open();
+                     SqlCommand trainerDataUpdate = new SqlCommand();
+                     trainerDataUpdate.Connection = conn;
+                     trainerDataUpdate.CommandText = "UPDATE TrainersData SET Intro='" + introTextArea.InnerText + "', Bio='" + bioTextArea.InnerText + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                     trainerDataUpdate.ExecuteNonQuery();
+                     conn.Close();
+
+                     conn.Open();
+                     SqlCommand trainerDataUpdate2 = new SqlCommand();
+                     trainerDataUpdate2.Connection = conn;
+                     trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                     trainerDataUpdate2.ExecuteNonQuery();
+                     conn.Close();
+                 }
+                 else
+                 {
+
+                     byte[] myimage = new byte[FileUpload1.PostedFile.ContentLength];
+                     HttpPostedFile Image = FileUpload1.PostedFile;
+                     Image.InputStream.Read(myimage, 0, (int)FileUpload1.PostedFile.ContentLength);
+                     MemoryStream thumbnailPhotoStream = ResizeImage(FileUpload1);
+                     byte[] thumbnailImageBytes = thumbnailPhotoStream.ToArray();
+
+                     Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(thumbnailImageBytes);
+                     string sql = "UPDATE TrainersData SET Intro=@intro, Photo=@photo, Bio=@bio WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                     SqlCommand komut = new SqlCommand(sql, conn);
+                     komut.Parameters.AddWithValue("@intro", introTextArea.InnerText);
+                     komut.Parameters.Add("@photo", SqlDbType.Image, thumbnailImageBytes.Length).Value = thumbnailImageBytes;
+                     komut.Parameters.Add("@bio", bioTextArea.InnerText);
+                     conn.Open();
+
+                     komut.ExecuteNonQuery();
+                     conn.Close();
+
+                     conn.Open();
+                     SqlCommand trainerDataUpdate2 = new SqlCommand();
+                     trainerDataUpdate2.Connection = conn;
+                     trainerDataUpdate2.CommandText = "UPDATE Users SET Email='" + emailTextArea.InnerText + "' WHERE User_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                     trainerDataUpdate2.ExecuteNonQuery();
+                     conn.Close();
+
+
+
+                 }
+
+                 MessageBox.Show("Successful !!!", MessageBox.MesajTipleri.Success, false, 3000);
+             }
+             else
+             {
+                 MessageBox.Show("This email is used. !!!", MessageBox.MesajTipleri.Error, false, 3000);
+             }
+
+
+           
 
          
             if (Session["rejectedTrainer"].ToString() == "true")

@@ -53,13 +53,13 @@
               ErrorMessage="Surname is required!"
               SetFocusOnError="True" ForeColor="Red" />
 
-     <asp:TextBox ID="textboxEmail" runat="server"  placeholder='Email'></asp:TextBox>
+     <asp:TextBox ID="textboxEmail" runat="server"   placeholder='Email'></asp:TextBox>
      <asp:RequiredFieldValidator id="emailReq"
               runat="server"
               ControlToValidate="textboxEmail"
               ErrorMessage="Email is required!"
               SetFocusOnError="True" ForeColor="Red" />
-
+     <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" ControlToValidate="textboxEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
 
      <asp:TextBox ID="textboxPassword" runat="server" placeholder='Password' TextMode="Password"></asp:TextBox>
       <asp:RequiredFieldValidator id="passwordReq"

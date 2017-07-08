@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+     <div class="container-fluid">
 
          <div class="col-lg-10 col-sm-8">
 
@@ -10,10 +10,11 @@
         <!-- left column -->
         <div class="col-md-2">
             <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">All Trainers</h3>
-                </div>
+      
+                     <div class="header">
+                                <h4 class="title">All Trainers</h4>
+                                
+                            </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <div class="box-body">
@@ -36,7 +37,7 @@
                  
                 </div>
                      <br />
-            </div>
+           
         </div>
     </div>
                            
@@ -63,7 +64,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-           <asp:TemplateField HeaderText="SalesProgram" SortExpression="SalesProgram">
+           <asp:TemplateField HeaderText="Total Program" SortExpression="SalesProgram">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBoxProgramNumber" runat="server" Text='<%# Bind("SalesProgram") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -124,18 +125,25 @@
                     <asp:Label ID="Label8" runat="server" Text='<%# Bind("BannedReason") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+               <asp:TemplateField HeaderText="DeclineReason" SortExpression="DeclineReason">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("DeclineReason") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label9" runat="server" Text='<%# Bind("DeclineReason") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Users].[Name]+ ' ' +[Users].[Surname] as TrainerName,[Trainer_ID], [Intro], [Bio], [Status].[Status_Name] as StatusName, [isBanned], [BannedReason] ,
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Users].[Name]+ ' ' +[Users].[Surname] as TrainerName,[Trainer_ID], [Intro], [Bio], [Status].[Status_Name] as StatusName, [isBanned], [BannedReason] , [Users].[DeclineReason],
 (
-select count(*) from Program p ,  UserProgram up
-where up.Program_ID= p.Program_ID
-and  p.Trainer_ID= [TrainersData].[Trainer_ID]
+select CONVERT(varchar(10),count(*) ) from Program p 
+where p.Trainer_ID= [TrainersData].[Trainer_ID]
 ) as SalesProgram
 FROM [TrainersData],[Users],[Status]
  where [TrainersData].[Status_ID]=[Status].[Status_ID]  and [TrainersData].[Trainer_ID]=[Users].[User_ID]"></asp:SqlDataSource>
 
-
+         </div>
 </asp:Content>

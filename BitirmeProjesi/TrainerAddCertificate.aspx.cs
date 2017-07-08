@@ -34,7 +34,7 @@ namespace BitirmeProjesi
                     string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
-                        string query = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @Date, @CertificateFile)";
+                        string query = "insert into Certificate values (@Trainer_ID, @Certificate_Name, @Instution, @DateCertificate, @CertificateFile)";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
              
@@ -42,7 +42,7 @@ namespace BitirmeProjesi
                             cmd.Parameters.AddWithValue("@Trainer_ID", Convert.ToInt32(Session["trainerID"].ToString()));
                             cmd.Parameters.AddWithValue("@Certificate_Name", certificateName.Text);
                             cmd.Parameters.AddWithValue("@Instution", instutionName.Text);
-                            cmd.Parameters.AddWithValue("@Date", date.Text);
+                            cmd.Parameters.AddWithValue("@DateCertificate", date.Text);
                             cmd.Parameters.AddWithValue("@CertificateFile", bytes);
                             con.Open();
                             cmd.ExecuteNonQuery();
@@ -60,7 +60,7 @@ namespace BitirmeProjesi
                 conn.Open();
                 SqlCommand trainerStatusUpdate = new SqlCommand();
                 trainerStatusUpdate.Connection = conn;
-                trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+                trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Status_ID=3 and Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
                 trainerStatusUpdate.ExecuteNonQuery();
                 conn.Close();
             }

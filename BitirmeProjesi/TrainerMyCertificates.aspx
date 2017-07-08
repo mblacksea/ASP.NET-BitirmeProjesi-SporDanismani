@@ -51,7 +51,7 @@
 
                     </div>
                     <div class="box-footer">
-                         <asp:Button ID ="d" OnClick="searchButton" CausesValidation="false" runat="server" />
+                         <asp:Button ID ="d" OnClick="searchButton" class="btn btn-primary" Text="Search" CausesValidation="false" runat="server" />
                        
                     </div>
                 </div>
@@ -59,7 +59,7 @@
 
 
 
-               <div class="col-md-3">
+               <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
                   
@@ -67,13 +67,60 @@
                     <!-- form start -->
 
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Search</label>
-                            
-                                 
-                          
-                        </div>
-                      
+                         <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Certificate Name</label>
+                        <asp:TextBox ID="certificateName" onkeyup="textCounter(this, this.form.remLenCertificateName, 200);" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
+                            Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenCertificateName" readonly="readonly" type="text" value="200" />
+                        <asp:RequiredFieldValidator ID="certificatenameReq"
+                            runat="server"
+                            ControlToValidate="certificateName"
+                            ErrorMessage="Certificate Name is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                     <div class="form-group">
+                        <label>Instution</label>
+                        <asp:TextBox ID="instutionName" onkeyup="textCounter(this, this.form.remLenIns, 100);" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
+                            Rest character:   
+                                    <input readonly="readonly" class="form-control" name="remLenIns" readonly="readonly" type="text" value="100" />
+
+                           <asp:RequiredFieldValidator ID="instutionnameReq"
+                            runat="server"
+                            ControlToValidate="instutionName"
+                            ErrorMessage="Instution Name is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                     <div class="form-group">
+                        <label>Date</label>
+                        <asp:TextBox ID="date" CssClass="form-control" runat="server" TextMode="Date"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="dateReq"
+                            runat="server"
+                            ControlToValidate="date"
+                            ErrorMessage="Date is required!"
+                            SetFocusOnError="True" ForeColor="Red" />
+                    </div>
+                    <div class="form-group">
+                        <label>File(Optional)</label>
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                    </div>
+                  
+                    </div>
+                  <div class="col-md-6">
+                    <br />
+                    
+                      <div class="form-group">
+                        <button type="button" id="updateID" runat="server" onserverclick="updateCertificate" class="btn btn-block btn-success">Update Certificate</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="showCertificateID" onserverclick="showCertificate" runat="server" class="btn btn-block btn-warning">Show Certificate File</button>
+                    </div>
+                    </div>
+                </div>
+         </div>
 
 
 
@@ -185,54 +232,7 @@
         </UpdateParameters>
     </asp:SqlDataSource>
 
-     <div class="box-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Certificate Name</label>
-                        <asp:TextBox ID="certificateName" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="certificatenameReq"
-                            runat="server"
-                            ControlToValidate="certificateName"
-                            ErrorMessage="Certificate Name is required!"
-                            SetFocusOnError="True" ForeColor="Red" />
-                    </div>
-                     <div class="form-group">
-                        <label>Instution</label>
-                        <asp:TextBox ID="instutionName" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="instutionnameReq"
-                            runat="server"
-                            ControlToValidate="instutionName"
-                            ErrorMessage="Instution Name is required!"
-                            SetFocusOnError="True" ForeColor="Red" />
-                    </div>
-                     <div class="form-group">
-                        <label>Date</label>
-                        <asp:TextBox ID="date" CssClass="form-control" runat="server" TextMode="Date"></asp:TextBox>
-                          <asp:RequiredFieldValidator ID="dateReq"
-                            runat="server"
-                            ControlToValidate="date"
-                            ErrorMessage="Date is required!"
-                            SetFocusOnError="True" ForeColor="Red" />
-                    </div>
-                    <div class="form-group">
-                        <label>File(Optional)</label>
-                        <asp:FileUpload ID="FileUpload1" runat="server" />
-                    </div>
-                  
-                    </div>
-                  <div class="col-md-6">
-                    <br />
-                    
-                      <div class="form-group">
-                        <button type="button" id="updateID" runat="server" onserverclick="updateCertificate" class="btn btn-block btn-success">Update Certificate</button>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" id="showCertificateID" onserverclick="showCertificate" runat="server" class="btn btn-block btn-warning">Show Certificate File</button>
-                    </div>
-                    </div>
-                </div>
-         </div>
+   
 
 
 </asp:Content>

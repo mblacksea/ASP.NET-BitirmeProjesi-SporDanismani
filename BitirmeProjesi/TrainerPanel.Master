@@ -24,8 +24,27 @@
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-    
+    <script type="text/javascript" language="Javascript">
 
+        function textCounter(field, countfield, maxlimit) {
+
+            if (field.value.length > maxlimit) {
+
+                field.value = field.value.substring(0, maxlimit);
+
+                field.enabled = false;
+
+            }
+
+            else
+
+                countfield.value = maxlimit - field.value.length;
+
+        }
+
+ </script>
+ 
+     
     <asp:ContentPlaceHolder ID="head" runat="server">
 
 
@@ -59,47 +78,7 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          
-          <!-- /.messages-menu -->
 
-          <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- Inner Menu: contains the notifications -->
-                <ul class="menu">
-                  <li><!-- start notification -->
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <!-- end notification -->
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- Tasks Menu -->
-           
-            
-         
-          <!-- User Account Menu -->
-         
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -110,14 +89,14 @@
 
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
-        <div class="pull-left image">
-            <img src="images/userDefaultImage.jpg" runat="server" id="trainerPhoto" class="img-circle" alt="User Image" />
-          
-        </div>
+          <div class="pull-left image">
+              <img src="" runat="server" id="trainerPhoto" class="img-circle"  />
+
+          </div>
         <div class="pull-left info">
          <asp:Label ID="Label1" runat="server"></asp:Label> 
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
         </div>
       </div>
 
@@ -129,6 +108,7 @@
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
+          <li><a href="TrainerDefaultPage.aspx"><i class="fa fa-link"></i> <span>Home</span></a></li>
         <li><a href="TrainerProfileSettings.aspx"><i class="fa fa-link"></i> <span>Profile Settings</span></a></li>
         <li><a href="TrainerChangePassword.aspx"><i class="fa fa-link"></i> <span>Change Password</span></a></li>
          <li class="treeview">
@@ -167,6 +147,7 @@
 
 
           </li>
+           <li><a href="TrainerGraphics.aspx"><i class="fa fa-link"></i> <span>Graphics</span></a></li>
           <li>
                <button type="button" causesvalidation="false" runat="server" onserverclick="logout" class="btn btn-block btn-danger">Logout</button>
 

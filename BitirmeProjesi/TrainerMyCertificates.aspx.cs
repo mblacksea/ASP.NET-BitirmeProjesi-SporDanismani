@@ -14,7 +14,7 @@ namespace BitirmeProjesi
     public partial class TrainerMyCertificates : System.Web.UI.Page
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString);
-
+        byte[] bytes;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,7 +34,12 @@ namespace BitirmeProjesi
 
         protected void searchButton(object sender, EventArgs e)
         {
-
+            showCertificateID.Visible = false;
+            updateID.Visible = false;
+            certificateName.Text = null;
+            instutionName.Text = null;
+            date.Text = null;
+            bytes = null;
             if (DateStart.Text == "" && DateEnd.Text == "" && textField2.Text!="")
             {
                 string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
@@ -96,7 +101,7 @@ namespace BitirmeProjesi
             conn.Open();
             SqlCommand trainerData = new SqlCommand();
             trainerData.Connection = conn;
-            trainerData.CommandText = "select Certificate_Name,Instution,Date,CertificateFile from Certificate where Certificate_ID='" + certificate_ID + "'";
+            trainerData.CommandText = "select Certificate_Name,Instution,DateCertificate,CertificateFile from Certificate where Certificate_ID='" + certificate_ID + "'";
 
             SqlDataReader dr = trainerData.ExecuteReader();
             while (dr.Read())
@@ -141,11 +146,11 @@ namespace BitirmeProjesi
             {
                 using (BinaryReader br = new BinaryReader(fs))
                 {
-                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                  bytes = br.ReadBytes((Int32)fs.Length);
                     string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(constr))
                     {
-                        string query = "UPDATE Certificate SET Certificate_Name=@Certificate_Name, Instution=@Instution, Date=@Date, CertificateFile=@CertificateFile where Certificate_ID='" + Convert.ToInt32(Session["Certificate_ID"].ToString()) + "' ";
+                        string query = "UPDATE Certificate SET Certificate_Name=@Certificate_Name, Instution=@Instution, DateCertificate=@DateCertificate, CertificateFile=@CertificateFile where Certificate_ID='" + Convert.ToInt32(Session["Certificate_ID"].ToString()) + "' ";
                         using (SqlCommand cmd = new SqlCommand(query))
                         {
 
@@ -153,7 +158,7 @@ namespace BitirmeProjesi
 
                             cmd.Parameters.AddWithValue("@Certificate_Name", certificateName.Text);
                             cmd.Parameters.AddWithValue("@Instution", instutionName.Text);
-                            cmd.Parameters.AddWithValue("@Date", date.Text);
+                            cmd.Parameters.AddWithValue("@DateCertificate", date.Text);
                             cmd.Parameters.AddWithValue("@CertificateFile", bytes);
                             con.Open();
                             cmd.ExecuteNonQuery();
@@ -168,9 +173,16 @@ namespace BitirmeProjesi
             conn.Open();
             SqlCommand trainerStatusUpdate = new SqlCommand();
             trainerStatusUpdate.Connection = conn;
-            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
+            trainerStatusUpdate.CommandText = "UPDATE TrainersData SET Status_ID=2 WHERE Status_ID=3 and Trainer_ID='" + Convert.ToInt32(Session["trainerID"].ToString()) + "'";
             trainerStatusUpdate.ExecuteNonQuery();
             conn.Close();
+            certificateName.Text=null;
+            instutionName.Text = null;
+            date.Text = null;
+            bytes=null;
+            updateID.Visible = false;
+
+            showCertificateID.Visible = false;
         }
     }
 }

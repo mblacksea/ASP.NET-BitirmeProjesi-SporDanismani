@@ -5,15 +5,16 @@
     <script src="/js/notifyit/notifIt.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+     <div class="container-fluid">
      <div class="row">
         <!-- left column -->
         <div class="col-md-6">
             <!-- general form elements -->
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Email Settings Page</h3>
-                </div>
+                     <div class="header">
+                                <h4 class="title">Email Settings</h4>
+                                
+                            </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form role="form">
@@ -26,6 +27,12 @@
                                  ControlToValidate="textEmail"
                                  ErrorMessage="Email is required!"
                                  SetFocusOnError="True" ForeColor="Red" />
+                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                 ErrorMessage="Invalid Email" ControlToValidate="textEmail"
+                                 SetFocusOnError="True"
+                                 ForeColor="Red"
+                                 ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                             </asp:RegularExpressionValidator>
                         </div>
                         <div class="form-group">
                             <label>Email Password</label>
@@ -41,7 +48,7 @@
                            <asp:TextBox ID="textPort"  placeHolder="Port" CssClass="form-control" runat="server"></asp:TextBox>
                         </div>
                            <div class="form-group">
-                            <label>SmtpServer</label>
+                            <label>Smtp Server</label>
                             <asp:DropDownList CssClass="form-control select2" AutoPostBack="true" ID="DropDownList1" runat="server">
                                 <asp:ListItem>smtp.gmail.com</asp:ListItem>
                                 <asp:ListItem>smtp.live.com</asp:ListItem>
@@ -63,4 +70,5 @@
             </div>
         </div>
     </div>
+         </div>
 </asp:Content>

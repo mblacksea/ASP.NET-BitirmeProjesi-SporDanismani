@@ -20,6 +20,7 @@ namespace BitirmeProjesi
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            banDate.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
 
             if (Session["adminSession"] == null)
             {
@@ -123,6 +124,8 @@ namespace BitirmeProjesi
         {
             reasonBannedSection.Visible = true;
             textBanned.InnerText = "Ban for Program";
+            banForDateSection.Visible = false;
+
             Session["flag"] = "1";
             
         }
@@ -131,6 +134,7 @@ namespace BitirmeProjesi
         {
             reasonBannedSection.Visible = true;
             textBanned.InnerText = "Ban for Trainer";
+            banForDateSection.Visible = true;
             Session["flag"] = "2";
 
         }
@@ -195,20 +199,20 @@ namespace BitirmeProjesi
                 conn.Open();
                 SqlCommand trainerDataUpdate = new SqlCommand();
                 trainerDataUpdate.Connection = conn;
-                trainerDataUpdate.CommandText = "UPDATE Program SET isBanned='Y', BannedReason='" + reasonTextArea.InnerText + "' WHERE Program_ID='" + Convert.ToInt32(Session["banProgramID"].ToString()) + "'";
+                trainerDataUpdate.CommandText = "UPDATE Program SET Status_ID=4,isBanned='Y', BannedReason='" + reasonTextArea.Text + "' WHERE Program_ID='" + Convert.ToInt32(Session["banProgramID"].ToString()) + "'";
                 trainerDataUpdate.ExecuteNonQuery();
                 conn.Close();
 
                 UpdateComplainStatusForProgram();
 
-           
-                MyEmail.sendEmailForTrainer(trainerEmail, reasonTextArea.InnerText, Session["banProgramTittle"].ToString(), myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail,myEmailParam.SmtpServer);
+
+                MyEmail.sendEmailForTrainer(trainerEmail, reasonTextArea.Text, Session["banProgramTittle"].ToString(), myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail, myEmailParam.SmtpServer);
                 //trainer a mail gonder // tamamlandi
 
                 ArrayList userEmailList = getUserEmail();
                 foreach (string listElement in userEmailList)
                 {
-                    MyEmail.sendEmailForUsers(listElement, reasonTextArea.InnerText, Session["banProgramTittle"].ToString(), myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail, myEmailParam.SmtpServer);
+                    MyEmail.sendEmailForUsers(listElement, reasonTextArea.Text, Session["banProgramTittle"].ToString(), myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail, myEmailParam.SmtpServer);
                 }
                 //bu programi alan userlara mail gonder
 
@@ -222,17 +226,29 @@ namespace BitirmeProjesi
                 conn.Open();
                 SqlCommand trainerDataUpdate = new SqlCommand();
                 trainerDataUpdate.Connection = conn;
-                trainerDataUpdate.CommandText = "UPDATE TrainersData SET Status_ID=4, isBanned='Y', BannedReason='" + reasonTextArea.InnerText + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["banTrainerID"].ToString()) + "'";
+
+                if (banDate.Text != "")
+                {
+                    trainerDataUpdate.CommandText = "UPDATE TrainersData SET Status_ID=4, isBanned='Y', BannedReason='" + reasonTextArea.Text + "',BannedDate='" + banDate.Text + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["banTrainerID"].ToString()) + "'";
+
+                }
+                else
+                {
+                    trainerDataUpdate.CommandText = "UPDATE TrainersData SET Status_ID=4, isBanned='Y', BannedReason='" + reasonTextArea.Text + "' WHERE Trainer_ID='" + Convert.ToInt32(Session["banTrainerID"].ToString()) + "'";
+
+                }
+
+               
                 trainerDataUpdate.ExecuteNonQuery();
                 conn.Close();
 
                 UpdateComplainStatusForTrainer();
-                MyEmail.sendEmailForTrainer2(trainerEmail, reasonTextArea.InnerText, myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail, myEmailParam.SmtpServer);
+                MyEmail.sendEmailForTrainer2(trainerEmail, reasonTextArea.Text, myEmailParam.FromEmail, myEmailParam.PasswordEmail, myEmailParam.PortEmail, myEmailParam.SmtpServer);
                 //trainer a banlandigi bilgisini mail olarak gonder //tamamlandi.
                 
 
             }
-            reasonTextArea.InnerText = null;
+            reasonTextArea.Text = null;
             GridView1.DataBind();
             decisionButton.Visible = false;
             reasonBannedSection.Visible = false;

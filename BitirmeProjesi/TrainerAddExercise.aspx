@@ -22,8 +22,11 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Exercise Name</label>
-                        <asp:TextBox ID="exerciseName" CssClass="form-control" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="exercisenameReq"
+                        <asp:TextBox ID="exerciseName" onkeyup="textCounter(this, this.form.remLenExerciseName, 100);" placeholder="Max(100)" CssClass="form-control" runat="server"></asp:TextBox>
+                         Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseName" readonly="readonly" type="text" value="100" />
+                         <asp:RequiredFieldValidator ID="exercisenameReq"
                             runat="server"
                             ControlToValidate="exerciseName"
                             ErrorMessage="Exercise Name is required!"
@@ -31,8 +34,11 @@
                     </div>
                      <div class="form-group">
                         <label>Exercise Tittle</label>
-                        <asp:TextBox ID="tittleName" CssClass="form-control" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="tittlenameReq"
+                        <asp:TextBox ID="tittleName" onkeyup="textCounter(this, this.form.remLenExerciseTittle, 200);" placeholder="Max(200)" CssClass="form-control" runat="server"></asp:TextBox>
+                         Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseTittle" readonly="readonly" type="text" value="200" />
+                          <asp:RequiredFieldValidator ID="tittlenameReq"
                             runat="server"
                             ControlToValidate="tittleName"
                             ErrorMessage="Tittle is required!"
@@ -41,7 +47,10 @@
                   
                     <div class="form-group">
                         <label>Exercise Description</label>
-                         <textarea class="form-control" rows="3" runat="server" id="descriptionarea" maxlength="1500"></textarea>
+                         <textarea class="form-control" onkeyup="textCounter(this, this.form.remLenExerciseDesc, 1500);" rows="3" placeholder="Max(1500)" runat="server" id="descriptionarea" maxlength="1500"></textarea>
+                         Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseDesc" readonly="readonly" type="text" value="1500" />
                          <asp:RequiredFieldValidator ID="descriptionnameReq"
                             runat="server"
                             ControlToValidate="descriptionarea"

@@ -19,6 +19,21 @@ namespace BitirmeProjesi
     {
 
         string constr = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+
+            Session["userDisplayGraphicsID"] = (GridView1.SelectedRow.FindControl("Label2") as Label).Text;
+            Session["userDisplayGraphicsUsername"] = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
+            Response.Redirect("TrainerDisplayUsersGraphics.aspx");
+
+
+        }
+        
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -55,7 +70,7 @@ namespace BitirmeProjesi
                 DropDownList2.DataBind();
                 con.Close();
 
-                SqlCommand cmd3 = new SqlCommand("SELECT ProgramTittle,ProgramPhoto,ProgramSpec_Name,ProgramDiff_Name FROM Program,ProgramDifficulty,ProgramSpec where ProgramSpec.ProgramSpec_ID=Program.ProgramSpec_ID and Program.ProgramDiff_ID=ProgramDifficulty.ProgramDiff_ID and Program.Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'");
+                SqlCommand cmd3 = new SqlCommand("SELECT ProgramTittle,ProgramPhoto,ProgramSpec_Name,ProgramDiff_Name,ProgramDescription,ProgramPrice FROM Program,ProgramDifficulty,ProgramSpec where ProgramSpec.ProgramSpec_ID=Program.ProgramSpec_ID and Program.ProgramDiff_ID=ProgramDifficulty.ProgramDiff_ID and Program.Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'");
                 cmd3.CommandType = CommandType.Text;
                 cmd3.Connection = con;
                 con.Open();
@@ -71,6 +86,8 @@ namespace BitirmeProjesi
                     String value2 = dr[3].ToString();
                     DropDownList1.SelectedIndex = DropDownList1.Items.IndexOf(DropDownList1.Items.FindByText(value1));
                     DropDownList2.SelectedIndex = DropDownList2.Items.IndexOf(DropDownList2.Items.FindByText(value2));
+                    TextBoxDescription.InnerText = dr[4].ToString();
+                    TextBoxPrice.Text = dr[5].ToString();
                     //DropDownList1.SelectedValue = dr[2].ToString();
                     //DropDownList2.SelectedValue = dr[3].ToString();
 
@@ -96,6 +113,8 @@ namespace BitirmeProjesi
                     DropDownList1.Enabled = false;
                     DropDownList2.Enabled = false;
                     TextBoxProgramTittle.Enabled = false;
+                    TextBoxDescription.Disabled = true;
+                    TextBoxPrice.Enabled = false;
                     FileUpload1.Enabled = false;
                     MessageBox.Show(" Can not be edited because this program is purchased!", MessageBox.MesajTipleri.Info, false, 3000);
 
@@ -182,7 +201,7 @@ namespace BitirmeProjesi
             trainerDataUpdate.Connection = con;
             if (!FileUpload1.HasFile)
             {
-                trainerDataUpdate.CommandText = "UPDATE Program SET ProgramSpec_ID='" + Convert.ToInt32(DropDownList1.SelectedValue) + "', ProgramDiff_ID='" + Convert.ToInt32(DropDownList2.SelectedValue) + "', ProgramTittle='" + TextBoxProgramTittle.Text + "' WHERE Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'";
+                trainerDataUpdate.CommandText = "UPDATE Program SET ProgramSpec_ID='" + Convert.ToInt32(DropDownList1.SelectedValue) + "', ProgramDiff_ID='" + Convert.ToInt32(DropDownList2.SelectedValue) + "', ProgramTittle='" + TextBoxProgramTittle.Text + "',ProgramDescription='"+TextBoxDescription.InnerText+"',ProgramPrice='"+TextBoxPrice.Text+"' WHERE Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'";
                 trainerDataUpdate.ExecuteNonQuery();
                 con.Close();
             }
@@ -192,12 +211,14 @@ namespace BitirmeProjesi
                 MemoryStream thumbnailPhotoStream = ResizeImage(FileUpload1);
                 byte[] thumbnailImageBytes = thumbnailPhotoStream.ToArray();
                 Image1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(thumbnailImageBytes);
-                string sql = "UPDATE Program SET ProgramSpec_ID=@ProgramSpec_ID,ProgramDiff_ID=@ProgramDiff_ID,ProgramTittle=@ProgramTittle,ProgramPhoto=@ProgramPhoto where Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'";
+                string sql = "UPDATE Program SET ProgramSpec_ID=@ProgramSpec_ID,ProgramDiff_ID=@ProgramDiff_ID,ProgramTittle=@ProgramTittle,ProgramPhoto=@ProgramPhoto,ProgramDescription=@ProgramDescription,ProgramPrice=@ProgramPrice where Program_ID='" + Convert.ToInt32(Session["updateProgramID"].ToString()) + "'";
                 SqlCommand komut = new SqlCommand(sql, con);
                 komut.Parameters.AddWithValue("@ProgramSpec_ID", Convert.ToInt32(DropDownList1.SelectedValue));
                 komut.Parameters.AddWithValue("@ProgramDiff_ID", Convert.ToInt32(DropDownList2.SelectedValue));
                 komut.Parameters.AddWithValue("@ProgramTittle", TextBoxProgramTittle.Text);
                 komut.Parameters.Add("@ProgramPhoto", SqlDbType.Image, thumbnailImageBytes.Length).Value = thumbnailImageBytes;
+                komut.Parameters.AddWithValue("@ProgramDescription", TextBoxDescription.InnerText);
+                komut.Parameters.AddWithValue("@ProgramPrice", TextBoxPrice.Text);
                 con.Open();
 
                 komut.ExecuteNonQuery();

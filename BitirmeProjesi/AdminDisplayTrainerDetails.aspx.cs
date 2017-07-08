@@ -21,8 +21,19 @@ namespace BitirmeProjesi
                 Response.Redirect("Main.aspx");
             }
 
+           
+
             if (!Page.IsPostBack)
             {
+                GridView1.Visible = false;
+                if (Session["trainerIsBanned"].ToString() == "Y")
+                {
+                    unbannedButton.Visible = true;
+                }
+                else
+                {
+                    unbannedButton.Visible = false;
+                }
 
                 conn.Open();
                 SqlCommand trainerData = new SqlCommand();
@@ -53,6 +64,23 @@ namespace BitirmeProjesi
 
                 conn.Close();
 
+                conn.Open();
+                string totalSales = " select ISNULL(sum( x.toplamSayi * y.ProgramPrice ),0) as Total from (select up.Program_ID, count(*) toplamSayi from UserProgram up where up.Program_ID in (select p.Program_ID from Program p where p.Trainer_ID='" + Convert.ToInt32(Session["trainerDisplayID"].ToString()) + "') group by up.Program_ID) x, Program y where x.Program_ID=y.Program_ID";
+                SqlCommand com = new SqlCommand(totalSales, conn);
+                int tempTotalSales = Convert.ToInt32(com.ExecuteScalar().ToString());
+                conn.Close();
+               // Label10.Text = tempTotalSales.ToString();
+
+
+                conn.Open();
+                string totalIncome = "select  count(*) toplamSayi from UserProgram up where up.Program_ID in (select p.Program_ID from Program p where p.Trainer_ID='" + Convert.ToInt32(Session["trainerDisplayID"].ToString()) + "')";
+                SqlCommand com2 = new SqlCommand(totalIncome, conn);
+                int totalIncomeValue = Convert.ToInt32(com2.ExecuteScalar().ToString());
+                conn.Close();
+
+                Label1.Text = totalIncomeValue.ToString();
+
+                Label1.Text = totalIncomeValue.ToString() + " / " + tempTotalSales.ToString(); 
                 trainerName.InnerText = Session["trainerDisplayNameSurname"].ToString();
                 trainerBio.InnerText = Session["trainerDisplayBio"].ToString();
                 trainerIntro.InnerText = Session["trainerDisplayIntro"].ToString();
@@ -62,5 +90,111 @@ namespace BitirmeProjesi
               
             }
         }
+        // Session["displayProgramID"] = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
+
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+
+            Session["displayProgramID"] = (GridView1.SelectedRow.FindControl("Label1") as Label).Text;
+            Session["displayProgramTrainer"] = trainerName.InnerText;
+            Session["displayProgramTittle"] = (GridView1.SelectedRow.FindControl("Label2") as Label).Text;
+            Session["removeProgramBan"] = (GridView1.SelectedRow.FindControl("Label5") as Label).Text;
+            Response.Redirect("AdminDisplayProgramsDetails.aspx");
+
+
+        }
+
+
+
+
+        protected void unbannedButton_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+            SqlCommand trainerDataUpdate = new SqlCommand();
+            trainerDataUpdate.Connection = conn;
+            trainerDataUpdate.CommandText = "UPDATE TrainersData SET Status_ID=1,isBanned=NULL,BannedReason=NULL,BannedDate=NULL WHERE Trainer_ID='" + Convert.ToInt32(Session["trainerDisplayID"].ToString()) + "'";
+            trainerDataUpdate.ExecuteNonQuery();
+            conn.Close();
+            Session["trainerIsBanned"] = "N";
+            unbannedButton.Visible = false;
+        }
+
+        protected void search_Click(object sender, EventArgs e)
+        {
+            GridView1.Visible = true;
+            if (DateStart.Text == "" && DateEnd.Text == "" && textField2.Text != "")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text != "" && DateEnd.Text != "" && textField2.Text != "")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'   AND CreationDate>='{1}' AND CreationDate<='{2}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text != "" && DateEnd.Text != "" && textField2.Text == "")
+            {
+                string FilterExpression = string.Concat("CreationDate>='{0}' AND CreationDate<='{1}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text != "" && DateEnd.Text == "" && textField2.Text == "")
+            {
+                string FilterExpression = string.Concat("CreationDate>='{0}'  ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+
+            }
+            else if (DateStart.Text == "" && DateEnd.Text != "" && textField2.Text == "")
+            {
+                string FilterExpression = string.Concat("CreationDate<='{0}'  ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+                SqlDataSource1.FilterExpression = FilterExpression;
+            }
+            else if (DateStart.Text != "" && DateEnd.Text == "" && textField2.Text != "")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'   AND CreationDate>='{1}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateStart.Text, "DateStart", "Text"));
+
+                SqlDataSource1.FilterExpression = FilterExpression;
+            }
+            else if (DateStart.Text == "" && DateEnd.Text != "" && textField2.Text != "")
+            {
+                string FilterExpression = string.Concat(DropDownList1.SelectedValue, " LIKE '%{0}%'   AND CreationDate<='{1}' ");
+                SqlDataSource1.FilterParameters.Clear();
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DropDownList1.SelectedValue, "textField2", "Text"));
+                SqlDataSource1.FilterParameters.Add(new ControlParameter(DateEnd.Text, "DateEnd", "Text"));
+
+                SqlDataSource1.FilterExpression = FilterExpression;
+            }
+
+
+            else if (DateStart.Text == "" && DateEnd.Text == "" && textField2.Text == "")
+            {
+                SqlDataSource1.FilterParameters.Clear();
+            }
+
+            GridView1.DataBind();
+        }
+
+   
     }
 }

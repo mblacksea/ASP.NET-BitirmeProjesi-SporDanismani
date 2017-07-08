@@ -4,8 +4,13 @@
     <link rel="stylesheet" href="/js/notifyit/notifIt.css" />
     <script src="/js/jquery-2.0.3.min.js"></script>
     <script src="/js/notifyit/notifIt.js"></script>
+
+
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <div class="container-fluid">
       <div class="col-lg-8 col-sm-8">
 
     <div class="row">
@@ -13,22 +18,23 @@
         <div class="col-md-3">
             <!-- general form elements -->
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Complains Page</h3>
-                </div>
+                   <div class="header">
+                                <h4 class="title">Complain Page</h4>
+                                
+                            </div>
                 <!-- /.box-header -->
                 <!-- form start -->
 
                 <div class="box-body">
                     <div class="form-group">
-                        <label>Search</label>
+                    
                         <asp:DropDownList CssClass="form-control select2" ID="DropDownList1" runat="server">
                             <asp:ListItem>TrainerName</asp:ListItem>
-                            <asp:ListItem>Status</asp:ListItem>
                             <asp:ListItem>ProgramTittle</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group">
+
                         <asp:TextBox ID="textField" placeHolder="SearchQuery" CssClass="form-control" runat="server"></asp:TextBox>
 
                     </div>
@@ -38,8 +44,11 @@
 
                 </div>
                 <div class="box-footer">
-                    <button type="button" runat="server" onserverclick="searchButton" class="btn btn-primary">Search</button>
+                   
+                    <button type="button" runat="server" CausesValidation="false" onserverclick="searchButton" class="btn btn-primary">Search</button>
+                  
                 </div>
+                   <br />
             </div>
             </div>
         </div>
@@ -64,7 +73,7 @@
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Id") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="User_ID" SortExpression="User_ID" Visible="True">
+            <asp:TemplateField HeaderText="User_ID" SortExpression="User_ID" Visible="False">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("User_ID") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -88,7 +97,7 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("Surname") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Program_ID" SortExpression="Program_ID" Visible="True">
+            <asp:TemplateField HeaderText="Program_ID" SortExpression="Program_ID" Visible="False">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("PID") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -107,7 +116,7 @@
             </asp:TemplateField>
 
 
-            <asp:TemplateField HeaderText="TUser_ID" SortExpression="TUser_ID" Visible="True">
+            <asp:TemplateField HeaderText="TUser_ID" SortExpression="TUser_ID" Visible="False">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("TUser_ID") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -139,7 +148,7 @@
                     <asp:Label ID="Label9" runat="server" Text='<%# Bind("Comment") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ComplainStatus_Name" SortExpression="Status">
+            <asp:TemplateField HeaderText="ComplainStatus_Name" Visible="false" SortExpression="Status">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("Status") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -152,8 +161,8 @@
  
 
     <div runat="server" id="decisionButton" class="box-footer">
-        <asp:Button ID="ButtonProgramBan" OnClick="ButtonProgramBan_Click"  CssClass="btn btn-danger" Width="150px" runat="server" Text="Program Ban" />
-        <asp:Button ID="ButtonTrainerBan" OnClick="ButtonTrainerBan_Click" CssClass="btn btn-warning pull-center" Width="150px" runat="server" Text="Trainer Ban" />
+        <asp:Button ID="ButtonProgramBan" OnClick="ButtonProgramBan_Click" CausesValidation="false" CssClass="btn btn-danger" Width="150px" runat="server" Text="Program Ban" />
+        <asp:Button ID="ButtonTrainerBan" OnClick="ButtonTrainerBan_Click" CausesValidation="false" CssClass="btn btn-warning pull-center" Width="150px" runat="server" Text="Trainer Ban" />
 
     </div>
        
@@ -202,15 +211,28 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label>Reason</label>
-                            <textarea class="form-control"  rows="5" placeholder="Max(3000)" runat="server" id="reasonTextArea" maxlength="2000"></textarea>
-                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                  runat="server"
                                  ControlToValidate="reasonTextArea"
                                  ErrorMessage="Ban reason is required!"
                                  SetFocusOnError="True" ForeColor="Red" />
+                            <asp:TextBox ID="reasonTextArea" Rows="5" TextMode="MultiLine" Placeholder="Max(3000)" CssClass="form-control" runat="server"></asp:TextBox>
+                            
                         </div>
+                        <div runat="server" id="banForDateSection" class="form-group">
+                            <label>Ban Date</label>
+                            <div class="col-xs-7">
+                                <div class="numbers">
+                                    <p>If you do not choose a date, it will be banned indefinitely</p>
+
+                                </div>
+                            </div>
+
+                            <asp:TextBox ID="banDate" TextMode="Date" runat="server"></asp:TextBox>
+                        </div>
+
                         <div class="box-footer">
-                            <asp:Button ID="ButtonSend"  OnClick="ButtonSend_Click" CssClass="btn btn-primary" runat="server" Text="Send" />
+                            <asp:Button ID="ButtonSend"  OnClick="ButtonSend_Click"  CssClass="btn btn-primary" runat="server" Text="Send" />
                     
        
 
@@ -242,7 +264,7 @@
     </asp:SqlDataSource>
  
 
-
+         </div>
     
  
 

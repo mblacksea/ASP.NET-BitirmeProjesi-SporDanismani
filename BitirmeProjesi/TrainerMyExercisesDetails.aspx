@@ -16,7 +16,10 @@
 
                             <div class="form-group">
                                 <label for="Name">Name</label>
-                                <asp:TextBox ID="Name" placeholder="Name" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="Name" onkeyup="textCounter(this, this.form.remLenExerciseName, 100);" placeholder="Max(100)" CssClass="form-control" runat="server"></asp:TextBox>
+                                    Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseName" readonly="readonly" type="text" value="100" />
                                 <asp:RequiredFieldValidator ID="confirmPasswordReq"
                                     runat="server"
                                     ControlToValidate="Name"
@@ -27,7 +30,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="Tittle">Tittle</label>
-                                <asp:TextBox ID="Tittle" placeholder="Tittle" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="Tittle" onkeyup="textCounter(this, this.form.remLenExerciseTittle, 200);"  placeholder="Max(200)" CssClass="form-control" runat="server"></asp:TextBox>
+                                    Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseTittle" readonly="readonly" type="text" value="200" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                     runat="server"
                                     ControlToValidate="Tittle"
@@ -38,7 +44,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="Description">Description</label>
-                                <asp:TextBox ID="Description" placeholder="Description" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="Description" onkeyup="textCounter(this, this.form.remLenExerciseDesc, 1500);"  placeholder="Max(1500)"  CssClass="form-control" runat="server"></asp:TextBox>
+                                    Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenExerciseDesc" readonly="readonly" type="text" value="1500" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                     runat="server"
                                     ControlToValidate="Description"

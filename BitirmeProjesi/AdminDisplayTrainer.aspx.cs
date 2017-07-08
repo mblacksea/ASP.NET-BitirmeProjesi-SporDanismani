@@ -53,6 +53,8 @@ namespace BitirmeProjesi
             Session["trainerDisplayNameSurname"] = (GridView1.SelectedRow.FindControl("Label2") as Label).Text;
             Session["trainerDisplayIntro"] = (GridView1.SelectedRow.FindControl("Label4") as Label).Text;
             Session["trainerDisplayBio"] = (GridView1.SelectedRow.FindControl("Label5") as Label).Text;
+            Session["trainerIsBanned"] = (GridView1.SelectedRow.FindControl("Label7") as Label).Text;
+            Session["displayTittle"] = "AllTrainers";
             Response.Redirect("AdminDisplayTrainerDetails.aspx");
 
 

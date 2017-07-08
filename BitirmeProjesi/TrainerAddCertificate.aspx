@@ -23,8 +23,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Certificate Name</label>
-                        <asp:TextBox ID="certificateName" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
+                         <label>Certificate Name</label>
+                        <asp:TextBox ID="certificateName" onkeyup="textCounter(this, this.form.remLenCertificateName, 200);" CssClass="form-control" placeholder="Max(200)" maxlength="200" runat="server"></asp:TextBox>
+                            Rest character:
+
+                <input readonly="readonly" class="form-control" name="remLenCertificateName" readonly="readonly" type="text" value="200" />
                         <asp:RequiredFieldValidator ID="certificatenameReq"
                             runat="server"
                             ControlToValidate="certificateName"
@@ -33,13 +36,16 @@
                     </div>
                      <div class="form-group">
                         <label>Instution</label>
-                        <asp:TextBox ID="instutionName" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="instutionnameReq"
+                        <asp:TextBox ID="instutionName" onkeyup="textCounter(this, this.form.remLenIns, 100);" placeholder="Max(100)" maxlength="100" CssClass="form-control" runat="server"></asp:TextBox>
+                            Rest character:   
+                                    <input readonly="readonly" class="form-control" name="remLenIns" readonly="readonly" type="text" value="100" />
+
+                           <asp:RequiredFieldValidator ID="instutionnameReq"
                             runat="server"
                             ControlToValidate="instutionName"
                             ErrorMessage="Instution Name is required!"
                             SetFocusOnError="True" ForeColor="Red" />
-                    </div>
+                         </div>
                      <div class="form-group">
                         <label>Date</label>
                         <asp:TextBox ID="date" CssClass="form-control" runat="server" TextMode="Date"></asp:TextBox>

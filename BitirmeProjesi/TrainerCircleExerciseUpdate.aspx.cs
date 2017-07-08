@@ -197,7 +197,7 @@ namespace BitirmeProjesi
 
                 if (c1 == "NULL")
                 {
-
+                   
                 }
                 else
                 {

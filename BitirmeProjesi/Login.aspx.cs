@@ -20,6 +20,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Security;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace BitirmeProjesi
 {
@@ -29,11 +30,15 @@ namespace BitirmeProjesi
         string password;
         int role_id;
         string name;
+        int status_id;
+        String bannedDate;
+        DateTime dt2;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["infoForTrainer"]!=null){
                 MessageBox.Show("Awaiting approval by admin. You will be notified by e-mail", MessageBox.MesajTipleri.Info, false, 3000);
             }
+            Session.Remove("infoForTrainer");
            
         }
 
@@ -75,7 +80,7 @@ namespace BitirmeProjesi
                     conn.Close();
                     if (password ==FormsAuthentication.HashPasswordForStoringInConfigFile(textboxPassword.Text, "MD5"))
                     {
-                        conn.Open();
+                    
                         if (role_id == 1)
                         {   //Admin page e yonlendir......
                             Session["adminSession"] = textboxEmail.Text;
@@ -84,10 +89,26 @@ namespace BitirmeProjesi
                         else if (role_id == 2)
                         {
                             //Trainer page e yonlendir....
-                            SqlCommand controlActivateTrainer = new SqlCommand();
+                          /*  SqlCommand controlActivateTrainer = new SqlCommand();
                             controlActivateTrainer.Connection = conn;
                             controlActivateTrainer.CommandText = "select Status_ID from TrainersData where Trainer_ID='" + trainer_id + "'";
-                            int status_id = Convert.ToInt32(controlActivateTrainer.ExecuteScalar().ToString());
+                            int status_id = Convert.ToInt32(controlActivateTrainer.ExecuteScalar().ToString());*/
+                            conn.Open();
+                            SqlCommand trainerData = new SqlCommand();
+                            trainerData.Connection = conn;
+                            trainerData.CommandText = "select Status_ID,BannedDate from TrainersData where Trainer_ID='" + trainer_id + "'";
+                            
+                            SqlDataReader drBanControl = trainerData.ExecuteReader();
+                            while (drBanControl.Read())
+                            {
+                                status_id = Convert.ToInt32(drBanControl[0].ToString());
+                                bannedDate = drBanControl[1].ToString();
+                            }
+
+                            
+
+                            conn.Close();
+
                             if (status_id == 1)
                             {
                                 //Onaylandi...
@@ -108,7 +129,30 @@ namespace BitirmeProjesi
                             }
                             else if (status_id == 4)
                             {   //Banlanmis
-                                MessageBox.Show("Your account is banned", MessageBox.MesajTipleri.Error, false, 3000);
+                              
+                                if (bannedDate == "")
+                                {
+                                    MessageBox.Show("Your account is banned unlimited!", MessageBox.MesajTipleri.Error, false, 3000);
+
+                                }
+                                else{
+                                     if (Convert.ToDateTime(bannedDate) > Convert.ToDateTime(DateTime.Now.ToString("dd-MM-yyyy"))){
+                                          MessageBox.Show("Your account is banned until "+ bannedDate, MessageBox.MesajTipleri.Error, false, 3000);
+                                     }else{
+                                          conn.Open();
+                                    SqlCommand trainerDataUpdate = new SqlCommand();
+                                    trainerDataUpdate.Connection = conn;
+                                    trainerDataUpdate.CommandText = "UPDATE TrainersData SET Status_ID=1,isBanned=NULL,BannedReason=NULL,BannedDate=NULL WHERE Trainer_ID='" + trainer_id + "'";
+                                    trainerDataUpdate.ExecuteNonQuery();
+                                    conn.Close();
+                                    Session["trainerEmail"] = textboxEmail.Text;
+                                    Session["rejectedTrainer"] = "false";
+                                    Response.Redirect("TrainerDefaultPage.aspx");
+                                     }
+                                }
+
+
+                               
                             }
 
 

@@ -7,6 +7,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+
+
+
+
+
+
     <div class="col-lg-3 col-sm-6">
            <div class="header">
                                 <h4 class="title">Insert Parameters</h4>
